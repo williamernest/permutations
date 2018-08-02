@@ -5,12 +5,13 @@
          [attr.value]="value"
          [disabled]="state === States.Disabled"
          type="text"
+         [placeholder]="type === Types.Fullwidth ? label : ''"
          class="mdc-text-field__input">
   <textarea *ngIf="type === Types.Textarea || type === Types.FullwidthTextArea"
             [attr.id]="componentId"
             [disabled]="state === States.Disabled"
             class="mdc-text-field__input">{{ value }}</textarea>
-  <label [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
+  <label *ngIf="type !== Types.Fullwidth" [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
   <i *ngIf="parameters.includes(Parameters.TrailingIcon)" class="material-icons mdc-text-field__icon">{{ trailingIcon }}</i>
   <div *ngIf="hasLineRipple" class="mdc-line-ripple" [ngClass]="currentClassesLineRipple"></div>
   <div *ngIf="hasOutline" class="mdc-notched-outline" [ngClass]="currentClassesOutline">

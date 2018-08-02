@@ -102,7 +102,9 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     if (this.state === this.States.Focused || this.state === this.States.FocusedInvalid) {
-      this.value = ' ';
+      if (this.type !== this.Types.Fullwidth) {
+        this.value = ' ';
+      }
     }
 
   }
