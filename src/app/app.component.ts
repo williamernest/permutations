@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from './textfield.enum';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
 
 export class AppComponent {
   title = 'app';
+
+  public States = TextfieldStates;
+  public Parameters = TextfieldParameters;
+  public Types = TextfieldType;
+  public HelperTextStyle = TextfieldHelperTextStyles;
 }
