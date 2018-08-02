@@ -28,7 +28,7 @@ export class TextFieldRendererComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<TfConfig[]>('/assets/text-fields.json').subscribe(data => this.tfConfigData = data);
+    this.http.get<TfConfig[]>('assets/text-fields.json').subscribe(data => this.tfConfigData = data);
   }
 
   typeChanged(type, value) {
