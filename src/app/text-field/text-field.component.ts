@@ -31,6 +31,7 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() label = 'Floating Label';
   @Input() leadingIcon: string;
   @Input() trailingIcon: string;
+  @Input() dense = false;
   @Input() type = TextfieldType.Default;
   @Input() state = TextfieldStates.Default;
   @Input() parameters: Array<TextfieldParameters> = [];
@@ -69,26 +70,26 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currentClassesTf = {
       'mdc-text-field--box': this.type === this.Types.Default,
       'mdc-text-field--outlined': this.type === this.Types.Outlined,
-      'mdc-text-field--textarea': this.type === this.Types.Textarea,
+      'mdc-text-field--textarea': this.type === this.Types.Textarea || this.type === this.Types.FullwidthTextArea,
       'mdc-text-field--fullwidth': this.type === this.Types.Fullwidth || this.type === this.Types.FullwidthTextArea,
       'mdc-text-field--focused': this.state === this.States.FocusedInvalid || this.state === this.States.Focused,
       'mdc-text-field--invalid': this.state === this.States.Invalid || this.state === this.States.FocusedInvalid,
       'mdc-text-field--disabled': this.state === this.States.Disabled,
       'mdc-text-field--with-leading-icon': this.parameters.includes(this.Parameters.LeadingIcon),
       'mdc-text-field--with-trailing-icon': this.parameters.includes(this.Parameters.TrailingIcon),
+      'mdc-text-field--dense': this.dense,
     };
 
     this.currentClassesLabel = {
-      'mdc-floating-label--float-above':
-      this.value !== '' || this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
+      'mdc-floating-label--float-above': this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
+    };
+
+    this.currentClassesOutline = {
+      'mdc-notched-outline--notched': this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
     };
 
     this.currentClassesLineRipple = {
       'mdc-line-ripple--active': this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
-    };
-
-    this.currentClassesOutline = {
-      'mdc-notched-outline--notched': this.value !== '' || this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
     };
 
     this.currentClassesHelperText = {
@@ -99,6 +100,11 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
         this.helperTextParams === this.HelperTextStyle.PersistentValidationMsg ||
         this.helperTextParams === this.HelperTextStyle.ValidationMsg
     };
+
+    if (this.state === this.States.Focused || this.state === this.States.FocusedInvalid) {
+      this.value = ' ';
+    }
+
   }
 
   /**

@@ -3,25 +3,5 @@
   <app-button-renderer></app-button-renderer>
   <app-chips></app-chips>
   <app-list></app-list>
-  <app-text-field></app-text-field>
-  <app-text-field [type]="Types.Outlined"></app-text-field>
-  <app-text-field [type]="Types.Outlined"
-                  [parameters]="[Parameters.LeadingIcon]"
-                  [leadingIcon]="'directions_transit'">
-  </app-text-field>
-  <app-text-field [type]="Types.Outlined"
-                  [parameters]="[Parameters.TrailingIcon, Parameters.HelperText]"
-                  [helperTextParams]="HelperTextStyle.Persistent"
-                  [trailingIcon]="'3d_rotation'">
-  </app-text-field>
-
-  <app-text-field [type]="Types.Outlined"
-                  [state]="States.FocusedInvalid"
-                  [parameters]="[Parameters.TrailingIcon, Parameters.HelperText]"
-                  [helperTextParams]="HelperTextStyle.Persistent"
-                  [trailingIcon]="'3d_rotation'">
-  </app-text-field>
-  <app-text-field [type]="Types.Textarea"
-                  [helperTextParams]="HelperTextStyle.Persistent">
-  </app-text-field>
+  <app-text-field-renderer></app-text-field-renderer>
 </div>
