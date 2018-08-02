@@ -9,6 +9,7 @@ import { ChipsComponent } from './chips/chips.component';
 import { ButtonRendererComponent } from './button-renderer/button-renderer.component';
 import { TextFieldRendererComponent } from './text-field-renderer/text-field-renderer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterSelectorComponent } from './filter-selector/filter-selector.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListComponent,
     ChipsComponent,
     ButtonRendererComponent,
-    TextFieldRendererComponent
+    TextFieldRendererComponent,
+    FilterSelectorComponent,
   ],
   imports: [
     BrowserModule,

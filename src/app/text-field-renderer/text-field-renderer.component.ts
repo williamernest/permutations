@@ -15,108 +15,129 @@ export class TextFieldRendererComponent implements OnInit {
   public Parameters = TextfieldParameters;
   public HelperTextParams = TextfieldHelperTextStyles;
 
+  private tfConfigData_: Array<TfConfig>;
+
   @Input() textFields = Array<Object>();
+  types = Array<TextfieldType>();
+  state = Array<TextfieldStates>();
+  helperParam = Array<TextfieldHelperTextStyles>();
+  dense = false;
+  leadingIcon = false;
+  trailingIcon = false;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    // Used to generate a new JSON file
-    // let tfConfig = this.getTextfieldTypes_();
-    // tfConfig = this.appendTextfieldStates_(tfConfig);
-    // tfConfig = this.appendParameters_(tfConfig);
-    // tfConfig = this.appendHelperTextParams_(tfConfig);
-    // tfConfig = this.appendDense_(tfConfig);
-    this.http.get<TfConfig[]>('/assets/text-fields.json').subscribe(data => this.textFields = data);
+    this.http.get<TfConfig[]>('/assets/text-fields.json').subscribe(data => this.tfConfigData = data);
   }
 
-  getTextfieldTypes_() {
-    const arr = Array<TfConfig>();
-    for (const type in TextfieldType) {
-      if (!isNaN(Number(type))) {
-        const newConfig = new TfConfig();
-        newConfig.type = TextfieldType[TextfieldType[type]];
-        arr.push(newConfig);
-      }
+  typeChanged(type, value) {
+    if (value) {
+      this.types.push(type);
+    } else {
+      const index = this.types.indexOf(type);
+      this.types.splice(index, 1);
     }
 
-    return arr;
+    this.filterData();
   }
 
-  appendTextfieldStates_(types: Array<TfConfig>): Array<TfConfig> {
-    const configs = [];
-
-    for (const state in TextfieldStates) {
-      if (!TextfieldStates.hasOwnProperty(state)) {
-        continue;
-      }
-
-      let arr = JSON.parse(JSON.stringify(types));
-      if (!isNaN(Number(state))) {
-        arr.forEach((type) => type.state = TextfieldStates[TextfieldStates[state]]);
-        configs.push(...arr);
-        arr = JSON.parse(JSON.stringify(types));
-      }
+  statesChanged(state, value) {
+    if (value) {
+      this.state.push(state);
+    } else {
+      const index = this.state.indexOf(state);
+      this.state.splice(index, 1);
     }
-    return configs;
+
+    this.filterData();
   }
 
-  appendParameters_(configs: Array<TfConfig>): Array<TfConfig> {
-    const returnConfigs = Array<TfConfig>();
-    const paramPermutations = this.getParameterPermutations_();
+  paramsChanged(param, value) {
+    switch (param) {
+      case this.Parameters.TrailingIcon:
+        this.trailingIcon = value;
+        break;
+      case this.Parameters.LeadingIcon:
+        this.leadingIcon = value;
+        break;
+      default:
+        break;
+    }
 
-    paramPermutations.forEach(param => {
-      let tempConfigs = JSON.parse(JSON.stringify(configs));
-      tempConfigs.forEach(conf => conf.parameters = param);
+    this.filterData();
+  }
 
-      // Filter out textareas and fullwidth variants for leading/trailing icon since it's not supported.
-      // TODO: Fix this filter
-      tempConfigs = tempConfigs.filter(conf =>
-        !((conf.type === TextfieldType.Textarea || conf.type === TextfieldType.FullwidthTextArea || conf.type === TextfieldType.Fullwidth)
-          && (conf.parameters.includes(TextfieldParameters.TrailingIcon) || conf.parameters.includes(TextfieldParameters.LeadingIcon))));
+  helperParamsChanged(param, value) {
+    if (value) {
+      this.helperParam.push(param);
+    } else {
+      const index = this.helperParam.indexOf(param);
+      this.helperParam.splice(index, 1);
+    }
 
-      returnConfigs.push(...tempConfigs);
+    this.filterData();
+
+  }
+
+  denseChanged(value) {
+    this.dense = value;
+    this.filterData();
+  }
+
+  set tfConfigData(tfConfigData: Array<TfConfig>) {
+    this.tfConfigData_ = tfConfigData;
+    this.filterData();
+  }
+
+  filterData(): void {
+    const filterObject = {
+      type: this.types,
+      state: this.state,
+      dense: this.dense,
+      leadingIcon: this.leadingIcon,
+      trailingIcon: this.trailingIcon,
+      helperParams: this.helperParam,
+    };
+
+    this.textFields = this.tfConfigData_.filter((conf) => {
+      if (filterObject.type.length > 0) {
+        if (!filterObject.type.includes(conf.type)) {
+          return false;
+        }
+      }
+
+      if (filterObject.state.length > 0) {
+        if (!filterObject.state.includes(conf.state)) {
+          return false;
+        }
+      }
+
+      conf.dense = conf.dense === undefined ? false : conf.dense;
+
+      if (filterObject.dense !== conf.dense) {
+        return false;
+      }
+
+
+      if (filterObject.leadingIcon && filterObject.trailingIcon) {
+        if (!(conf.parameters.includes(TextfieldParameters.LeadingIcon) || conf.parameters.includes(TextfieldParameters.TrailingIcon))) {
+          return false;
+        }
+      } else if (filterObject.leadingIcon && !conf.parameters.includes(TextfieldParameters.LeadingIcon)) {
+        return false;
+      } else if (filterObject.trailingIcon && !conf.parameters.includes(TextfieldParameters.TrailingIcon)) {
+        return false;
+      }
+
+      if (filterObject.helperParams.length > 0) {
+        if (!filterObject.helperParams.includes(conf.helperTextParams)) {
+          return false;
+        }
+      }
+
+      return true;
     });
-
-    return returnConfigs;
-  }
-
-  appendDense_(configs: Array<TfConfig>): Array<TfConfig> {
-    const temp = JSON.parse(JSON.stringify(configs));
-    temp.forEach(config => config.dense = true);
-    return configs.concat(temp);
-  }
-
-  appendHelperTextParams_(configs: Array<TfConfig>): Array<TfConfig> {
-    const completeConfigs = configs.filter(config => !(config.parameters && config.parameters.includes(TextfieldParameters.HelperText)));
-    const filterConfigs = configs.filter(config => config.parameters && config.parameters.includes(TextfieldParameters.HelperText));
-
-    for (const param in TextfieldHelperTextStyles) {
-      if (!isNaN(Number(param))) {
-        const tempConfigs = JSON.parse(JSON.stringify(filterConfigs));
-        tempConfigs.forEach(config => config.helperTextParams = TextfieldHelperTextStyles[TextfieldHelperTextStyles[param]]);
-        completeConfigs.push(...tempConfigs);
-      }
-    }
-
-    return completeConfigs;
-  }
-
-  getParameterPermutations_(): Array<Array<TextfieldParameters>> {
-    let arr = [[]];
-    for (const param in TextfieldParameters) {
-      if (!isNaN(Number(param))) {
-        const tempArr = JSON.parse(JSON.stringify(arr)); // Duplicate the array
-        tempArr.forEach((permutation) => permutation.push(TextfieldParameters[TextfieldParameters[param]]));
-        arr.push(...tempArr);
-      }
-    }
-
-    // Filter leading && trailing icons since it doesn't render properly.
-    arr = arr.filter((eachArr) => {
-      return !(eachArr.includes(TextfieldParameters.LeadingIcon) && eachArr.includes(TextfieldParameters.TrailingIcon));
-    });
-
-    return arr;
   }
 
 }
@@ -124,10 +145,11 @@ export class TextFieldRendererComponent implements OnInit {
 class TfConfig {
   label = 'Floating Label';
   value: string;
-  dense: boolean;
+  dense = false;
   state: TextfieldStates;
   type: TextfieldType;
   parameters: Array<TextfieldParameters>;
+  helperTextParams: TextfieldHelperTextStyles;
   leadingIcon = 'directions_transit';
   trailingIcon = '3d_rotation';
   helperText = 'Helper text';
