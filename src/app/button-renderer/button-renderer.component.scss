@@ -1,0 +1,13 @@
+@import "@material/card/mdc-card";
+
+.buttons-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-list-card {
+  min-width: 200px;
+  min-height: 100px;
+  margin: 5px;
+  padding: 10px;
+}
