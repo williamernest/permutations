@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TextFieldComponent } from './text-field/text-field.component';
 import { ButtonComponent } from './button/button.component';
 import { ListComponent } from './list/list.component';
+import { ListRendererComponent } from './list-renderer/list-renderer.component';
 import { ButtonRendererComponent } from './button-renderer/button-renderer.component';
 import { TextFieldRendererComponent } from './text-field-renderer/text-field-renderer.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +20,7 @@ import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.
     TextFieldComponent,
     ButtonComponent,
     ListComponent,
+    ListRendererComponent,
     ButtonRendererComponent,
     TextFieldRendererComponent,
     FilterSelectorComponent,
