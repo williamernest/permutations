@@ -4,7 +4,7 @@ import ListItem from '../list-item';
 @Component({
   selector: 'app-list-renderer',
   templateUrl: './list-renderer.component.html',
-  styleUrls: ['./list-renderer.component.css']
+  styleUrls: ['./list-renderer.component.scss']
 })
 
 export class ListRendererComponent implements OnInit {
@@ -14,23 +14,40 @@ export class ListRendererComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.setLists();
+  }
+
+  setLists() {
     const variantTypes = [
       {},
       {twoLine: true},
       {dense: true},
       {nonInteractive: true},
     ];
-    const stringifiedVariants = new Set();
-    this.generateStringifiedVariants({}, variantTypes, stringifiedVariants);
-    const variants = Array.from(stringifiedVariants).map(stringifiedVariant => JSON.parse(stringifiedVariant));
-    const allVariants = this.getVariantsWithIcons(variants);
+    let variants = [];
+    this.generateVariants({}, variantTypes, variants);
+    let allVariants = this.removeDuplicates(this.getVariantsWithIcons(variants));
     allVariants.forEach(variant => {
-      const list = new List();
-      if (variant.items && variant.items.length) {
-        list.items = variant.items.map(listItem => new ListItem(listItem));
-      }
+      const list = new List(variant);
+      const listWithSelectedItem = this.addSelectedListItem(variant);
       this.lists.push(list);
-    })
+      this.lists.push(listWithSelectedItem);
+    });
+  }
+
+  removeDuplicates(variants) {
+    const uniqueStringifiedVariants = new Set();
+    variants.forEach(variant => {
+      const stringifiedVariant = JSON.stringify(variant);
+      uniqueStringifiedVariants.add(stringifiedVariant);
+    });
+    return Array.from(uniqueStringifiedVariants).map(stringifiedVariant => JSON.parse(stringifiedVariant));
+  }
+
+  addSelectedListItem(variant) {
+    const list = new List(variant);
+    list.items[0].selected = true;
+    return list;
   }
 
   getVariantsWithIcons(existingVariants) {
@@ -44,16 +61,15 @@ export class ListRendererComponent implements OnInit {
     return copy;
   }
 
-  generateStringifiedVariants(currentVariant, remainingVariants, variants) {
+  generateVariants(currentVariant, remainingVariants, variants) {
     if (!remainingVariants.length) return;
   
     for (let i=0; i<remainingVariants.length; i++) {
       const addedVariant = remainingVariants[i];
       const newVariant = Object.assign({}, currentVariant, addedVariant);
-      const stringifiedNewVariant = JSON.stringify(newVariant);
-      variants.add(stringifiedNewVariant);
+      variants.push(newVariant);
       const newRemaining = remainingVariants.filter((num, index) => index > i);
-      this.generateStringifiedVariants(newVariant, newRemaining, variants);
+      this.generateVariants(newVariant, newRemaining, variants);
     }
   }
 
@@ -69,9 +85,9 @@ export class ListRendererComponent implements OnInit {
       {graphicText: ''},
     ];
     const graphicImgPaths = [
-      {graphicImgPath: 'assets/animal1.svg'},
-      {graphicImgPath: 'assets/animal2.svg'},
-      {graphicImgPath: 'assets/animal3.svg'},
+      {graphicImgPath: '../../assets/animal1.svg'},
+      {graphicImgPath: '../../assets/animal2.svg'},
+      {graphicImgPath: '../../assets/animal3.svg'},
     ];
     const metaIcons = [
       {metaIcon: 'info'},
@@ -112,5 +128,17 @@ class List {
   avatarList = false;
   dense = false;
   nonInteractive = false;
+
+  constructor(list) {
+    if (!list.items || !list.items.length) {
+      list.items = [{}, {}, {}];
+    }
+    this.items = list.items.map(listItem => new ListItem(listItem));
+
+    this.twoLine = list.twoLine || this.twoLine;
+    this.avatarList = list.avatarList || this.avatarList;
+    this.dense = list.dense || this.dense;
+    this.nonInteractive = list.nonInteractive || this.nonInteractive;
+  }
 }
 

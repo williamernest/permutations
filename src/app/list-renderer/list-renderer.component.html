@@ -1,6 +1,10 @@
 <div class="list-renderer">
   <app-list
     *ngFor="let list of lists"
-    [items]="list"></app-list>
+    [avatarList]="list.avatarList"
+    [dense]="list.dense"
+    [twoLine]="list.twoLine"
+    [nonInteractive]="list.nonInteractive"
+    [items]="list.items"></app-list>
 </div>
   
