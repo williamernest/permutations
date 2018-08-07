@@ -1,7 +1,6 @@
-
 export default class ListItem {
   primaryLabel = 'Primary label';
-  secondaryLabel: 'Secondary Label';
+  secondaryLabel = 'Secondary Label';
   selected = false;
   graphicIcon: string;
   graphicText: string;
@@ -10,12 +9,6 @@ export default class ListItem {
   metaText: string;
 
   constructor(newListItem) {
-    if (newListItem.primaryLabel) {
-      this.primaryLabel = newListItem.primaryLabel;
-    }
-    if (newListItem.secondaryLabel) {
-      this.secondaryLabel = newListItem.secondaryLabel;
-    }
     if (newListItem.selected) {
       this.selected = newListItem.selected;
     }
