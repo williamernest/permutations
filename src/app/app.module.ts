@@ -10,6 +10,7 @@ import { ButtonRendererComponent } from './button-renderer/button-renderer.compo
 import { TextFieldRendererComponent } from './text-field-renderer/text-field-renderer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterSelectorComponent } from './filter-selector/filter-selector.component';
+import { ListRendererComponent } from './list-renderer/list-renderer.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FilterSelectorComponent } from './filter-selector/filter-selector.compo
     ButtonRendererComponent,
     TextFieldRendererComponent,
     FilterSelectorComponent,
+    ListRendererComponent,
   ],
   imports: [
     BrowserModule,
