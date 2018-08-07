@@ -9,6 +9,9 @@ import { ButtonRendererComponent } from './button-renderer/button-renderer.compo
 import { TextFieldRendererComponent } from './text-field-renderer/text-field-renderer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterSelectorComponent } from './filter-selector/filter-selector.component';
+import { ChipComponent } from './chip/chip.component';
+import { ChipSetComponent } from './chip-set/chip-set.component';
+import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { FilterSelectorComponent } from './filter-selector/filter-selector.compo
     ButtonRendererComponent,
     TextFieldRendererComponent,
     FilterSelectorComponent,
+    ChipComponent,
+    ChipSetComponent,
+    ChipSetRendererComponent,
   ],
   imports: [
     BrowserModule,

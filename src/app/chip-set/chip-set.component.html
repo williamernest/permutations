@@ -1,0 +1,8 @@
+<div class="mdc-chip-set" [ngClass]="getClasses()">
+  <app-chip *ngFor="let chip of chips"
+            [content]="chip.content"
+            [leadingIcon]="chip.leadingIcon"
+            [trailingIcon]="chip.trailingIcon"
+            [selected]="chip.selected"
+            [checkmark]="chip.checkmark"></app-chip>
+</div>

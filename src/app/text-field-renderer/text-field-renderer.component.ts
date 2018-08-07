@@ -17,7 +17,7 @@ export class TextFieldRendererComponent implements OnInit {
 
   private tfConfigData_: Array<TfConfig>;
 
-  @Input() textFields = Array<Object>();
+  @Input() textFields = Array<TfConfig>();
   types = Array<TextfieldType>();
   state = Array<TextfieldStates>();
   helperParam = Array<TextfieldHelperTextStyles>();

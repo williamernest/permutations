@@ -1,0 +1,15 @@
+<div class="chipset-renderer">
+  <h2 class="mdc-typography--headline5">Chip Sets</h2>
+  <div class="chipset-list">
+    <div class="chipset-list-card mdc-card mdc-card--outlined" *ngFor="let chipset of chipsets">
+      <div class="mdc-typography--subtitle1 demo-card-header">
+        Chip Set
+        <div>
+          <span class="mdc-typography--caption"> {{ ChipSetTypes[chipset.type] }} chips </span>
+
+        </div>
+        <app-chip-set [chips]="chipset.chips" [type]="chipset.type"></app-chip-set>
+      </div>
+    </div>
+  </div>
+</div>
