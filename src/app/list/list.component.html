@@ -1,3 +1,23 @@
-<p>
-  list works!
-</p>
+<h3>
+  {{title}}
+</h3>
+<ul class="mdc-list" [ngClass]="currentClasses_">
+  <li 
+    *ngFor="let listItem of items"
+    class="mdc-list-item"
+    [ngClass]="{
+      'mdc-list-item--selected': listItem.selected,
+      'mdc-list-item--activated': listItem.activated
+    }">
+    <i *ngIf="listItem.graphicIcon" class="mdc-list-item__graphic material-icons">{{listItem.graphicIcon}}</i>
+    <span *ngIf="listItem.graphicText" class="mdc-list-item__graphic">{{listItem.graphicText}}</span>
+    <img *ngIf="listItem.graphicImgPath" class="mdc-list-item__graphic" [src]="listItem.graphicImgPath" />
+    <span *ngIf="!twoLine">{{listItem.primaryLabel}}</span>
+    <span *ngIf="twoLine" class="mdc-list-item__text">
+      <span class="mdc-list-item__primary-text">{{listItem.primaryLabel}}</span>
+      <span class="mdc-list-item__secondary-text">{{listItem.secondaryLabel}}</span>
+    </span>
+    <i *ngIf="listItem.metaIcon" class="mdc-list-item__meta material-icons">{{listItem.metaIcon}}</i>
+    <span *ngIf="listItem.metaText" class="mdc-list-item__meta">{{listItem.metaText}}</span>
+  </li>
+</ul>
