@@ -1,0 +1,7 @@
+<div class="content">
+  <!--<app-component-drawer [open]="open"></app-component-drawer>-->
+  <div>
+    <app-top-app-bar (open)="toggleDrawer($event)"></app-top-app-bar>
+    <ng-content></ng-content>
+  </div>
+</div>

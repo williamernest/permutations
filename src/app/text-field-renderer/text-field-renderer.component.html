@@ -1,37 +1,45 @@
-<div class="button-renderer">
-  <h2 class="mdc-typography--headline5">Text fields</h2>
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2 class="mdc-typography--headline5">Text fields</h2>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <button *ngIf="panelOpenState" class="mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="menuSurface.open = true">filter_list</button>
   <div class="text-field-filter-container">
-    <div>
-      Filters
-    </div>
-    <div class="text-field-filter-control-container">
-      <div class="text-field-filter-control">
-        Types
-        <app-filter-selector *ngFor="let type of [0,1,2,3,4], let i = index " [checked]="i === 0" [label]="Types[type]" (checkboxChange)="typeChanged(type, $event)"></app-filter-selector>
-      </div>
+    <div class="mdc-menu-surface">
+      <div class="text-field-filter-control-container">
+        <div class="text-field-filter-control">
+          Types
+          <app-filter-selector *ngFor="let type of [0,1,2,3,4], let i = index " [checked]="i === 0" [label]="Types[type]" (checkboxChange)="typeChanged(type, $event)"></app-filter-selector>
+        </div>
 
-      <div class="text-field-filter-control">
-        States
-        <app-filter-selector *ngFor="let state of [0,1,2,3,4]; let i = index" [label]="States[state]" [checked]="i === 0" (checkboxChange)="statesChanged(state, $event)"></app-filter-selector>
-      </div>
+        <div class="text-field-filter-control">
+          States
+          <app-filter-selector *ngFor="let state of [0,1,2,3,4]; let i = index" [label]="States[state]" [checked]="i === 0" (checkboxChange)="statesChanged(state, $event)"></app-filter-selector>
+        </div>
 
-      <div class="text-field-filter-control">
-        Parameters (Optional)
-        <app-filter-selector *ngFor="let param of [0,1]" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
-      </div>
+        <div class="text-field-filter-control">
+          Parameters (Optional)
+          <app-filter-selector *ngFor="let param of [0,1]" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
+        </div>
 
-      <div class="text-field-filter-control">
-        Helper Text Params (Optional)
-        <app-filter-selector *ngFor="let helperParam of [0,1,2,3]" [label]="HelperTextParams[helperParam]" (checkboxChange)="helperParamsChanged(helperParam, $event)"></app-filter-selector>
-      </div>
+        <div class="text-field-filter-control">
+          Helper Text Params (Optional)
+          <app-filter-selector *ngFor="let helperParam of [0,1,2,3]" [label]="HelperTextParams[helperParam]" (checkboxChange)="helperParamsChanged(helperParam, $event)"></app-filter-selector>
+        </div>
 
-      <div class="text-field-filter-control">
-        Dense (Optional)
-        <app-filter-selector [label]="'Dense'" (checkboxChange)="denseChanged($event)"></app-filter-selector>
+        <div class="text-field-filter-control">
+          Dense (Optional)
+          <app-filter-selector [label]="'Dense'" (checkboxChange)="denseChanged($event)"></app-filter-selector>
+        </div>
+      </div>
+      <div class="menu-action-panel">
+        <button class="mdc-button" (click)="menuSurface.open = false">Close</button>
       </div>
     </div>
   </div>
-  <div class="tf-list">
+  <div class="tf-list" *ngIf="panelOpenState">
     <div class="tf-list-card mdc-card mdc-card--outlined" *ngFor="let field of textFields">
       <div class="mdc-typography--subtitle1 demo-card-header">
         {{ Types[field.type] }}
@@ -53,4 +61,5 @@
                       [dense]="field.dense" ></app-text-field>
     </div>
   </div>
-</div>
+
+</mat-expansion-panel>

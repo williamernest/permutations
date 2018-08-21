@@ -10,6 +10,7 @@ import ListItem from '../list-item';
 export class ListRendererComponent implements OnInit {
 
   lists: Array<List> = [];
+  panelOpenState = false;
 
   constructor() { }
 

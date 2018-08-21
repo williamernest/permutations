@@ -1,2 +1,18 @@
 @import "@material/ripple/mdc-ripple";
 @import "@material/typography/mdc-typography";
+
+body {
+  margin: 0;
+}
+
+.main-content {
+  margin: 8px;
+}
+
+.content {
+  display: inline-flex;
+  flex-direction: row;
+  flex-grow: 1;
+  height: 100%;
+  box-sizing: border-box;
+}

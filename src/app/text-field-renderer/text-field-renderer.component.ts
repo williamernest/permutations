@@ -1,6 +1,7 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
 import {HttpClient} from '@angular/common/http';
+import { MDCMenuSurface } from '@material/menu-surface';
 
 @Component({
   selector: 'app-text-field-renderer',
@@ -8,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./text-field-renderer.component.scss']
 })
-export class TextFieldRendererComponent implements OnInit {
+export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public Types = TextfieldType;
   public States = TextfieldStates;
@@ -16,6 +17,7 @@ export class TextFieldRendererComponent implements OnInit {
   public HelperTextParams = TextfieldHelperTextStyles;
 
   private tfConfigData_: Array<TfConfig>;
+  private menuSurface: MDCMenuSurface;
 
   @Input() textFields = Array<TfConfig>();
   types: Array<TextfieldType> = [this.Types.Default];
@@ -24,13 +26,28 @@ export class TextFieldRendererComponent implements OnInit {
   dense = false;
   leadingIcon = false;
   trailingIcon = false;
+  panelOpenState = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private myElement: ElementRef) { }
 
   ngOnInit() {
     this.http.get<TfConfig[]>('assets/text-fields.json').subscribe(data => {
       this.tfConfigData = data;
     });
+  }
+
+  ngAfterViewInit() {
+    const menuEl = this.myElement.nativeElement.querySelector('.mdc-menu-surface');
+    const anchorElement = this.myElement.nativeElement.querySelector('.mdc-menu-surface--anchor');
+
+    this.menuSurface = new MDCMenuSurface(menuEl);
+    this.menuSurface.setMenuSurfaceAnchorElement(anchorElement);
+  }
+
+  ngOnDestroy() {
+    if (this.menuSurface) {
+      this.menuSurface.destroy();
+    }
   }
 
   typeChanged(type, value) {
@@ -173,4 +190,4 @@ class TfConfig {
   leadingIcon = 'directions_transit';
   trailingIcon = '3d_rotation';
   helperText = 'Helper text';
-}
+};

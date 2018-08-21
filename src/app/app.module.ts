@@ -13,6 +13,13 @@ import { FilterSelectorComponent } from './filter-selector/filter-selector.compo
 import { ChipComponent } from './chip/chip.component';
 import { ChipSetComponent } from './chip-set/chip-set.component';
 import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.component';
+import { ComponentDrawerComponent } from './component-drawer/component-drawer.component';
+import { TopAppBarComponent } from './top-app-bar/top-app-bar.component';
+import { HeaderComponent } from './header/header.component';
+import {MatExpansionModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FilterPanelComponent } from './filter-panel/filter-panel.component';
+
 
 @NgModule({
   declarations: [
@@ -26,10 +33,17 @@ import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.
     FilterSelectorComponent,
     ChipComponent,
     ChipSetComponent,
-    ChipSetRendererComponent,],
+    ChipSetRendererComponent,
+    ComponentDrawerComponent,
+    TopAppBarComponent,
+    HeaderComponent,
+    FilterPanelComponent,
+  ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

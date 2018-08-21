@@ -1,10 +1,18 @@
-<div class="list-renderer">
-  <app-list
-    *ngFor="let list of lists"
-    [avatarList]="list.avatarList"
-    [dense]="list.dense"
-    [twoLine]="list.twoLine"
-    [nonInteractive]="list.nonInteractive"
-    [items]="list.items"></app-list>
-</div>
-  
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2 class="mdc-typography--headline5">Lists</h2>
+
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div *ngIf="panelOpenState">
+    <app-list
+      *ngFor="let list of lists"
+      [avatarList]="list.avatarList"
+      [dense]="list.dense"
+      [twoLine]="list.twoLine"
+      [nonInteractive]="list.nonInteractive"
+      [items]="list.items"></app-list>
+  </div>
+</mat-expansion-panel>
