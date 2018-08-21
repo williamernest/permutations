@@ -16,9 +16,8 @@ import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.
 import { ComponentDrawerComponent } from './component-drawer/component-drawer.component';
 import { TopAppBarComponent } from './top-app-bar/top-app-bar.component';
 import { HeaderComponent } from './header/header.component';
-import {MatExpansionModule} from '@angular/material';
+import { MatExpansionModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FilterPanelComponent } from './filter-panel/filter-panel.component';
 
 
 @NgModule({
@@ -37,13 +36,12 @@ import { FilterPanelComponent } from './filter-panel/filter-panel.component';
     ComponentDrawerComponent,
     TopAppBarComponent,
     HeaderComponent,
-    FilterPanelComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     MatExpansionModule,
-    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

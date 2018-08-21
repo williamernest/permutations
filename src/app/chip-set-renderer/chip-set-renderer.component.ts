@@ -12,6 +12,7 @@ export class ChipSetRendererComponent implements OnInit {
   @Input() chipsets = Array<ChipSet>();
 
   public ChipSetTypes = ChipSetType;
+  panelOpenState = false;
 
   constructor() { }
 

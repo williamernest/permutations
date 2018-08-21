@@ -10,7 +10,7 @@ import {ButtonState, ButtonType} from '../button-config';
 export class ButtonRendererComponent implements OnInit {
 
   @Input() buttons: Array<Object> = [];
-
+  panelOpenState = false;
   constructor() {
   }
 

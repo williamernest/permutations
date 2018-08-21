@@ -1,6 +1,6 @@
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false" [ngClass]="{'mdc-ripple-surface': !panelOpenState}">
+  <mat-expansion-panel-header [ngClass]="{'mdc-ripple-surface': panelOpenState}">
     <mat-panel-title>
   <h2 class="mdc-typography--headline5">Chip Sets</h2>
     </mat-panel-title>

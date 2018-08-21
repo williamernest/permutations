@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleDrawer() {
+  toggleDrawer(): void {
     this.open = !this.open;
   }
 

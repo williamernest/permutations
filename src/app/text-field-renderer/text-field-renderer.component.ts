@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEnca
 import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
 import {HttpClient} from '@angular/common/http';
 import { MDCMenuSurface } from '@material/menu-surface';
+import { MDCRipple } from '@material/ripple';
 
 @Component({
   selector: 'app-text-field-renderer',
@@ -17,7 +18,8 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   public HelperTextParams = TextfieldHelperTextStyles;
 
   private tfConfigData_: Array<TfConfig>;
-  private menuSurface: MDCMenuSurface;
+  menuSurface: MDCMenuSurface;
+  ripple: MDCRipple;
 
   @Input() textFields = Array<TfConfig>();
   types: Array<TextfieldType> = [this.Types.Default];
@@ -47,6 +49,10 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   ngOnDestroy() {
     if (this.menuSurface) {
       this.menuSurface.destroy();
+    }
+
+    if (this.ripple) {
+      this.ripple.destroy();
     }
   }
 
