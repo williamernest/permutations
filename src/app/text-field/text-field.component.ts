@@ -78,6 +78,7 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
       'mdc-text-field--with-leading-icon': this.parameters.includes(this.Parameters.LeadingIcon),
       'mdc-text-field--with-trailing-icon': this.parameters.includes(this.Parameters.TrailingIcon),
       'mdc-text-field--dense': this.dense,
+      // '__hover': this.state === this.States.Hovered,
     };
 
     this.currentClassesLabel = {

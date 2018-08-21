@@ -5,9 +5,10 @@ import {MDCList} from '@material/list';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private list: MDCList;
 
@@ -63,7 +64,7 @@ export class ListComponent implements OnInit {
     } else if (firstItem.graphicImgPath) {
       title += this.avatarList ? ' Avatar Graphic Img'   : ' Graphic Img';
     }
-    
+
     if (firstItem.metaIcon || firstItem.metaText) {
       title += title.includes('Graphic') ? ' &' : '';
     }

@@ -24,9 +24,9 @@ export class ListRendererComponent implements OnInit {
       {dense: true},
       {nonInteractive: true},
     ];
-    let variants = [];
+    const variants = [];
     this.generateVariants({}, variantTypes, variants);
-    let allVariants = this.removeDuplicates(this.getVariantsWithIcons(variants));
+    const allVariants = this.removeDuplicates(this.getVariantsWithIcons(variants));
     allVariants.forEach(variant => {
       const list = new List(variant);
       const listWithSelectedItem = this.addSelectedListItem(variant);
@@ -53,18 +53,18 @@ export class ListRendererComponent implements OnInit {
   getVariantsWithIcons(existingVariants) {
     const copy = existingVariants.slice();
     const listIcons = this.listItemIconVariants();
-    existingVariants.forEach(existingVariants => {
-      listIcons.forEach((listIcons) => {
-        copy.push(Object.assign({}, existingVariants, listIcons));
+    existingVariants.forEach(existingVariant => {
+      listIcons.forEach((listIcon) => {
+        copy.push(Object.assign({}, existingVariant, listIcon));
       });
     });
     return copy;
   }
 
   generateVariants(currentVariant, remainingVariants, variants) {
-    if (!remainingVariants.length) return;
-  
-    for (let i=0; i<remainingVariants.length; i++) {
+    if (!remainingVariants.length) { return; }
+
+    for (let i = 0; i < remainingVariants.length; i++) {
       const addedVariant = remainingVariants[i];
       const newVariant = Object.assign({}, currentVariant, addedVariant);
       variants.push(newVariant);
@@ -108,7 +108,7 @@ export class ListRendererComponent implements OnInit {
       Object.assign({avatarList: true}, {items: graphicImgPaths}),
       Object.assign({}, {items: metaIcons}),
       Object.assign({}, {items: metaText}),
-      Object.assign({}, {items: graphicIcons.map((graphic, index) => Object.assign({}, graphic, metaIcons[index]))}), 
+      Object.assign({}, {items: graphicIcons.map((graphic, index) => Object.assign({}, graphic, metaIcons[index]))}),
       Object.assign({}, {items: graphicText.map((graphic, index) => Object.assign({}, graphic, metaIcons[index]))}),
       Object.assign({}, {items: graphicImgPaths.map((graphic, index) => Object.assign({}, graphic, metaIcons[index]))}),
       Object.assign({avatarList: true}, {items: graphicImgPaths.map((graphic, index) => Object.assign({}, graphic, metaIcons[index]))}),

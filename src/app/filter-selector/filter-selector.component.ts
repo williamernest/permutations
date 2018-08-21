@@ -14,6 +14,7 @@ export class FilterSelectorComponent implements OnInit {
   checkbox: MDCCheckbox;
   formField: MDCFormField;
   componentId: string;
+  @Input() checked = false;
   @Input() label;
   @Output() checkboxChange = new EventEmitter<boolean>();
 
@@ -28,6 +29,7 @@ export class FilterSelectorComponent implements OnInit {
   }
 
   changed() {
+    this.checked = this.checkbox.checked;
     this.checkboxChange.emit(this.checkbox.checked);
   }
 

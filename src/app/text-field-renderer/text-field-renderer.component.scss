@@ -10,3 +10,24 @@
   margin: 5px;
   padding: 10px;
 }
+
+.text-field-filter-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  margin: 5px;
+}
+
+.text-field-filter-control-container {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.text-field-filter-control {
+ display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  margin: 0 5px;
+}

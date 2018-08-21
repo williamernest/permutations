@@ -22,6 +22,7 @@ enum TextfieldHelperTextStyles {
 enum TextfieldStates {
   Default,
   Focused,
+  // Hovered,
   Invalid,
   FocusedInvalid,
   Disabled,

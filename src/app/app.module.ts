@@ -13,7 +13,6 @@ import { FilterSelectorComponent } from './filter-selector/filter-selector.compo
 import { ChipComponent } from './chip/chip.component';
 import { ChipSetComponent } from './chip-set/chip-set.component';
 import { ChipSetRendererComponent } from './chip-set-renderer/chip-set-renderer.component';
-import { ListRendererComponent } from './list-renderer/list-renderer.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +26,7 @@ import { ListRendererComponent } from './list-renderer/list-renderer.component';
     FilterSelectorComponent,
     ChipComponent,
     ChipSetComponent,
-    ChipSetRendererComponent,
-    ListRendererComponent,
-  ],
+    ChipSetRendererComponent,],
   imports: [
     BrowserModule,
     HttpClientModule

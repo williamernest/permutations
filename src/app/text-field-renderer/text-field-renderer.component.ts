@@ -18,9 +18,9 @@ export class TextFieldRendererComponent implements OnInit {
   private tfConfigData_: Array<TfConfig>;
 
   @Input() textFields = Array<TfConfig>();
-  types = Array<TextfieldType>();
-  state = Array<TextfieldStates>();
-  helperParam = Array<TextfieldHelperTextStyles>();
+  types: Array<TextfieldType> = [this.Types.Default];
+  state: Array<TextfieldStates> = [this.States.Default];
+  helperParam = [];
   dense = false;
   leadingIcon = false;
   trailingIcon = false;
@@ -28,7 +28,9 @@ export class TextFieldRendererComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<TfConfig[]>('assets/text-fields.json').subscribe(data => this.tfConfigData = data);
+    this.http.get<TfConfig[]>('assets/text-fields.json').subscribe(data => {
+      this.tfConfigData = data;
+    });
   }
 
   typeChanged(type, value) {
@@ -49,6 +51,31 @@ export class TextFieldRendererComponent implements OnInit {
       const index = this.state.indexOf(state);
       this.state.splice(index, 1);
     }
+
+    // Experimental work on Hover state
+    // if (state === this.States.Hovered) {
+    //   // rewrite global styles for :hover to .__hover
+    //   for (const key in document.styleSheets) {
+    //     if (document.styleSheets[key] instanceof CSSStyleSheet) {
+    //       if (document.styleSheets[key].href === null) {
+    //         const rules = document.styleSheets[key].cssRules || document.styleSheets[key].rules;
+    //         for (const rule in rules) {
+    //           if (rules[rule] instanceof CSSStyleRule) {
+    //             if (rules[rule].selectorText.includes(':hover')) {
+    //               const newRule = rules[rule];
+    //               if (value) {
+    //                 newRule.selectorText = newRule.selectorText.replace(':hover', '.__hover');
+    //               } else {
+    //                 newRule.selectorText = newRule.selectorText.replace('.__hover', ':hover');
+    //               }
+    //               document.styleSheets[key];
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
     this.filterData();
   }
@@ -119,21 +146,14 @@ export class TextFieldRendererComponent implements OnInit {
         return false;
       }
 
-
-      if (filterObject.leadingIcon && filterObject.trailingIcon) {
-        if (!(conf.parameters.includes(TextfieldParameters.LeadingIcon) || conf.parameters.includes(TextfieldParameters.TrailingIcon))) {
-          return false;
-        }
-      } else if (filterObject.leadingIcon && !conf.parameters.includes(TextfieldParameters.LeadingIcon)) {
+      if (filterObject.leadingIcon !== conf.parameters.includes(TextfieldParameters.LeadingIcon)) {
         return false;
-      } else if (filterObject.trailingIcon && !conf.parameters.includes(TextfieldParameters.TrailingIcon)) {
+      } else if (filterObject.trailingIcon !== conf.parameters.includes(TextfieldParameters.TrailingIcon)) {
         return false;
       }
 
-      if (filterObject.helperParams.length > 0) {
-        if (!filterObject.helperParams.includes(conf.helperTextParams)) {
-          return false;
-        }
+      if (conf.parameters.includes(TextfieldParameters.HelperText) && !filterObject.helperParams.includes(conf.helperTextParams)) {
+        return false;
       }
 
       return true;
