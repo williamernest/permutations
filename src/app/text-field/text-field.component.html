@@ -1,5 +1,5 @@
 <div class="mdc-text-field" [ngClass]="currentClassesTf">
-  <i *ngIf="parameters.includes(Parameters.LeadingIcon)" class="material-icons mdc-text-field__icon">{{ leadingIcon }}</i>
+  <i *ngIf="parameters === Parameters.LeadingIcon || parameters === Parameters.BothIcons" class="material-icons mdc-text-field__icon">{{ leadingIcon }}</i>
   <input *ngIf="type !== Types.Textarea && type !== Types.FullwidthTextArea"
          [attr.id]="componentId"
          [attr.value]="value"
@@ -12,7 +12,7 @@
             [disabled]="state === States.Disabled"
             class="mdc-text-field__input">{{ value }}</textarea>
   <label *ngIf="type !== Types.Fullwidth" [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
-  <i *ngIf="parameters.includes(Parameters.TrailingIcon)" class="material-icons mdc-text-field__icon">{{ trailingIcon }}</i>
+  <i *ngIf="parameters === Parameters.TrailingIcon || parameters === Parameters.BothIcons" class="material-icons mdc-text-field__icon">{{ trailingIcon }}</i>
   <div *ngIf="hasLineRipple" class="mdc-line-ripple" [ngClass]="currentClassesLineRipple"></div>
   <div *ngIf="hasOutline" class="mdc-notched-outline" [ngClass]="currentClassesOutline">
     <svg>
@@ -21,7 +21,7 @@
   </div>
   <div *ngIf="hasOutline" class="mdc-notched-outline__idle"></div>
 </div>
-<p *ngIf="parameters.includes(Parameters.HelperText)"
+<p *ngIf="helperTextParams"
    class="mdc-text-field-helper-text"
    [ngClass]="currentClassesHelperText"
    aria-hidden="true">

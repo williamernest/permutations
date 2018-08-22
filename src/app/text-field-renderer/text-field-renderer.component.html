@@ -5,7 +5,7 @@
       <h2 class="mdc-typography--headline5">Text fields</h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <button *ngIf="panelOpenState" class="mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="menuSurface.open = !menuSurface.open">filter_list</button>
+  <button *ngIf="panelOpenState" class="filter-button mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="toggleMenu($event)">filter_list</button>
   <div class="text-field-filter-container">
     <div class="mdc-menu-surface">
       <div class="text-field-filter-control-container">
@@ -16,17 +16,17 @@
 
         <div class="text-field-filter-control">
           States
-          <app-filter-selector *ngFor="let state of [0,1,2,3,4]; let i = index" [label]="States[state]" [checked]="i === 0" (checkboxChange)="statesChanged(state, $event)"></app-filter-selector>
+          <app-filter-selector *ngFor="let state of [0,1,2,3,4]; let i = index" [checked]="i === 0" [label]="States[state]" (checkboxChange)="statesChanged(state, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
-          Parameters (Optional)
-          <app-filter-selector *ngFor="let param of [0,1]" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
+          Parameters
+          <app-filter-selector *ngFor="let param of [0,1,2,3]; let i = index" [checked]="i === 0" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
-          Helper Text Params (Optional)
-          <app-filter-selector *ngFor="let helperParam of [0,1,2,3]" [label]="HelperTextParams[helperParam]" (checkboxChange)="helperParamsChanged(helperParam, $event)"></app-filter-selector>
+          Helper Text Params
+          <app-filter-selector *ngFor="let helperParams of [0,1,2,3,4]; let i = index" [checked]="i === 0" [label]="HelperTextParams[helperParams]" (checkboxChange)="helperParamsChanged(helperParams, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
@@ -42,11 +42,11 @@
   <div class="tf-list" *ngIf="panelOpenState">
     <div class="tf-list-card mdc-card mdc-card--outlined" *ngFor="let field of textFields">
       <div class="mdc-typography--subtitle1 demo-card-header">
-        {{ Types[field.type] }}
+        Type {{ Types[field.type] }}
         <div>
           <span *ngIf="field.dense" class="mdc-typography--caption">Dense</span>
           <span *ngIf="field.state" class="mdc-typography--caption"> - {{ States[field.state] }}</span>
-          <span *ngFor="let param of field.parameters" class="mdc-typography--caption"> - {{ Parameters[param] }}</span>
+          <span *ngIf="field.parameters" class="mdc-typography--caption"> - {{ Parameters[field.parameters] }}</span>
           <span *ngIf="field.helperTextParams" class="mdc-typography--caption"> - {{ HelperTextParams[field.helperTextParams] }}</span>
         </div>
       </div>

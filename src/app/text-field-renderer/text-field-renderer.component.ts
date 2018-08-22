@@ -3,6 +3,7 @@ import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, Textfie
 import {HttpClient} from '@angular/common/http';
 import { MDCMenuSurface } from '@material/menu-surface';
 import { MDCRipple } from '@material/ripple';
+import {TextfieldGenerator} from '../textfield-generator';
 
 @Component({
   selector: 'app-text-field-renderer',
@@ -17,6 +18,8 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   public Parameters = TextfieldParameters;
   public HelperTextParams = TextfieldHelperTextStyles;
 
+  private generator: TextfieldGenerator = new TextfieldGenerator();
+
   private tfConfigData_: Array<TfConfig>;
   menuSurface: MDCMenuSurface;
   ripple: MDCRipple;
@@ -24,26 +27,21 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   @Input() textFields = Array<TfConfig>();
   types: Array<TextfieldType> = [this.Types.Default];
   state: Array<TextfieldStates> = [this.States.Default];
-  helperParam = [];
+  helperParams: Array<TextfieldHelperTextStyles> = [this.HelperTextParams.None];
   dense = false;
-  leadingIcon = false;
-  trailingIcon = false;
+  params: Array<TextfieldParameters> = [this.Parameters.NoIcon];
   panelOpenState = false;
 
   constructor(private http: HttpClient, private myElement: ElementRef) { }
 
   ngOnInit() {
-    this.http.get<TfConfig[]>('assets/text-fields.json').subscribe(data => {
-      this.tfConfigData = data;
-    });
   }
 
   ngAfterViewInit() {
     const menuEl = this.myElement.nativeElement.querySelector('.mdc-menu-surface');
-    const anchorElement = this.myElement.nativeElement.querySelector('.mdc-menu-surface--anchor');
 
     this.menuSurface = new MDCMenuSurface(menuEl);
-    this.menuSurface.setMenuSurfaceAnchorElement(anchorElement);
+    this.filterData();
   }
 
   ngOnDestroy() {
@@ -54,6 +52,13 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
     if (this.ripple) {
       this.ripple.destroy();
     }
+  }
+
+  toggleMenu(event) {
+    const anchorElement = this.myElement.nativeElement.querySelector('.mdc-menu-surface--anchor');
+
+    this.menuSurface.setMenuSurfaceAnchorElement(anchorElement);
+    this.menuSurface.open = !this.menuSurface.open;
   }
 
   typeChanged(type, value) {
@@ -67,12 +72,15 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
     this.filterData();
   }
 
-  statesChanged(state, value) {
+  statesChanged(state: TextfieldStates, value: boolean) {
     if (value) {
-      this.state.push(state);
+      if (!this.state.includes(state)) {
+        this.state.push(state);
+      }
     } else {
-      const index = this.state.indexOf(state);
-      this.state.splice(index, 1);
+      if (this.state.includes(state)) {
+        this.state.splice(this.state.indexOf(state), 1);
+      }
     }
 
     // Experimental work on Hover state
@@ -103,31 +111,32 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
     this.filterData();
   }
 
-  paramsChanged(param, value) {
-    switch (param) {
-      case this.Parameters.TrailingIcon:
-        this.trailingIcon = value;
-        break;
-      case this.Parameters.LeadingIcon:
-        this.leadingIcon = value;
-        break;
-      default:
-        break;
+  paramsChanged(param: TextfieldParameters, value: boolean) {
+    if (value) {
+      if (!this.params.includes(param)) {
+        this.params.push(param);
+      }
+    } else {
+      if (this.params.includes(param)) {
+        this.params.splice(this.params.indexOf(param), 1);
+      }
     }
 
     this.filterData();
   }
 
-  helperParamsChanged(param, value) {
+  helperParamsChanged(param: TextfieldHelperTextStyles, value: boolean) {
     if (value) {
-      this.helperParam.push(param);
+      if (!this.helperParams.includes(param)) {
+        this.helperParams.push(param);
+      }
     } else {
-      const index = this.helperParam.indexOf(param);
-      this.helperParam.splice(index, 1);
+      if (this.helperParams.includes(param)) {
+        this.helperParams.splice(this.helperParams.indexOf(param), 1);
+      }
     }
 
     this.filterData();
-
   }
 
   denseChanged(value) {
@@ -141,47 +150,44 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   }
 
   filterData(): void {
-    const filterObject = {
-      type: this.types,
-      state: this.state,
+    this.generator.filters = {
+      types: this.types,
+      states: this.state,
+      parameters: this.params,
+      helperTextParams: this.helperParams,
       dense: this.dense,
-      leadingIcon: this.leadingIcon,
-      trailingIcon: this.trailingIcon,
-      helperParams: this.helperParam,
     };
+    this.textFields = this.generator.generate() as TfConfig[];
 
-    this.textFields = this.tfConfigData_.filter((conf) => {
-      if (filterObject.type.length > 0) {
-        if (!filterObject.type.includes(conf.type)) {
-          return false;
-        }
-      }
-
-      if (filterObject.state.length > 0) {
-        if (!filterObject.state.includes(conf.state)) {
-          return false;
-        }
-      }
-
-      conf.dense = conf.dense === undefined ? false : conf.dense;
-
-      if (filterObject.dense !== conf.dense) {
-        return false;
-      }
-
-      if (filterObject.leadingIcon !== conf.parameters.includes(TextfieldParameters.LeadingIcon)) {
-        return false;
-      } else if (filterObject.trailingIcon !== conf.parameters.includes(TextfieldParameters.TrailingIcon)) {
-        return false;
-      }
-
-      if (conf.parameters.includes(TextfieldParameters.HelperText) && !filterObject.helperParams.includes(conf.helperTextParams)) {
-        return false;
-      }
-
-      return true;
-    });
   }
+  //   this.textFields = this.tfConfigData_.filter((conf) => {
+  //     if (!this.types.includes(conf.type)) {
+  //       return false;
+  //     }
+  //
+  //     if (!this.state.includes(conf.state)) {
+  //       return false;
+  //     }
+  //
+  //     conf.dense = conf.dense === undefined ? false : conf.dense;
+  //
+  //     if (this.dense !== conf.dense) {
+  //       return false;
+  //     }
+  //
+  //     if (this.helperParams.length === 0 && conf.helperTextParams) {
+  //       return false;
+  //     }
+  //
+  //
+  //
+  //     if (this.helperParams.length > 0 && !this.helperParams.includes(conf.helperTextParams)) {
+  //       return false;
+  //     }
+  //
+  //     return true;
+  //   });
+  // }
 
 }
 
@@ -191,9 +197,9 @@ class TfConfig {
   dense = false;
   state: TextfieldStates;
   type: TextfieldType;
-  parameters: Array<TextfieldParameters>;
+  parameters: TextfieldParameters;
   helperTextParams: TextfieldHelperTextStyles;
   leadingIcon = 'directions_transit';
   trailingIcon = '3d_rotation';
   helperText = 'Helper text';
-};
+}

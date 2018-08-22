@@ -7,14 +7,16 @@ enum TextfieldType {
 }
 
 enum TextfieldParameters {
+  NoIcon,
   LeadingIcon,
   TrailingIcon,
-  HelperText,
+  BothIcons
 }
 
 enum TextfieldHelperTextStyles {
-  Default,
-  Persistent,
+  None,
+  DefaultHelperText,
+  PersistentHelperText,
   ValidationMsg,
   PersistentValidationMsg,
 }
@@ -22,7 +24,6 @@ enum TextfieldHelperTextStyles {
 enum TextfieldStates {
   Default,
   Focused,
-  // Hovered,
   Invalid,
   FocusedInvalid,
   Disabled,

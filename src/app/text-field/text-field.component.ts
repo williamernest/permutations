@@ -34,8 +34,8 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() dense = false;
   @Input() type = TextfieldType.Default;
   @Input() state = TextfieldStates.Default;
-  @Input() parameters: Array<TextfieldParameters> = [];
-  @Input() helperTextParams = TextfieldHelperTextStyles.Default;
+  @Input() parameters: TextfieldParameters = TextfieldParameters.NoIcon;
+  @Input() helperTextParams: TextfieldHelperTextStyles;
 
   constructor(private myElement: ElementRef) {
     this.componentId = shortId.generate();
@@ -75,8 +75,9 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
       'mdc-text-field--focused': this.state === this.States.FocusedInvalid || this.state === this.States.Focused,
       'mdc-text-field--invalid': this.state === this.States.Invalid || this.state === this.States.FocusedInvalid,
       'mdc-text-field--disabled': this.state === this.States.Disabled,
-      'mdc-text-field--with-leading-icon': this.parameters.includes(this.Parameters.LeadingIcon),
-      'mdc-text-field--with-trailing-icon': this.parameters.includes(this.Parameters.TrailingIcon),
+      'mdc-text-field--with-leading-icon': this.parameters === this.Parameters.LeadingIcon || this.parameters === this.Parameters.BothIcons,
+      'mdc-text-field--with-trailing-icon': this.parameters === this.Parameters.TrailingIcon
+      || this.parameters === this.Parameters.BothIcons,
       'mdc-text-field--dense': this.dense,
       // '__hover': this.state === this.States.Hovered,
     };
@@ -95,7 +96,7 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.currentClassesHelperText = {
       'mdc-text-field-helper-text--persistent':
-        this.helperTextParams === this.HelperTextStyle.Persistent ||
+        this.helperTextParams === this.HelperTextStyle.PersistentHelperText ||
         this.helperTextParams === this.HelperTextStyle.PersistentValidationMsg,
       'mdc-text-field-helper-text--validation-msg':
         this.helperTextParams === this.HelperTextStyle.PersistentValidationMsg ||
