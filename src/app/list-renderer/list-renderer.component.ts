@@ -86,9 +86,9 @@ export class ListRendererComponent implements OnInit {
       {graphicText: ''},
     ];
     const graphicImgPaths = [
-      {graphicImgPath: '../../assets/animal1.svg'},
-      {graphicImgPath: '../../assets/animal2.svg'},
-      {graphicImgPath: '../../assets/animal3.svg'},
+      {graphicImgPath: 'assets/animal1.svg'},
+      {graphicImgPath: 'assets/animal2.svg'},
+      {graphicImgPath: 'assets/animal3.svg'},
     ];
     const metaIcons = [
       {metaIcon: 'info'},

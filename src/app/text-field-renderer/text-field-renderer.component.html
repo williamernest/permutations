@@ -5,7 +5,7 @@
       <h2 class="mdc-typography--headline5">Text fields</h2>
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <button *ngIf="panelOpenState" class="mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="menuSurface.open = true">filter_list</button>
+  <button *ngIf="panelOpenState" class="mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="menuSurface.open = !menuSurface.open">filter_list</button>
   <div class="text-field-filter-container">
     <div class="mdc-menu-surface">
       <div class="text-field-filter-control-container">
