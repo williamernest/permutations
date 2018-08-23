@@ -18,6 +18,9 @@ import { TopAppBarComponent } from './top-app-bar/top-app-bar.component';
 import { HeaderComponent } from './header/header.component';
 import { MatExpansionModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { InstancesComponent } from './instances/instances.component';
+import { SandboxComponent } from './sandbox/sandbox.component';
 
 
 @NgModule({
@@ -36,12 +39,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ComponentDrawerComponent,
     TopAppBarComponent,
     HeaderComponent,
+    InstancesComponent,
+    SandboxComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatExpansionModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
