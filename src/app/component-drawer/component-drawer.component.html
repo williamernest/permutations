@@ -6,10 +6,10 @@
       </div>
     </header>
     <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
-      <a routerLink="/instances" class="mdc-list-item mdc-list-item--activated" >
+      <a routerLink="/instances" class="mdc-list-item" [routerLinkActive]="['mdc-list-item--activated']">
         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>Instances
       </a>
-      <a routerLink="/sandbox" class="mdc-list-item">
+      <a routerLink="/sandbox" class="mdc-list-item" [routerLinkActive]="['mdc-list-item--activated']">
         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">edit</i>Code Sandbox
       </a>
     </nav>

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {MDCTemporaryDrawer} from '@material/drawer';
+import {MDCTemporaryDrawer, MDCTemporaryDrawerFoundation} from '@material/drawer';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-component-drawer',
@@ -10,14 +11,18 @@ import {MDCTemporaryDrawer} from '@material/drawer';
 export class ComponentDrawerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   drawer: MDCTemporaryDrawer;
-  @Output('open') outEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  openChange = new EventEmitter<boolean>();
 
-  constructor(private myElement: ElementRef) { }
+  constructor(private myElement: ElementRef, private router: Router) {
+    router.events.subscribe(() => this.drawer.open = false);
+  }
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
     this.drawer = new MDCTemporaryDrawer(this.myElement.nativeElement.firstChild);
+    this.drawer.listen(MDCTemporaryDrawerFoundation.strings.CLOSE_EVENT, () => this.openChange.emit(false));
   }
 
   ngOnDestroy(): void {
@@ -30,7 +35,6 @@ export class ComponentDrawerComponent implements OnInit, OnDestroy, AfterViewIni
   set open(open) {
     if (this.drawer) {
       this.drawer.open = open;
-      this.outEvent.emit(open);
     }
   }
 
