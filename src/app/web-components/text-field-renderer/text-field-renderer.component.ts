@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
+import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../../textfield.enum';
 import {HttpClient} from '@angular/common/http';
 import { MDCMenuSurface } from '@material/menu-surface';
 import { MDCRipple } from '@material/ripple';
-import {TextfieldGenerator} from '../textfield-generator';
+import {TextfieldGenerator} from '../../generators/textfield-generator';
 
 @Component({
   selector: 'app-text-field-renderer',

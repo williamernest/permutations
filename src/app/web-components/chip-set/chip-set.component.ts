@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewEncapsulation} from '@angular/core';
 import {MDCChipSet} from '@material/chips';
-import {ChipSetType} from '../chip-set-type.enum';
+import {ChipSetType} from '../../chip-set-type.enum';
 
 @Component({
   selector: 'app-chip-set',

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {ButtonState, ButtonType} from '../button-config';
+import {ButtonState, ButtonType} from '../../button-config';
 
 @Component({
   selector: 'app-button-renderer',

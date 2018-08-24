@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, OnDestroy, ViewEncapsulation, Input, AfterViewInit} from '@angular/core';
 import {MDCTextField} from '@material/textfield';
 import * as shortId from 'shortid';
-import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
+import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../../textfield.enum';
 
 @Component({
   selector: 'app-text-field',

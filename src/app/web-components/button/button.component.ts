@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {MDCRipple} from '@material/ripple';
-import {ButtonState, ButtonType} from '../button-config';
+import {ButtonState, ButtonType} from '../../button-config';
 
 @Component({
   selector: 'app-button',

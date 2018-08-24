@@ -1,6 +1,7 @@
-import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from './textfield.enum';
+///<reference path="config-generator.ts"/>
+import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
 
-export class TextfieldGenerator {
+export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
 
   public Types = TextfieldType;
   public States = TextfieldStates;
@@ -12,7 +13,8 @@ export class TextfieldGenerator {
     states: Array<TextfieldStates>,
     parameters: Array<TextfieldParameters>,
     helperTextParams: Array<TextfieldHelperTextStyles>,
-    dense: boolean} = {types: [TextfieldType.Default], states: [TextfieldStates.Default], parameters: [], helperTextParams: [], dense: false};
+    dense: boolean} =
+    {types: [TextfieldType.Default], states: [TextfieldStates.Default], parameters: [], helperTextParams: [], dense: false};
 
   generate(): Array<TfConfig> {
     let tf = this.getTextfieldTypes_();

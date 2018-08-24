@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {ChipSetType} from '../chip-set-type.enum';
+import {ChipSetType} from '../../chip-set-type.enum';
 
 @Component({
   selector: 'app-chip-set-renderer',
