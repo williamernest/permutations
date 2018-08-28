@@ -1,5 +1,5 @@
 enum TextfieldType {
-  Default, // Box
+  Default,
   Outlined,
   Textarea,
   Fullwidth,

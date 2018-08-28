@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {MDCPersistentDrawer} from '@material/drawer';
+import {MDCDrawer} from '@material/drawer';
 
 @Component({
   selector: 'app-component-drawer',
@@ -9,14 +9,14 @@ import {MDCPersistentDrawer} from '@material/drawer';
 })
 export class ComponentDrawerComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  drawer: MDCPersistentDrawer;
+  drawer: MDCDrawer;
 
   constructor(private myElement: ElementRef) { }
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    this.drawer = new MDCPersistentDrawer(this.myElement.nativeElement.firstChild);
+    this.drawer = new MDCDrawer(this.myElement.nativeElement.firstChild);
   }
 
   ngOnDestroy(): void {

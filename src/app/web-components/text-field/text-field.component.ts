@@ -68,7 +68,6 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   setCurrentClasses(): void {
     this.currentClassesTf = {
-      'mdc-text-field--box': this.type === this.Types.Default,
       'mdc-text-field--outlined': this.type === this.Types.Outlined,
       'mdc-text-field--textarea': this.type === this.Types.Textarea || this.type === this.Types.FullwidthTextArea,
       'mdc-text-field--fullwidth': this.type === this.Types.Fullwidth || this.type === this.Types.FullwidthTextArea,

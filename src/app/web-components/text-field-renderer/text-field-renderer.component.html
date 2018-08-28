@@ -43,22 +43,22 @@
     <div class="tf-list-card mdc-card mdc-card--outlined" *ngFor="let field of textFields">
       <div class="mdc-typography--subtitle1 demo-card-header">
         Type {{ Types[field.type] }}
-        <div>
-          <span *ngIf="field.dense" class="mdc-typography--caption">Dense</span>
-          <span *ngIf="field.state" class="mdc-typography--caption"> - {{ States[field.state] }}</span>
-          <span *ngIf="field.parameters" class="mdc-typography--caption"> - {{ Parameters[field.parameters] }}</span>
-          <span *ngIf="field.helperTextParams" class="mdc-typography--caption"> - {{ HelperTextParams[field.helperTextParams] }}</span>
-        </div>
+      <div>
+        <span *ngIf="field.dense" class="mdc-typography--caption">Dense</span>
+        <span *ngIf="field.state" class="mdc-typography--caption"> - {{ States[field.state] }}</span>
+        <span *ngIf="field.parameters" class="mdc-typography--caption"> - {{ Parameters[field.parameters] }}</span>
+        <span *ngIf="field.helperTextParams" class="mdc-typography--caption"> - {{ HelperTextParams[field.helperTextParams] }}</span>
       </div>
-      <app-text-field [type]="field.type"
-                      [state]="field.state"
-                      [helperText]="field.helperText"
-                      [helperTextParams]="field.helperTextParams"
-                      [leadingIcon]="field.leadingIcon"
-                      [trailingIcon]="field.trailingIcon"
-                      [label]="" [value]="field.value"
-                      [parameters]="field.parameters"
-                      [dense]="field.dense" ></app-text-field>
+    </div>
+    <app-text-field [type]="field.type"
+                    [state]="field.state"
+                    [helperText]="field.helperText"
+                    [helperTextParams]="field.helperTextParams"
+                    [leadingIcon]="field.leadingIcon"
+                    [trailingIcon]="field.trailingIcon"
+                    [label]="" [value]="field.value"
+                    [parameters]="field.parameters"
+                    [dense]="field.dense" ></app-text-field>
     </div>
   </div>
 
