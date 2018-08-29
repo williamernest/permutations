@@ -33,7 +33,10 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
     let data = '';
     this.colors.forEach(el => data = `${data}\n$mdc-theme-${el.name}: ${el.value};`);
 
-    data = `${data}\n@import "@material/textfield/mdc-text-field.scss";`;
+    data = `${data}
+    @import "@material/theme/mdc-theme.scss";
+    @import "@material/textfield/mdc-text-field.scss";
+    `;
     return this.colors[0].value ? data : '';
   }
 
