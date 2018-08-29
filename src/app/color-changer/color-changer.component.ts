@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MDCMenuSurface} from '@material/menu-surface';
 import {HttpClient} from '@angular/common/http';
+import {Subject} from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-color-changer',
@@ -20,8 +22,26 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
     ];
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;
+  httpRequestDebouncer = new Subject();
 
-  constructor(private httpClient: HttpClient, private ele: ElementRef) { }
+  constructor(private httpClient: HttpClient, private ele: ElementRef) {
+    this.httpRequestDebouncer.pipe(debounceTime(1000)).subscribe(() => {
+      this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
+        const demo = document.getElementById('demo-class');
+
+        if (demo) {
+          demo.parentElement.removeChild(demo);
+        }
+
+        if (response['data']) {
+          let ss = document.getElementsByTagName('head')[0].innerHTML;
+          ss += `<style type="text/css" id="demo-class">${response['data']}</script>`;
+          document.getElementsByTagName('head')[0].innerHTML = ss;
+        }
+        // this.cssChange.emit(response['data']);
+      });
+    });
+  }
 
   ngOnInit() {
     this.colors.forEach(val => {
@@ -42,20 +62,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   updateColors() {
-    this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
-      const ele = document.getElementById('demo-class');
-
-      if (ele) {
-        ele.parentElement.removeChild(ele);
-      }
-
-      if (response['data']) {
-        let ss = document.getElementsByTagName('head')[0].innerHTML;
-        ss += `<style type="text/css" id="demo-class">${response['data']}</script>`;
-        document.getElementsByTagName('head')[0].innerHTML = ss;
-      }
-      // this.cssChange.emit(response['data']);
-    });
+    this.httpRequestDebouncer.next();
   }
 
   ngAfterViewInit(): void {
