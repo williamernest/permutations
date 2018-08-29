@@ -38,7 +38,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   updateColors() {
-    this.httpClient.post('/api/compile/scss', {data: this.buildSass()}).subscribe((response) => {
+    this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
       const ele = document.getElementById('demo-class');
 
       if (ele) {
