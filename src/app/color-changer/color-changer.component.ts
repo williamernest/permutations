@@ -28,7 +28,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
     this.httpRequestDebouncer.pipe(debounceTime(1000)).subscribe(() => {
       this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
         const demo = document.getElementById('demo-class');
-        const data = response['data'].replace(':root{', '{');
+        const data = response['data'];
 
         if (demo) {
           demo.parentElement.removeChild(demo);
