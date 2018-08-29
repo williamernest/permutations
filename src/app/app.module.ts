@@ -18,6 +18,8 @@ import { TopAppBarComponent } from './top-app-bar/top-app-bar.component';
 import { HeaderComponent } from './header/header.component';
 import { MatExpansionModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ColorChangerComponent } from './color-changer/color-changer.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -36,12 +38,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ComponentDrawerComponent,
     TopAppBarComponent,
     HeaderComponent,
+    ColorChangerComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatExpansionModule,
+    ColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
