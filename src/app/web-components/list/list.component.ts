@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import ListItem from '../list-item';
+import ListItem from '../../list-item';
 import {MDCList} from '@material/list';
 
 @Component({

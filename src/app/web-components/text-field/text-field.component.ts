@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import {MDCTextField} from '@material/textfield';
 import * as shortId from 'shortid';
-import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
+import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../../textfield.enum';
 
 @Component({
   selector: 'app-text-field',
@@ -102,7 +102,6 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
    */
   setCurrentClasses(): void {
     this.currentClassesTf = {
-      'mdc-text-field--box': this.type === this.Types.Default,
       'mdc-text-field--outlined': this.type === this.Types.Outlined,
       'mdc-text-field--textarea': this.type === this.Types.Textarea || this.type === this.Types.FullwidthTextArea,
       'mdc-text-field--fullwidth': this.type === this.Types.Fullwidth || this.type === this.Types.FullwidthTextArea,
