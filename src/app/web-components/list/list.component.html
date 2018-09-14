@@ -1,8 +1,8 @@
 <h3>
   {{title}}
 </h3>
-<ul class="mdc-list" [ngClass]="currentClasses_">
-  <li 
+<ul class="mdc-list instances-list" [ngClass]="currentClasses_">
+  <li
     *ngFor="let listItem of items"
     class="mdc-list-item"
     [ngClass]="{
