@@ -46,13 +46,19 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngOnInit() {
     this.colors.forEach(val => {
-      val.value = window.getComputedStyle(document.body).getPropertyValue(`--mdc-theme-${val.name}`);
+      if(val.value === '') {
+        val.value = window.getComputedStyle(document.body).getPropertyValue(`--mdc-theme-${val.name}`);
+      }
     });
   }
 
   buildSass() {
     let data = '.main-content {';
-    this.colors.forEach(el => data = `${data}\n$mdc-theme-${el.name}: ${el.value};`);
+    this.colors.forEach(el => {
+       if (el.value !== '') {
+         data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
+       }
+    });
 
     data = `${data}
       @import "@material/theme/mdc-theme.scss";
