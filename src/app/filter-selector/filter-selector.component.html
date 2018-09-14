@@ -15,5 +15,6 @@
       <div class="mdc-checkbox__mixedmark"></div>
     </div>
   </div>
-  <label [attr.for]="componentId">{{ label }}</label>
+  <label *ngIf="!input" [attr.for]="componentId">{{ label }}</label>
+  <input *ngIf="input" [value]="label" (input)="label = $event.target.value" (blur)="changed()" (keyup.enter)="changed()"/>
 </div>

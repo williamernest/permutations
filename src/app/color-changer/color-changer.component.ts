@@ -3,6 +3,7 @@ import {MDCMenuSurface} from '@material/menu-surface';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-color-changer',
@@ -16,15 +17,17 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
     {label: 'Primary', name: 'primary', value: ''},
     {label: 'Secondary', name: 'secondary', value: ''},
     {label: 'Surface', name: 'surface', value: ''},
+    // {label: 'Error', name: 'error', value: ''},
     {label: 'On Primary', name: 'on-primary', value: ''},
     {label: 'On Secondary', name: 'on-secondary', value: ''},
     {label: 'On Surface', name: 'on-surface', value: ''},
+    // {label: 'On Error', name: 'on-error', value: ''},
     ];
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;
   httpRequestDebouncer = new Subject();
 
-  constructor(private httpClient: HttpClient, private ele: ElementRef) {
+  constructor(private httpClient: HttpClient, private ele: ElementRef, private router: Router) {
     this.httpRequestDebouncer.pipe(debounceTime(1000)).subscribe(() => {
       this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
         const demo = document.getElementById('demo-class');
@@ -46,18 +49,24 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngOnInit() {
     this.colors.forEach(val => {
-      if(val.value === '') {
+      if (val.value === '') {
         val.value = window.getComputedStyle(document.body).getPropertyValue(`--mdc-theme-${val.name}`);
       }
     });
   }
 
   buildSass() {
-    let data = '.main-content {';
+    let data;
+    if (this.router.url === '/sandbox') { // TODO: Fixme
+      data = '.hero {';
+    } else {
+      data = '.main-content {';
+    }
+
     this.colors.forEach(el => {
-       if (el.value !== '') {
-         data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
-       }
+      if (el.value !== '') {
+        data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
+      }
     });
 
     data = `${data}

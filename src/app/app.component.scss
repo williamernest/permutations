@@ -8,6 +8,7 @@ body {
 
 .main-content {
   margin: 8px;
+  width: 100%;
 }
 
 .content {
@@ -15,5 +16,6 @@ body {
   flex-direction: row;
   flex-grow: 1;
   height: 100%;
+  width: 100%;
   box-sizing: border-box;
 }
