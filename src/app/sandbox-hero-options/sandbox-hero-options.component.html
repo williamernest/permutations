@@ -1,0 +1,18 @@
+<div class="text-field-filter-control-container">
+  <div *ngFor="let item of config"  [ngSwitch]="item.type">
+    {{ item.label }}
+    <ul class="mdc-list" *ngSwitchCase="'radio'">
+      <li class="mdc-list-item" *ngFor="let option of item.options; let i = index;">
+        <app-radio-selector (radioChange)="item.value = option.label; setOptions()" [label]="option.label" [checked]="item.value === option.label" [radioName]="item.label + 'radio'"></app-radio-selector>
+      </li>
+    </ul>
+    <ul class="mdc-list" *ngSwitchCase="'checkbox'">
+      <li class="mdc-list-item" *ngFor="let option of item.options; let i = index;">
+        <app-filter-selector (checkboxChange)="item.selected = $event; setOptions()" [label]="option.label" [checked]="item.value === option.label"></app-filter-selector>
+      </li>
+    </ul>
+    <div *ngSwitchCase="'checkbox-input'">
+      <app-filter-selector (labelChange)="item.value = $event" [label]="item.value" [checked]="item.checked" (checkboxChange)="item.checked = $event; setOptions()" [input]="true"></app-filter-selector>
+    </div>
+  </div>
+</div>

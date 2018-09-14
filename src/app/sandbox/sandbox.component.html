@@ -1,3 +1,6 @@
-<p>
-  sandbox works!
-</p>
+<div class="content">
+
+  <app-sandbox-sidebar></app-sandbox-sidebar>
+  <app-sandbox-hero [config]="config"></app-sandbox-hero>
+  <app-sandbox-hero-options (configChange)="config = $event"></app-sandbox-hero-options>
+</div>

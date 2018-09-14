@@ -12,11 +12,12 @@ import * as shortId from 'shortid';
 export class FilterSelectorComponent implements OnInit {
 
   checkbox: MDCCheckbox;
-  formField: MDCFormField;
   componentId: string;
+  label_ = '';
   @Input() checked = false;
-  @Input() label;
+  @Input() input = false;
   @Output() checkboxChange = new EventEmitter<boolean>();
+  @Output() labelChange = new EventEmitter<string>();
 
   constructor(private myElement: ElementRef) {
     this.componentId = shortId.generate();
@@ -24,8 +25,16 @@ export class FilterSelectorComponent implements OnInit {
 
   ngOnInit() {
     this.checkbox = new MDCCheckbox(this.myElement.nativeElement.querySelector('.mdc-checkbox'));
-    this.formField = new MDCFormField(this.myElement.nativeElement.querySelector('.mdc-form-field'));
-    this.formField.input = this.checkbox;
+  }
+
+  @Input()
+  get label() {
+    return this.label_;
+  }
+
+  set label(val) {
+    this.label_ = val;
+    this.labelChange.emit(this.label_);
   }
 
   changed() {

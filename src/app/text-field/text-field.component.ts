@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, OnDestroy, ViewEncapsulation, Input, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 import {MDCTextField} from '@material/textfield';
 import * as shortId from 'shortid';
 import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
@@ -9,7 +9,7 @@ import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, Textfie
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./text-field.component.scss']
 })
-export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecked, AfterContentChecked {
 
   public States = TextfieldStates;
   public Types = TextfieldType;
@@ -37,24 +37,58 @@ export class TextFieldComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() parameters: TextfieldParameters = TextfieldParameters.NoIcon;
   @Input() helperTextParams: TextfieldHelperTextStyles;
 
+  private resetComponent = false;
+
   constructor(private myElement: ElementRef) {
     this.componentId = shortId.generate();
   }
 
-  ngOnInit() {
-    this.setCurrentClasses();
-    this.setIndicator();
-
-    // Quick hack to force the outline text field to render the outline correctly in focused state with no value.
-    if (this.state === this.States.FocusedInvalid || this.state === this.States.Focused) {
-      if (this.value === '') {
-        this.value = ' ';
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        if (propName === 'type') {
+          this.resetComponent = true;
+        } else if (propName === 'state') {
+          this.resetComponent = true;
+        } else if (propName === 'leadingIcon' || propName === 'trailingIcon') {
+          this.setCurrentClasses();
+        }
       }
     }
   }
 
-  ngAfterViewInit() {
-    this.textField = new MDCTextField(this.myElement.nativeElement.firstChild);
+  ngAfterContentChecked() {
+    if (this.resetComponent) {
+      if (this.textField) {
+        this.textField.destroy();
+      }
+
+      // Quick hack to force the outline text field to render the outline correctly in focused state with no value.
+      if (this.state === this.States.FocusedInvalid || this.state === this.States.Focused) {
+        if (this.value === '') {
+          this.value = ' ';
+        }
+      } else {
+        if (this.value === ' ') {
+          this.value = '';
+        }
+      }
+
+      this.setIndicator();
+      this.setCurrentClasses();
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (this.resetComponent) {
+      this.resetComponent = false;
+
+
+      setTimeout(() => {
+        this.textField = new MDCTextField(this.myElement.nativeElement.firstChild);
+        this.textField.layout();
+      }, 0);
+    }
   }
 
   ngOnDestroy() {

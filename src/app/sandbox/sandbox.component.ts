@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SandboxComponent implements OnInit {
 
+  config: Object;
   constructor() { }
 
   ngOnInit() {

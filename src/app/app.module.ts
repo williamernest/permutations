@@ -21,6 +21,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { InstancesComponent } from './instances/instances.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { SandboxSidebarComponent } from './sandbox-sidebar/sandbox-sidebar.component';
+import { SandboxHeroComponent } from './sandbox-hero/sandbox-hero.component';
+import { SandboxHeroOptionsComponent } from './sandbox-hero-options/sandbox-hero-options.component';
+import { RadioSelectorComponent } from './radio-selector/radio-selector.component';
 
 
 @NgModule({
@@ -41,6 +45,10 @@ import { SandboxComponent } from './sandbox/sandbox.component';
     HeaderComponent,
     InstancesComponent,
     SandboxComponent,
+    SandboxSidebarComponent,
+    SandboxHeroComponent,
+    SandboxHeroOptionsComponent,
+    RadioSelectorComponent,
   ],
   imports: [
     BrowserModule,
