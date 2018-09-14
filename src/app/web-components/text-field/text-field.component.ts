@@ -46,12 +46,13 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
-        if (propName === 'type') {
-          this.resetComponent = true;
-        } else if (propName === 'state') {
-          this.resetComponent = true;
-        } else if (propName === 'leadingIcon' || propName === 'trailingIcon') {
-          this.setCurrentClasses();
+        switch (propName) {
+          case 'type':
+          case 'state':
+          case 'leadingIcon':
+          case 'trailingIcon':
+            this.resetComponent = true;
+            break;
         }
       }
     }
