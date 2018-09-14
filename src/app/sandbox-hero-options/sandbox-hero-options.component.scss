@@ -1,0 +1,15 @@
+
+:host {
+  flex: 2 1;
+}
+
+.sandbox-options-container {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  margin: 5px 0;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

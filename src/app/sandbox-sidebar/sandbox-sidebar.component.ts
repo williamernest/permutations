@@ -4,7 +4,6 @@ import {MDCList} from '@material/list';
 @Component({
   selector: 'app-sandbox-sidebar',
   templateUrl: './sandbox-sidebar.component.html',
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./sandbox-sidebar.component.scss']
 })
 export class SandboxSidebarComponent implements OnInit, OnDestroy, AfterViewInit {

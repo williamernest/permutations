@@ -1,6 +1,6 @@
 <div class="content">
   <app-component-drawer [(open)]="open"></app-component-drawer>
-  <div>
+  <div style="flex: auto;">
     <app-top-app-bar (open)="open = !open"></app-top-app-bar>
     <ng-content></ng-content>
   </div>

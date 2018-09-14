@@ -1,4 +1,4 @@
-<div class="text-field-filter-control-container">
+<div class="sandbox-options-container">
   <div *ngFor="let item of config"  [ngSwitch]="item.type">
     {{ item.label }}
     <ul class="mdc-list" *ngSwitchCase="'radio'">

@@ -13,9 +13,6 @@ import { FilterSelectorComponent } from './filter-selector/filter-selector.compo
 import { ChipComponent } from './web-components/chip/chip.component';
 import { ChipSetComponent } from './web-components/chip-set/chip-set.component';
 import { ChipSetRendererComponent } from './web-components/chip-set-renderer/chip-set-renderer.component';
-import { ComponentDrawerComponent } from './component-drawer/component-drawer.component';
-import { TopAppBarComponent } from './top-app-bar/top-app-bar.component';
-import { HeaderComponent } from './header/header.component';
 import { MatExpansionModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -25,7 +22,7 @@ import { SandboxSidebarComponent } from './sandbox-sidebar/sandbox-sidebar.compo
 import { SandboxHeroComponent } from './sandbox-hero/sandbox-hero.component';
 import { SandboxHeroOptionsComponent } from './sandbox-hero-options/sandbox-hero-options.component';
 import { RadioSelectorComponent } from './radio-selector/radio-selector.component';
-
+import {HeaderModule} from './header/header.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +37,6 @@ import { RadioSelectorComponent } from './radio-selector/radio-selector.componen
     ChipComponent,
     ChipSetComponent,
     ChipSetRendererComponent,
-    ComponentDrawerComponent,
-    TopAppBarComponent,
-    HeaderComponent,
     InstancesComponent,
     SandboxComponent,
     SandboxSidebarComponent,
@@ -56,8 +50,10 @@ import { RadioSelectorComponent } from './radio-selector/radio-selector.componen
     HttpClientModule,
     MatExpansionModule,
     AppRoutingModule,
+    HeaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

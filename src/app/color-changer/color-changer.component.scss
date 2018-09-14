@@ -1,0 +1,21 @@
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/button/mdc-button";
+
+.color-picker-surface {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  margin: 5px 0;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.text-field-filter-control {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  margin: 0 5px;
+}
