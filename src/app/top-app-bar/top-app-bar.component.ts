@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {MDCTopAppBar, MDCTopAppBarFoundation} from '@material/top-app-bar';
 
 @Component({
@@ -10,19 +10,18 @@ import {MDCTopAppBar, MDCTopAppBarFoundation} from '@material/top-app-bar';
 export class TopAppBarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private topAppBar: MDCTopAppBar;
-  private openState = false;
-
-  @Output()
-  open: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private myElement: ElementRef) { }
 
   ngOnInit() {
   }
 
+  @Output('open')
+  outEvent = new EventEmitter();
+
   ngAfterViewInit(): void {
     this.topAppBar = new MDCTopAppBar(this.myElement.nativeElement.firstChild);
-    this.topAppBar.listen(MDCTopAppBarFoundation.strings.NAVIGATION_EVENT, () => this.navigate());
+    this.topAppBar.listen(MDCTopAppBarFoundation.strings.NAVIGATION_EVENT, () => this.outEvent.emit());
   }
 
   ngOnDestroy(): void {
@@ -30,10 +29,4 @@ export class TopAppBarComponent implements OnInit, OnDestroy, AfterViewInit {
       this.topAppBar.destroy();
     }
   }
-
-  navigate() {
-    this.openState = !this.openState;
-    this.open.emit(this.openState);
-  }
-
 }

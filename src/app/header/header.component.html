@@ -1,7 +1,7 @@
 <div class="content">
-  <!--<app-component-drawer [open]="open"></app-component-drawer>-->
-  <div class="mdc-drawer-app-content">
-    <app-top-app-bar (open)="toggleDrawer()"></app-top-app-bar>
+  <app-component-drawer [(open)]="open"></app-component-drawer>
+  <div style="flex: auto;">
+    <app-top-app-bar (open)="open = !open"></app-top-app-bar>
     <ng-content></ng-content>
   </div>
 </div>

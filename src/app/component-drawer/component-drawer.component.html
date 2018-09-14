@@ -1,10 +1,16 @@
-<aside class="mdc-drawer mdc-drawer--dismissible mdc-typography">
-  <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
-    <a class="mdc-list-item mdc-list-item--activated" href="#">
-      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>Inbox
-    </a>
-    <a class="mdc-list-item" href="#">
-      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>Star
-    </a>
-  </nav>
+<aside class="mdc-drawer mdc-drawer--modal">
+  <div class="mdc-drawer__header">
+  </div>
+  <div class="mdc-drawer__content">
+    <nav id="icon-with-text-demo" class="mdc-list">
+      <a routerLink="/instances" class="mdc-list-item" [routerLinkActive]="['mdc-list-item--activated']">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">view_module</i>Instances
+      </a>
+      <a routerLink="/sandbox" class="mdc-list-item" [routerLinkActive]="['mdc-list-item--activated']">
+        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">code</i>Code Sandbox
+      </a>
+    </nav>
+  </div>
 </aside>
+
+<div class="mdc-drawer-scrim"></div>

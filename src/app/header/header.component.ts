@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +8,19 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  open = false;
+  open_ = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleDrawer(): void {
-    this.open = !this.open;
+  @Input()
+  set open(val) {
+    this.open_ = val;
   }
 
+  get open() {
+    return this.open_;
+  }
 }

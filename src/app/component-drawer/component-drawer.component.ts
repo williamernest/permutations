@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {MDCDrawer} from '@material/drawer';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {MDCDrawer, MDCModalDrawerFoundation} from '@material/drawer';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-component-drawer',
@@ -10,13 +11,18 @@ import {MDCDrawer} from '@material/drawer';
 export class ComponentDrawerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   drawer: MDCDrawer;
+  @Output()
+  openChange = new EventEmitter<boolean>();
 
-  constructor(private myElement: ElementRef) { }
+  constructor(private myElement: ElementRef, private router: Router) {
+    router.events.subscribe(() => this.drawer.open = false);
+  }
 
   ngOnInit() {}
 
   ngAfterViewInit(): void {
     this.drawer = new MDCDrawer(this.myElement.nativeElement.firstChild);
+    this.drawer.listen(MDCModalDrawerFoundation.strings.CLOSE_EVENT, () => this.openChange.emit(false));
   }
 
   ngOnDestroy(): void {
