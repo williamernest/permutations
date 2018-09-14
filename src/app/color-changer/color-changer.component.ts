@@ -39,7 +39,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
         if (response['data']) {
           let ss = document.getElementsByTagName('head')[0].innerHTML;
-          ss += `<style type="text/css" id="demo-class">${data}</script>`;
+          ss += `<style type="text/css" id="demo-class">${data.replace(':root', '')}</script>`;
           document.getElementsByTagName('head')[0].innerHTML = ss;
         }
         // this.cssChange.emit(response['data']);
