@@ -57,6 +57,13 @@ export class SandboxHeroOptionsComponent implements OnInit {
       type: 'checkbox-input',
       value: 'directions_transit',
       checked: false,
+    },
+    {
+      name: 'floatingLabel',
+      label: 'Floating Label',
+      type: 'checkbox-input',
+      value: 'Floating Label',
+      checked: true,
     }];
 
   @Output() configChange = new EventEmitter<Object>();

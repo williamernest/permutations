@@ -1,3 +1,25 @@
-<div class="hero">
-  <app-text-field [parameters]="params" [type]="type" [label]="floatingLabel" [value]="value" [trailingIcon]="trailingIcon" [leadingIcon]="leadingIcon" [state]="state" [dense]="dense"></app-text-field>
-</div>
+<mat-tab-group (selectedTabChange)="selectedTabChange = $event">
+  <mat-tab label="Sandbox">
+    <div class="hero">
+      <app-text-field [parameters]="params" [type]="type" [label]="floatingLabel" [value]="value" [trailingIcon]="trailingIcon" [leadingIcon]="leadingIcon" [state]="state" [dense]="dense"></app-text-field>
+    </div>
+  </mat-tab>
+  <mat-tab label="HTML">
+    <div class="hero">
+      <textarea highlight-js [lang]="'html'">
+        {{ renderedHTML }}
+      </textarea>
+      <app-text-field style="display:none" [parameters]="params" [type]="type" [label]="floatingLabel" [value]="value" [trailingIcon]="trailingIcon" [leadingIcon]="leadingIcon" [state]="state" [dense]="dense"></app-text-field>
+    </div>
+  </mat-tab>
+  <mat-tab label="React">
+    <div class="hero">
+      Placeholder JSX
+    </div>
+  </mat-tab>
+  <mat-tab label="Android">
+    <div class="hero">
+      Placeholder Android
+    </div>
+  </mat-tab>
+</mat-tab-group>
