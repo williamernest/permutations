@@ -14,12 +14,15 @@
   </mat-tab>
   <mat-tab label="React">
     <div class="hero">
-      Placeholder JSX
+      <textarea highlight-js [lang]="'html'">
+        {{ renderedJSX }}
+      </textarea>
     </div>
   </mat-tab>
   <mat-tab label="Android">
     <div class="hero">
-      Placeholder Android
-    </div>
+      <textarea highlight-js [lang]="'xml'">
+        {{ renderedAndroid }}
+      </textarea>    </div>
   </mat-tab>
 </mat-tab-group>

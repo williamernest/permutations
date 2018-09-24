@@ -7,6 +7,7 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
   public States = TextfieldStates;
   public Parameters = TextfieldParameters;
   public HelperTextParams = TextfieldHelperTextStyles;
+  public label = 'Floating Label';
 
   private filters_: {
     types: Array<TextfieldType>,
@@ -116,6 +117,68 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
   getParameterPermutations_(): Array<TextfieldParameters> {
     return this.filters_.parameters;
   }
+
+  getJSX(label = 'Floating Label',
+         type: string|TextfieldType = TextfieldType.Default,
+         state: string|TextfieldStates = TextfieldStates.Disabled,
+         leadingIcon = '',
+         trailingIcon = '',
+         dense = false,
+         helperText: '') {
+    const base = `
+    <TextField
+        ${label ? 'label=\'' + label + '\'\n' : ''}
+        ${type === TextfieldType.Outlined ? 'outlined\n' : ''}
+        ${type === TextfieldType.Fullwidth ? 'fullWidth\n' : ''}
+        ${dense ? 'dense\n' : ''}
+        ${leadingIcon !== '' ? 'leadingIcon=\'{<i className=\'material-icons\'>' + leadingIcon + '</i>}\'\n' : ''}
+        ${trailingIcon !== '' ? 'trailingIcon=\'{<i className=\'material-icons\'>' + trailingIcon + '</i>}\'\n' : ''}
+        ${helperText !== '' ? 'helperText=\'{<span>' + helperText + '</span>}\'\n' : ''}>\n
+        <Input
+          value={this.state.value}
+          ${state === TextfieldStates.Disabled ? 'disabled\n' : ''}
+          onChange={(e) => this.setState({value: e.target.value})}/>
+      </TextField>
+      `;
+    return base;
+  }
+
+  getAndroid(label = 'Floating Label',
+             type: string|TextfieldType = TextfieldType.Default,
+             state: string|TextfieldStates = TextfieldStates.Disabled,
+             leadingIcon = '',
+             trailingIcon = '',
+             dense = false,
+             helperText: '') {
+    const base = `
+<com.google.android.material.textfield.TextInputLayout
+    ${this.getAndroidType_(type, dense)}
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    ${label !== '' ? 'android:hint="@string/textfield_label"' : ''}>
+  <com.google.android.material.textfield.TextInputEditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+</com.google.android.material.textfield.TextInputLayout>`;
+    return base;
+  }
+
+  getAndroidType_(type, dense) {
+    if (type === TextfieldType.Default) {
+      if (dense) {
+        return 'style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"';
+      } else {
+        return 'style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"';
+      }
+    } else if (type === TextfieldType.Outlined) {
+      if (dense) {
+        return 'style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"';
+      } else {
+        return 'style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"';
+      }
+    }
+  }
+
 
 }
 

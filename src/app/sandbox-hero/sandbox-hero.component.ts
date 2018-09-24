@@ -1,6 +1,7 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Input, OnInit} from '@angular/core';
 import {TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
 import pretty from 'pretty';
+import {TextfieldGenerator} from '../generators/textfield-generator';
 
 @Component({
   selector: 'app-sandbox-hero',
@@ -20,8 +21,11 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
 
   html: HTMLElement;
   html_: string;
+  jsx_: string;
+  android_: string;
   private refresh = false;
   private currentTab = 0;
+  generator = new TextfieldGenerator();
 
   private selectors = [
     '[ng-reflect-klass]',
@@ -39,9 +43,15 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    if (this.refresh && this.currentTab === 1) {
-      this.html = this.myElement.nativeElement.querySelector('.mdc-text-field').parentElement;
-      this.setRenderedHTML(this.html);
+    if (this.refresh) {
+      if (this.currentTab === 1) {
+        this.html = this.myElement.nativeElement.querySelector('.mdc-text-field').parentElement;
+        this.setRenderedHTML(this.html);
+      } else if (this.currentTab === 2) {
+        this.setRenderedJSX();
+      } else if (this.currentTab === 3) {
+        this.setRenderedAndroid();
+      }
     }
   }
 
@@ -88,15 +98,21 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   }
 
   set selectedTabChange(tab) {
-    if (tab.index === 1) {
-      this.html = this.myElement.nativeElement.querySelector('.mdc-text-field').parentElement;
+    if (tab.index > 0) {
       this.refresh = true;
     }
+
     this.currentTab = tab.index;
   }
 
   get renderedHTML(): string {
     return this.html_ ? this.html_ : '';
+  }
+  get renderedJSX(): string {
+    return this.jsx_ ? this.jsx_ : '';
+  }
+  get renderedAndroid(): string {
+    return this.android_ ? this.android_ : '';
   }
 
   setRenderedHTML(element: HTMLElement)  {
@@ -114,6 +130,18 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
       this.html_ = pretty(element.innerHTML.replace(/<!--[\s\S]*?-->/g, '\n'), {ocd: true}).toString();
       this.changeDetector.detectChanges();
     }
+  }
+
+  setRenderedJSX() {
+    const jsx = this.generator.getJSX(this.floatingLabel, this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    this.jsx_ = pretty(jsx, {ocd: true}).toString();
+    this.changeDetector.detectChanges();
+  }
+
+  setRenderedAndroid() {
+    const android = this.generator.getAndroid(this.floatingLabel, this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    this.android_ = android;
+    this.changeDetector.detectChanges();
   }
 
 }
