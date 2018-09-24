@@ -26,6 +26,7 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
   hasOutline = false;
   componentId: string;
 
+  @Input() codeblock = false;
   @Input() helperText = 'Helper Text';
   @Input() value = '';
   @Input() label = 'Floating Label';

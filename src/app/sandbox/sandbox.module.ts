@@ -5,17 +5,27 @@ import {SandboxComponent} from './sandbox.component';
 import {SandboxHeroComponent} from '../sandbox-hero/sandbox-hero.component';
 import {SandboxSidebarComponent} from '../sandbox-sidebar/sandbox-sidebar.component';
 import {SandboxHeroOptionsComponent} from '../sandbox-hero-options/sandbox-hero-options.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {HighlightJsModule} from 'ngx-highlight-js';
+import {TextFieldComponent} from '../web-components/text-field/text-field.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
+    MatTabsModule,
+    MatIconModule,
+    HighlightJsModule,
   ],
   declarations: [
     SandboxComponent,
     SandboxHeroComponent,
     SandboxSidebarComponent,
     SandboxHeroOptionsComponent,
+  ],
+  entryComponents: [
+    TextFieldComponent,
   ]
 })
 export class SandboxModule { }
