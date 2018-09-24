@@ -155,7 +155,7 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
     ${this.getAndroidType_(type, dense)}
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    ${label !== '' ? 'android:hint="@string/textfield_label"' : ''}>
+    ${label !== '' ? 'android:hint="' + label + '"' : ''}>
   <com.google.android.material.textfield.TextInputEditText
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>

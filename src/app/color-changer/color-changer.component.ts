@@ -17,11 +17,11 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
     {label: 'Primary', name: 'primary', value: ''},
     {label: 'Secondary', name: 'secondary', value: ''},
     {label: 'Surface', name: 'surface', value: ''},
-    // {label: 'Error', name: 'error', value: ''},
+    {label: 'Error', name: 'error', value: ''},
     {label: 'On Primary', name: 'on-primary', value: ''},
     {label: 'On Secondary', name: 'on-secondary', value: ''},
     {label: 'On Surface', name: 'on-surface', value: ''},
-    // {label: 'On Error', name: 'on-error', value: ''},
+    {label: 'On Error', name: 'on-error', value: ''},
     ];
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;

@@ -32,7 +32,7 @@
     "@angular/router": "^6.0.3",
     "@ng-select/ng-select": "^2.9.0",
     "core-js": "^2.5.4",
-    "material-components-web": "^0.39.3",
+    "material-components-web": "^0.40.0",
     "ngx-color-picker": "^6.6.0",
     "ngx-highlight-js": "^2.1.0",
     "pretty": "^2.0.0",
