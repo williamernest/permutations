@@ -179,6 +179,27 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
     }
   }
 
+  getWebComponents(label = 'Floating Label',
+                   type: string|TextfieldType = TextfieldType.Default,
+                   state: string|TextfieldStates = TextfieldStates.Disabled,
+                   leadingIcon = '',
+                   trailingIcon = '',
+                   dense = false,
+                   helperText: '') {
+    const base = `
+    <mwc-textfield
+      ${label ? 'label=\'' + label + '\'\n' : ''}
+      ${type === TextfieldType.Outlined ? 'outlined\n' : ''}
+      ${state === TextfieldStates.Disabled ? 'disabled\n' : ''}
+      ${dense ? 'dense\n' : ''}
+      ${leadingIcon !== '' ? 'icon=\'' + leadingIcon + '\'\n' : ''}
+      ${trailingIcon !== '' ? 'trailingIcon=\'' + trailingIcon + '\'\n' : ''}
+      ${helperText !== '' ? 'helperText=\'' + helperText + '\'\n' : ''}>\n
+      </mwc-textfield>
+    `;
+
+    return base;
+  }
 
 }
 

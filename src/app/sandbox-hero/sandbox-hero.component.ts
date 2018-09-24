@@ -23,6 +23,7 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   html_: string;
   jsx_: string;
   android_: string;
+  webComponents_: string;
   private refresh = false;
   private currentTab = 0;
   generator = new TextfieldGenerator();
@@ -51,6 +52,8 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
         this.setRenderedJSX();
       } else if (this.currentTab === 3) {
         this.setRenderedAndroid();
+      } else if (this.currentTab === 4) {
+        this.setRenderedWebComponents();
       }
     }
   }
@@ -98,9 +101,7 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   }
 
   set selectedTabChange(tab) {
-    if (tab.index > 0) {
-      this.refresh = true;
-    }
+    this.refresh = true;
 
     this.currentTab = tab.index;
   }
@@ -113,6 +114,9 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   }
   get renderedAndroid(): string {
     return this.android_ ? this.android_ : '';
+  }
+  get renderedWebComponents(): string {
+    return this.webComponents_ ? this.webComponents_ : '';
   }
 
   setRenderedHTML(element: HTMLElement)  {
@@ -138,8 +142,16 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
     this.changeDetector.detectChanges();
   }
 
+  setRenderedWebComponents() {
+    const webComponents = this.generator.getWebComponents(this.floatingLabel,
+      this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    this.webComponents_ = pretty(webComponents, {ocd: true}).toString();
+    this.changeDetector.detectChanges();
+  }
+
   setRenderedAndroid() {
-    const android = this.generator.getAndroid(this.floatingLabel, this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    const android = this.generator.getAndroid(this.floatingLabel,
+      this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
     this.android_ = android;
     this.changeDetector.detectChanges();
   }
