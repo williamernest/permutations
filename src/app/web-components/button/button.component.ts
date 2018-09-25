@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {MDCRipple} from '@material/ripple';
 import {ButtonState, ButtonType} from '../../button-config';
 
@@ -8,13 +8,15 @@ import {ButtonState, ButtonType} from '../../button-config';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements AfterViewInit, OnDestroy, OnInit {
+export class ButtonComponent implements AfterViewInit, OnDestroy, OnInit, AfterContentChecked, OnChanges {
 
   @Input() text: string;
   @Input() icon: string;
   @Input() state: string;
   @Input() type: ButtonType = ButtonType.Default;
   @Input() dense = false;
+
+  private resetComponent = false;
 
   public Types = ButtonType;
 
@@ -25,8 +27,29 @@ export class ButtonComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(private myElement: ElementRef) {
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    for (const propName in changes) {
+      if (changes.hasOwnProperty(propName)) {
+        switch (propName) {
+          case 'type':
+          case 'state':
+          case 'icon':
+            this.resetComponent = true;
+            break;
+        }
+      }
+    }
+  }
+
+  ngAfterContentChecked() {
+    if (this.resetComponent) {
+      this.setCurrentClasses();
+      this.isDisabled_ = this.state === ButtonState[ButtonState.Disabled];
+      this.resetComponent = false;
+    }
+  }
+
   ngOnInit() {
-    this.isDisabled_ = this.state === ButtonState[ButtonState.Disabled];
     this.setCurrentClasses();
   }
 

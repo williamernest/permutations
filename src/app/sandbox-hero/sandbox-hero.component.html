@@ -1,7 +1,8 @@
 <mat-tab-group (selectedTabChange)="selectedTabChange = $event">
   <mat-tab label="Sandbox">
     <div class="hero">
-      <app-text-field [parameters]="params" [type]="type" [label]="floatingLabel" [value]="value" [trailingIcon]="trailingIcon" [leadingIcon]="leadingIcon" [state]="state" [dense]="dense"></app-text-field>
+      <app-text-field *ngIf="currentComponent === 'textfield'" [parameters]="config_.params" [type]="config_.type" [label]="config_.label" [value]="config_.value" [trailingIcon]="config_.trailingIcon" [leadingIcon]="config_.leadingIcon" [state]="config_.state" [dense]="config_.dense"></app-text-field>
+      <app-button *ngIf="currentComponent === 'button'" [text]="config_.label" [icon]="config_.leadingIcon" [state]="config_.state" [type]="config_.type" [dense]="config_.dense"></app-button>
     </div>
   </mat-tab>
   <mat-tab label="HTML">
@@ -9,7 +10,8 @@
       <textarea highlight-js [lang]="'html'">
         {{ renderedHTML }}
       </textarea>
-      <app-text-field style="display:none" [parameters]="params" [type]="type" [label]="floatingLabel" [value]="value" [trailingIcon]="trailingIcon" [leadingIcon]="leadingIcon" [state]="state" [dense]="dense"></app-text-field>
+      <app-text-field *ngIf="currentComponent === 'textfield'" style="display:none" [parameters]="config_.params" [type]="config_.type" [label]="config_.label" [value]="config_.value" [trailingIcon]="config_.trailingIcon" [leadingIcon]="config_.leadingIcon" [state]="config_.state" [dense]="config_.dense"></app-text-field>
+      <app-button *ngIf="currentComponent === 'button'" style="display:none" [text]="config_.label" [icon]="config_.leadingIcon" [state]="config_.state" [type]="config_.type" [dense]="config_.dense"></app-button>
     </div>
   </mat-tab>
   <mat-tab label="React">

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-sandbox-hero-options',
@@ -7,23 +7,11 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class SandboxHeroOptionsComponent implements OnInit {
 
-  config: Array<any> = [{
-    name: 'type',
-    label: 'Types',
-    type: 'radio',
-    value: 'Default',
-    options: [
+  config: any = {
+    textfield: [
       {
-        label: 'Default',
-      },
-      {
-        label: 'Outlined',
-      },
-    ]
-  },
-    {
-      name: 'state',
-      label: 'States',
+      name: 'type',
+      label: 'Types',
       type: 'radio',
       value: 'Default',
       options: [
@@ -31,17 +19,20 @@ export class SandboxHeroOptionsComponent implements OnInit {
           label: 'Default',
         },
         {
-          label: 'Focused',
+          label: 'Outlined',
         },
-        {
-          label: 'Invalid',
-        },
-        {
-          label: 'FocusedInvalid',
-        },
-        {
-          label: 'Disabled',
-        }
+      ]
+    }, {
+      name: 'state',
+      label: 'States',
+      type: 'radio',
+      value: 'Default',
+      options: [
+        {label: 'Default'},
+        {label: 'Focused'},
+        {label: 'Invalid'},
+        {label: 'FocusedInvalid'},
+        {label: 'Disabled'}
       ]
     },
     {
@@ -59,22 +50,63 @@ export class SandboxHeroOptionsComponent implements OnInit {
       checked: false,
     },
     {
-      name: 'floatingLabel',
+      name: 'label',
       label: 'Floating Label',
       type: 'checkbox-input',
       value: 'Floating Label',
       checked: true,
-    }];
+    }],
+    button: [
+      {
+        name: 'label',
+        label: 'Text',
+        type: 'checkbox-input',
+        value: 'Button',
+        checked: true,
+      },
+      {
+        name: 'leadingIcon',
+        label: 'Icon',
+        type: 'checkbox-input',
+        value: 'favorite',
+        checked: true,
+      },
+      {
+        name: 'type',
+        label: 'Type',
+        type: 'radio',
+        value: 'Default',
+        options: [
+          {label: 'Default'},
+          {label: 'Raised'},
+          {label: 'Unelevated'},
+          {label: 'Outlined'},
+        ]
+      },
+      {
+        name: 'state',
+        label: 'State',
+        type: 'radio',
+        value: 'Default',
+        options: [
+          { label: 'Default'},
+          { label: 'Disabled'},
+        ]
+      },
+    ]
+};
 
+  currentComponent_ = 'textfield';
   @Output() configChange = new EventEmitter<Object>();
 
   constructor() { }
 
   ngOnInit() {
+    this.setOptions();
   }
 
   setOptions() {
-    const configuration = this.config.map((val) => {
+    const configuration = this.config[this.currentComponent].map((val) => {
       const name = val.name;
       const config = {};
       if (val.type === 'checkbox-input') {
@@ -88,4 +120,15 @@ export class SandboxHeroOptionsComponent implements OnInit {
     this.configChange.emit(configuration);
   }
 
+  @Input()
+  set currentComponent(component) {
+    if (component && this.currentComponent_ !== component) {
+      this.currentComponent_ = component;
+      this.setOptions();
+    }
+  }
+
+  get currentComponent() {
+    return this.currentComponent_;
+  }
 }

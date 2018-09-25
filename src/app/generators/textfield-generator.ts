@@ -118,13 +118,15 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
     return this.filters_.parameters;
   }
 
-  getJSX(label = 'Floating Label',
-         type: string|TextfieldType = TextfieldType.Default,
-         state: string|TextfieldStates = TextfieldStates.Disabled,
-         leadingIcon = '',
-         trailingIcon = '',
-         dense = false,
-         helperText: '') {
+  getJSX(config: any = {}) {
+    const label = config.label || 'Floating Label';
+    const type: string|TextfieldType = config.type || TextfieldType.Default;
+    const state: string|TextfieldStates = config.state || TextfieldStates.Disabled;
+    const leadingIcon = config.leadingIcon || '';
+    const trailingIcon = config.trailingIcon || '';
+    const dense = config.dense || false;
+    const helperText = config.helperText || '';
+
     const base = `
     <TextField
         ${label ? 'label=\'' + label + '\'\n' : ''}
@@ -143,13 +145,16 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
     return base;
   }
 
-  getAndroid(label = 'Floating Label',
-             type: string|TextfieldType = TextfieldType.Default,
-             state: string|TextfieldStates = TextfieldStates.Disabled,
-             leadingIcon = '',
-             trailingIcon = '',
-             dense = false,
-             helperText: '') {
+  getAndroid(config: any = {}) {
+    const label = config.label || 'Floating Label';
+    const type: string|TextfieldType = config.type || TextfieldType.Default;
+    const state: string|TextfieldStates = config.state || TextfieldStates.Disabled;
+    const leadingIcon = config.leadingIcon || '';
+    const trailingIcon = config.trailingIcon || '';
+    const dense = config.dense || false;
+    const helperText = config.helperText || '';
+
+
     const base = `
 <com.google.android.material.textfield.TextInputLayout
     ${this.getAndroidType_(type, dense)}
@@ -160,6 +165,31 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
 </com.google.android.material.textfield.TextInputLayout>`;
+    return base;
+  }
+
+  getWebComponents(config: any = {}) {
+
+    const label = config.label || 'Floating Label';
+    const type: string|TextfieldType = config.type || TextfieldType.Default;
+    const state: string|TextfieldStates = config.state || TextfieldStates.Disabled;
+    const leadingIcon = config.leadingIcon || '';
+    const trailingIcon = config.trailingIcon || '';
+    const dense = config.dense || false;
+    const helperText = config.helperText || '';
+
+    const base = `
+    <mwc-textfield
+      ${label ? 'label=\'' + label + '\'\n' : ''}
+      ${type === TextfieldType.Outlined ? 'outlined\n' : ''}
+      ${state === TextfieldStates.Disabled ? 'disabled\n' : ''}
+      ${dense ? 'dense\n' : ''}
+      ${leadingIcon !== '' ? 'icon=\'' + leadingIcon + '\'\n' : ''}
+      ${trailingIcon !== '' ? 'trailingIcon=\'' + trailingIcon + '\'\n' : ''}
+      ${helperText !== '' ? 'helperText=\'' + helperText + '\'\n' : ''}>\n
+      </mwc-textfield>
+    `;
+
     return base;
   }
 
@@ -178,29 +208,6 @@ export class TextfieldGenerator implements ConfigGenerator<TfConfig> {
       }
     }
   }
-
-  getWebComponents(label = 'Floating Label',
-                   type: string|TextfieldType = TextfieldType.Default,
-                   state: string|TextfieldStates = TextfieldStates.Disabled,
-                   leadingIcon = '',
-                   trailingIcon = '',
-                   dense = false,
-                   helperText: '') {
-    const base = `
-    <mwc-textfield
-      ${label ? 'label=\'' + label + '\'\n' : ''}
-      ${type === TextfieldType.Outlined ? 'outlined\n' : ''}
-      ${state === TextfieldStates.Disabled ? 'disabled\n' : ''}
-      ${dense ? 'dense\n' : ''}
-      ${leadingIcon !== '' ? 'icon=\'' + leadingIcon + '\'\n' : ''}
-      ${trailingIcon !== '' ? 'trailingIcon=\'' + trailingIcon + '\'\n' : ''}
-      ${helperText !== '' ? 'helperText=\'' + helperText + '\'\n' : ''}>\n
-      </mwc-textfield>
-    `;
-
-    return base;
-  }
-
 }
 
 class TfConfig {

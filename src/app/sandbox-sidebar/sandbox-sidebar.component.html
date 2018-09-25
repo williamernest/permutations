@@ -1,6 +1,7 @@
 <div class="sidebar">
-  Components
+  <div class="sidebar-header">Components</div>
   <ul class="mdc-list">
-    <li class="mdc-list-item">Text field</li>
+    <li class="mdc-list-item" (click)="updateSelected($event)" (keypress)="updateSelected($event)" value="button"><span class="mdc-list-item__text">Button</span></li>
+    <li class="mdc-list-item mdc-list-item--selected" (click)="updateSelected($event)" (keypress)="updateSelected($event)" value="textfield"><span class="mdc-list-item__text">Text field</span></li>
   </ul>
 </div>

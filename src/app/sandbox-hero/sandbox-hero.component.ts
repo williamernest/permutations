@@ -2,6 +2,7 @@ import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Input, OnIni
 import {TextfieldParameters, TextfieldStates, TextfieldType} from '../textfield.enum';
 import pretty from 'pretty';
 import {TextfieldGenerator} from '../generators/textfield-generator';
+import {ButtonGenerator} from '../generators/button-generator';
 
 @Component({
   selector: 'app-sandbox-hero',
@@ -10,14 +11,9 @@ import {TextfieldGenerator} from '../generators/textfield-generator';
 })
 export class SandboxHeroComponent implements OnInit, AfterViewChecked {
 
-  floatingLabel = 'Floating Label';
-  value: string = null;
-  leadingIcon = '';
-  trailingIcon = '';
-  params: TextfieldParameters|string = TextfieldParameters.NoIcon;
-  type: TextfieldType|string = TextfieldType.Default;
-  state: TextfieldStates|string = TextfieldStates.Default;
-  dense = false;
+  currentComponent_ = 'textfield';
+  config_: any = {
+  };
 
   html: HTMLElement;
   html_: string;
@@ -26,9 +22,9 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   webComponents_: string;
   private refresh = false;
   private currentTab = 0;
-  generator = new TextfieldGenerator();
+  generator: any = new TextfieldGenerator();
 
-  private selectors = [
+  private selectorsToRemove = [
     '[ng-reflect-klass]',
     '[ng-reflect-ng-class]',
     '.ng-star-inserted',
@@ -45,9 +41,15 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     if (this.refresh) {
+      this.refresh = false;
       if (this.currentTab === 1) {
-        this.html = this.myElement.nativeElement.querySelector('.mdc-text-field').parentElement;
-        this.setRenderedHTML(this.html);
+        let currentComponentSelector = '.mdc-text-field';
+        if (this.currentComponent === 'button') {
+          currentComponentSelector = '.mdc-button';
+        }
+
+        this.html = this.myElement.nativeElement.querySelector(currentComponentSelector).parentElement;
+        setTimeout(() => this.setRenderedHTML(this.html), 0);
       } else if (this.currentTab === 2) {
         this.setRenderedJSX();
       } else if (this.currentTab === 3) {
@@ -55,30 +57,39 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
       } else if (this.currentTab === 4) {
         this.setRenderedWebComponents();
       }
+      this.changeDetector.detectChanges();
     }
   }
 
   @Input()
   set config(config) {
+    if (config) {
+      this.runConfig(config);
+    }
+  }
+
+  runConfig(config) {
     for (const conf in config) {
       if (config.hasOwnProperty(conf)) {
         for (const key in config[conf]) {
           if (config[conf].hasOwnProperty(key)) {
             const change = config[conf];
             if (key === 'type') {
-              this.type = TextfieldType[change[key]];
+              if (this.currentComponent === 'textfield') {
+                this.config_.type = TextfieldType[change[key]];
+              } else if (this.currentComponent === 'button') {
+                this.config_.type = change[key];
+              }
               this.refresh = true;
             } else if (key === 'state') {
-              this.state = TextfieldStates[change[key]];
+              if (this.currentComponent === 'textfield') {
+                this.config_.state = TextfieldStates[change[key]];
+              } else if (this.currentComponent === 'button') {
+                this.config_.state = change[key];
+              }
               this.refresh = true;
-            } else if (key === 'leadingIcon') {
-              this.leadingIcon = change[key];
-              this.refresh = true;
-            } else if (key === 'trailingIcon') {
-              this.trailingIcon = change[key];
-              this.refresh = true;
-            } else if (key === 'floatingLabel') {
-              this.floatingLabel = change[key];
+            } else {
+              this.config_[key] = change[key];
               this.refresh = true;
             }
           }
@@ -89,14 +100,14 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   }
 
   private reSync() {
-    if (this.leadingIcon !== '' && this.trailingIcon !== '') {
-      this.params = TextfieldParameters.BothIcons;
-    } else if (this.leadingIcon !== '') {
-      this.params = TextfieldParameters.LeadingIcon;
-    } else if (this.trailingIcon !== '') {
-      this.params = TextfieldParameters.TrailingIcon;
+    if (this.config_.leadingIcon !== '' && this.config_.trailingIcon !== '') {
+      this.config_.params = TextfieldParameters.BothIcons;
+    } else if (this.config_.leadingIcon !== '') {
+      this.config_.params = TextfieldParameters.LeadingIcon;
+    } else if (this.config_.trailingIcon !== '') {
+      this.config_.params = TextfieldParameters.TrailingIcon;
     } else {
-      this.params = TextfieldParameters.NoIcon;
+      this.config_.params = TextfieldParameters.NoIcon;
     }
   }
 
@@ -104,6 +115,24 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
     this.refresh = true;
 
     this.currentTab = tab.index;
+  }
+
+  @Input()
+  set currentComponent(component) {
+    if (component && this.currentComponent_ !== component) {
+      this.currentComponent_ = component;
+      if (component === 'textfield') {
+        this.generator = new TextfieldGenerator();
+      } else if (component === 'button') {
+        this.generator = new ButtonGenerator();
+      }
+
+      this.refresh = true;
+    }
+  }
+
+  get currentComponent() {
+    return this.currentComponent_;
   }
 
   get renderedHTML(): string {
@@ -121,7 +150,7 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
 
   setRenderedHTML(element: HTMLElement)  {
     if (element) {
-      Array.from(element.querySelectorAll(this.selectors.join(', '))).forEach((ele) => {
+      Array.from(element.querySelectorAll(this.selectorsToRemove.join(', '))).forEach((ele) => {
         ele.removeAttribute('ng-reflect-klass');
         ele.removeAttribute('ng-reflect-ng-class');
         ele.removeAttribute('d');
@@ -132,28 +161,22 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
         ele.removeAttribute('style');
       });
       this.html_ = pretty(element.innerHTML.replace(/<!--[\s\S]*?-->/g, '\n'), {ocd: true}).toString();
-      this.changeDetector.detectChanges();
     }
   }
 
   setRenderedJSX() {
-    const jsx = this.generator.getJSX(this.floatingLabel, this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    const jsx = this.generator.getJSX(this.config_);
     this.jsx_ = pretty(jsx, {ocd: true}).toString();
-    this.changeDetector.detectChanges();
   }
 
   setRenderedWebComponents() {
-    const webComponents = this.generator.getWebComponents(this.floatingLabel,
-      this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    const webComponents = this.generator.getWebComponents(this.config_);
     this.webComponents_ = pretty(webComponents, {ocd: true}).toString();
-    this.changeDetector.detectChanges();
   }
 
   setRenderedAndroid() {
-    const android = this.generator.getAndroid(this.floatingLabel,
-      this.type, this.state, this.leadingIcon, this.trailingIcon, this.dense, '');
+    const android = this.generator.getAndroid(this.config_);
     this.android_ = android;
-    this.changeDetector.detectChanges();
   }
 
 }

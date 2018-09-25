@@ -1,3 +1,11 @@
 :host {
   flex: 1 0 200px;
 }
+
+.sidebar-header {
+  min-height: 48px;
+}
+
+.mdc-list-item__text {
+  pointer-events: none;
+}

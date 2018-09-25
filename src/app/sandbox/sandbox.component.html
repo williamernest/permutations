@@ -1,6 +1,6 @@
 <div class="content">
 
-  <app-sandbox-sidebar></app-sandbox-sidebar>
-  <app-sandbox-hero [config]="config"></app-sandbox-hero>
-  <app-sandbox-hero-options (configChange)="config = $event"></app-sandbox-hero-options>
+  <app-sandbox-sidebar (currentComponent)="updateCurrentComponent($event)"></app-sandbox-sidebar>
+  <app-sandbox-hero [config]="config" [currentComponent]="currentComponent"></app-sandbox-hero>
+  <app-sandbox-hero-options (configChange)="config = $event" [currentComponent]="currentComponent"></app-sandbox-hero-options>
 </div>
