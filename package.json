@@ -36,7 +36,8 @@
     "ngx-color-picker": "^6.6.0",
     "ngx-highlight-js": "^2.1.0",
     "pretty": "^2.0.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
     "shortid": "^2.2.12",
     "zone.js": "^0.8.26"
   },

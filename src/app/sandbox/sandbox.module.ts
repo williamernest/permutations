@@ -9,6 +9,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {HighlightJsModule} from 'ngx-highlight-js';
 import {TextFieldComponent} from '../web-components/text-field/text-field.component';
+import {SasscodeComponent} from '../sasscode/sasscode.component';
+import {CssCodeComponent} from '../css-code/css-code.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import {TextFieldComponent} from '../web-components/text-field/text-field.compon
     SandboxHeroComponent,
     SandboxSidebarComponent,
     SandboxHeroOptionsComponent,
+    SasscodeComponent,
+    CssCodeComponent
   ],
   entryComponents: [
     TextFieldComponent,

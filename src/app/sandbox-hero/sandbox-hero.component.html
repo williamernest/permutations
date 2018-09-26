@@ -35,4 +35,14 @@
         </textarea>
     </div>
   </mat-tab>
+  <mat-tab label="SCSS">
+    <div class="hero">
+        <app-sasscode [currentComponent]="currentComponent_"></app-sasscode>
+    </div>
+  </mat-tab>
+  <mat-tab label="CSS (Compiled)">
+    <div class="hero">
+        <app-css-code [currentComponent]="currentComponent_"></app-css-code>
+    </div>
+  </mat-tab>
 </mat-tab-group>

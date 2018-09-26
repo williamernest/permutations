@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {StylesService} from '../styles.service';
 
 @Component({
   selector: 'app-color-changer',
@@ -13,38 +14,18 @@ import {Router} from '@angular/router';
 })
 export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
-  @Input() colors: Array<any> = [
-    {label: 'Primary', name: 'primary', value: ''},
-    {label: 'Secondary', name: 'secondary', value: ''},
-    {label: 'Surface', name: 'surface', value: ''},
-    {label: 'Error', name: 'error', value: ''},
-    {label: 'On Primary', name: 'on-primary', value: ''},
-    {label: 'On Secondary', name: 'on-secondary', value: ''},
-    {label: 'On Surface', name: 'on-surface', value: ''},
-    {label: 'On Error', name: 'on-error', value: ''},
-    ];
+  colors: Array<any> = [];
+
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;
   httpRequestDebouncer = new Subject();
 
-  constructor(private httpClient: HttpClient, private ele: ElementRef, private router: Router) {
+  constructor(private httpClient: HttpClient, private ele: ElementRef, private router: Router, private stylesService: StylesService) {
     this.httpRequestDebouncer.pipe(debounceTime(1000)).subscribe(() => {
-      this.httpClient.post('/api/compile/scss', {data: {code: this.buildSass()}}).subscribe((response) => {
-        const demo = document.getElementById('demo-class');
-        const data = response['data'];
-
-        if (demo) {
-          demo.parentElement.removeChild(demo);
-        }
-
-        if (response['data']) {
-          let ss = document.getElementsByTagName('head')[0].innerHTML;
-          ss += `<style type="text/css" id="demo-class">${data.replace(':root', '')}</script>`;
-          document.getElementsByTagName('head')[0].innerHTML = ss;
-        }
-        // this.cssChange.emit(response['data']);
-      });
+      this.stylesService.compileGlobalStyles(this.buildSass(), 'demo-global-colors');
     });
+
+    this.colors = this.stylesService.getColors()
   }
 
   ngOnInit() {
@@ -74,6 +55,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
       @import "@material/textfield/mdc-text-field.scss";
     }
     `;
+    this.stylesService.setColors(this.colors);
     return this.colors[0].value ? data : '';
   }
 
