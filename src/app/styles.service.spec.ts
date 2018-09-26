@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { StylesService } from './styles-service.service';
+import { StylesService } from './styles.service';
 
 describe('StylesService', () => {
   beforeEach(() => {

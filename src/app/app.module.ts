@@ -12,7 +12,6 @@ import {ComponentsModule} from './components/components.module';
 import {SandboxModule} from './sandbox/sandbox.module';
 import { ShapeChangerComponent } from './shape-changer/shape-changer.component';
 import {StylesService} from './styles.service';
-import { CssCodeComponent } from './css-code/css-code.component';
 
 @NgModule({
   declarations: [
