@@ -1,7 +1,8 @@
 @import "@material/top-app-bar/mdc-top-app-bar";
 
-.mdc-top-app-bar {
+.mdc-top-app-bar.mdc-top-app-bar--fixed {
   top: 0;
+  z-index: 999;
 }
 
 .mdc-top-app-bar--fixed {

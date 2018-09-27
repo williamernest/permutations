@@ -12,11 +12,13 @@ import {ComponentsModule} from './components/components.module';
 import {SandboxModule} from './sandbox/sandbox.module';
 import { ShapeChangerComponent } from './shape-changer/shape-changer.component';
 import {StylesService} from './styles.service';
+import { ThemePageComponent } from './theme-page/theme-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShapeChangerComponent,
+    ThemePageComponent,
   ],
   imports: [
     BrowserModule,

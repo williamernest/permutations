@@ -19,3 +19,7 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
+
+.mdc-menu-surface.mdc-menu-surface--open {
+  z-index: 999;
+}
