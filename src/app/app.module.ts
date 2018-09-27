@@ -13,6 +13,7 @@ import {SandboxModule} from './sandbox/sandbox.module';
 import { ShapeChangerComponent } from './shape-changer/shape-changer.component';
 import {StylesService} from './styles.service';
 import { ThemePageComponent } from './theme-page/theme-page.component';
+import { DownloadThemeButtonComponent } from './download-theme-button/download-theme-button.component';
 
 @NgModule({
   declarations: [

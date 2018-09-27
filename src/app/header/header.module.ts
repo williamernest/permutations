@@ -6,6 +6,7 @@ import {ColorChangerComponent} from '../color-changer/color-changer.component';
 import {HeaderComponent} from './header.component';
 import {ComponentDrawerComponent} from '../component-drawer/component-drawer.component';
 import {RouterModule} from '@angular/router';
+import {DownloadThemeButtonComponent} from '../download-theme-button/download-theme-button.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {RouterModule} from '@angular/router';
     ColorChangerComponent,
     HeaderComponent,
     ComponentDrawerComponent,
+    DownloadThemeButtonComponent,
   ],
   exports: [
     TopAppBarComponent,
