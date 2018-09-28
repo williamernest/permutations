@@ -1,6 +1,8 @@
 
 :host {
   flex: 2 1;
+  flex-basis: auto;
+  min-width: 270px;
 }
 
 .sandbox-options-container {
@@ -17,4 +19,6 @@
 .demo-checkbox-input {
   margin-top: 15px;
   min-width: 250px;
+  overflow: hidden;
+  padding: 5px 5px 5px 0;
 }
