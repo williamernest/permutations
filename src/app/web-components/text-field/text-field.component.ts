@@ -120,7 +120,7 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
     };
 
     this.currentClassesLabel = {
-      'mdc-floating-label--float-above': this.state === this.States.Focused || this.state === this.States.FocusedInvalid || this.value !== ''
+      'mdc-floating-label--float-above': this.state === this.States.Focused || this.state === this.States.FocusedInvalid;
     };
 
     this.currentClassesOutline = {
