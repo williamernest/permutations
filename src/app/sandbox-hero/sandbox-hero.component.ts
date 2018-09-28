@@ -21,7 +21,7 @@ export class SandboxHeroComponent implements OnInit, AfterViewChecked {
   android_: string;
   webComponents_: string;
   private refresh = false;
-  private currentTab = 0;
+  currentTab = 0;
   generator: any = new TextfieldGenerator();
 
   private selectorsToRemove = [

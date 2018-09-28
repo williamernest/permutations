@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked, EventEmitter, Output} from '@angular/core';
 import {MDCTextField} from '@material/textfield';
 import * as shortId from 'shortid';
 import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../../textfield.enum';
@@ -37,6 +37,8 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
   @Input() state = TextfieldStates.Default;
   @Input() parameters: TextfieldParameters = TextfieldParameters.NoIcon;
   @Input() helperTextParams: TextfieldHelperTextStyles;
+
+  @Output() blur = new EventEmitter<Event>();
 
   private resetComponent = false;
 
@@ -118,7 +120,7 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
     };
 
     this.currentClassesLabel = {
-      'mdc-floating-label--float-above': this.state === this.States.Focused || this.state === this.States.FocusedInvalid,
+      'mdc-floating-label--float-above': this.state === this.States.Focused || this.state === this.States.FocusedInvalid || this.value !== ''
     };
 
     this.currentClassesOutline = {
@@ -144,6 +146,10 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
       }
     }
 
+  }
+
+  onBlur(event) {
+    this.blur.emit(event);
   }
 
   /**

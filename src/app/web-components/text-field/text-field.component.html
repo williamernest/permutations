@@ -6,7 +6,8 @@
          [disabled]="state === States.Disabled"
          type="text"
          [placeholder]="type === Types.Fullwidth ? label : ''"
-         class="mdc-text-field__input">
+         class="mdc-text-field__input"
+         (blur)="onBlur()">
   <textarea *ngIf="type === Types.Textarea || type === Types.FullwidthTextArea"
             [attr.id]="componentId"
             [disabled]="state === States.Disabled"

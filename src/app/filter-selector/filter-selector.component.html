@@ -16,5 +16,5 @@
     </div>
   </div>
   <label *ngIf="!input" [attr.for]="componentId">{{ label }}</label>
-  <input *ngIf="input" [value]="label" (input)="label = $event.target.value" (blur)="changed()" (keyup.enter)="changed()"/>
+  <app-text-field *ngIf="input" [type]="1" [value]="value" [label]="label" (input)="value = $event.target.value" (blur)="changed()" (keyup.enter)="changed()" [state]="state"></app-text-field>
 </div>
