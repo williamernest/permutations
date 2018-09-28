@@ -19,3 +19,19 @@
   flex-direction: column;
   margin: 0 5px;
 }
+
+.color-row {
+  .color-entry {
+    height: 60px;
+    width: 92px;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 4px;
+    margin: 10px;
+    cursor: pointer;
+
+    input {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+  }
+}

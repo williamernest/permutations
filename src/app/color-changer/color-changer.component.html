@@ -3,11 +3,13 @@
   <div class="color-picker-surface">
     <div class="text-field-filter-control">
       Colors
-     <label *ngFor="let color of colors">{{color.label}}
-       <input [(colorPicker)]="color.value" [(value)]="color.value" [style.background]="color.value"
-       [cpOKButton]="true" (colorPickerSelect)="updateColors()" [cpPosition]="'left'" [cpOKButtonClass]="'mdc-button mdc-button--unelevated'"
-       />
-     </label>
+      <div class="color-row">
+       <div class="color-entry" *ngFor="let color of colors">
+         <input class="color-entry" [(colorPicker)]="color.value" [(value)]="color.label" [style.background]="color.value"
+         [cpOKButton]="true" (colorPickerSelect)="updateColors()" [cpPosition]="'left'" [cpOKButtonClass]="'mdc-button mdc-button--unelevated'"
+         />
+       </div>
+     </div>
     </div>
   </div>
 </div>
