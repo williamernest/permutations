@@ -93,7 +93,7 @@ export class StylesService {
     }
   }
 
-  compileLocalStyles(scss: string): Observable<string> {
+  compileLocalStyles(scss): Observable<string> {
     return this.httpClient
       .post(this.API_URL, {data: {code: scss}})
       .pipe(map((res: Response) => {

@@ -7,7 +7,7 @@
         <div *ngFor="let shape of shapes">
           <span class="mdc-typography--body2">{{shape.label}} Components</span>
           <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
-               aria-valuemin="0" aria-valuemax="24" [(attr.aria-valuenow)]="shape.value"
+               aria-valuemin="0" aria-valuemax="32" [(attr.aria-valuenow)]="shape.value"
                aria-label="Select Value"
                [attr.data-slider-variable]="shape.name">
             <div class="mdc-slider__track-container">

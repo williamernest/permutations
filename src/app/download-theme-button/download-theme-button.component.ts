@@ -15,9 +15,16 @@ export class DownloadThemeButtonComponent implements OnInit {
 
   onClick() {
     let data = '';
+
     this.stylesService.getColors().forEach(el => {
       if (el.value !== '') {
         data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
+      }
+    });
+
+    this.stylesService.getShape().forEach(el => {
+      if (el.value !== '' && el.value !== el.defaultValue) {
+        data = ` ${data}\n${el.name}: ${el.value}${el.value > 0 ? 'px' : ''};`;
       }
     });
 
