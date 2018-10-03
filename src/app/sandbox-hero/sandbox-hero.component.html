@@ -1,4 +1,4 @@
-<mat-tab-group (selectedTabChange)="selectedTabChange = $event">
+<mat-tab-group (selectedTabChange)="selectedTabChange = $event" class="compiled-styles">
   <mat-tab label="Sandbox">
     <div class="hero">
       <app-text-field *ngIf="currentComponent === 'textfield'" [parameters]="config_.params" [type]="config_.type" [label]="config_.label" [value]="config_.value" [trailingIcon]="config_.trailingIcon" [leadingIcon]="config_.leadingIcon" [state]="config_.state" [dense]="config_.dense"></app-text-field>

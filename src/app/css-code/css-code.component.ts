@@ -47,7 +47,7 @@ export class CssCodeComponent implements OnInit, AfterViewChecked {
 
     colors.forEach(el => {
       if (el.value !== '') {
-        data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
+        data = `${data}\n${el.name.startsWith('$') ? '' : '$mdc-theme-'}${el.name}: ${el.value};`;
       }
     });
 

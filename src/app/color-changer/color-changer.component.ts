@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, On
 import {MDCMenuSurface} from '@material/menu-surface';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {StylesService} from '../styles.service';
 
@@ -16,50 +15,31 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
   colors: Array<any> = [];
 
+  colorObject: Array<any> = [];
+
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;
   httpRequestDebouncer = new Subject();
 
   constructor(private httpClient: HttpClient, private ele: ElementRef, private router: Router, private stylesService: StylesService) {
-    this.httpRequestDebouncer.pipe(debounceTime(1000)).subscribe(() => {
-      this.stylesService.compileGlobalStyles(this.buildSass(), 'demo-global-colors');
+    this.httpRequestDebouncer.subscribe(() => {
+      this.stylesService.compileGlobalStyles('demo-global-colors');
     });
 
-    this.colors = this.stylesService.getColors()
+    this.colors = this.stylesService.getColors();
   }
 
   ngOnInit() {
     this.colors.forEach(val => {
       if (val.value === '') {
         val.value = window.getComputedStyle(document.body).getPropertyValue(`--mdc-theme-${val.name}`);
+        val.defaultValue = val.value;
       }
     });
-  }
-
-  buildSass() {
-    let data;
-    if (this.router.url === '/sandbox') { // TODO: Fixme
-      data = '.hero {';
-    } else {
-      data = '.main-content {';
-    }
-
-    this.colors.forEach(el => {
-      if (el.value !== '') {
-        data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
-      }
-    });
-
-    data = `${data}
-      @import "@material/theme/mdc-theme.scss";
-      @import "@material/textfield/mdc-text-field.scss";
-    }
-    `;
-    this.stylesService.setColors(this.colors);
-    return this.colors[0].value ? data : '';
   }
 
   updateColors() {
+    this.stylesService.setColors(this.colors);
     this.httpRequestDebouncer.next();
   }
 

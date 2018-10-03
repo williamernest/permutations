@@ -1,0 +1,11 @@
+@import "@material/slider/mdc-slider";
+
+.shape-tool {
+  display: flex;
+  flex-direction: column;
+  > input {
+    margin: 5px;
+  }
+
+  min-width: 200px;
+}

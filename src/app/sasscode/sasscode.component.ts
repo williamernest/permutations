@@ -35,12 +35,18 @@ export class SasscodeComponent implements OnInit {
 
   buildSass() {
     let data = '';
-
     const colors = this.styleService.getColors();
+    const shapes = this.styleService.getShape();
 
     colors.forEach(el => {
       if (el.value !== '') {
         data = `${data}\n$mdc-theme-${el.name}: ${el.value};`;
+      }
+    });
+
+    shapes.forEach(el => {
+      if (el.value !== '' && el.value !== el.defaultValue) {
+        data = ` ${data}\n${el.name}: ${el.value}${el.value > 0 ? 'px' : ''};`;
       }
     });
 

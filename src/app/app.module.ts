@@ -10,15 +10,12 @@ import {HeaderModule} from './header/header.module';
 import {InstancesModule} from './instances/instances.module';
 import {ComponentsModule} from './components/components.module';
 import {SandboxModule} from './sandbox/sandbox.module';
-import { ShapeChangerComponent } from './shape-changer/shape-changer.component';
 import {StylesService} from './styles.service';
 import { ThemePageComponent } from './theme-page/theme-page.component';
-import { DownloadThemeButtonComponent } from './download-theme-button/download-theme-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShapeChangerComponent,
     ThemePageComponent,
   ],
   imports: [
@@ -30,7 +27,7 @@ import { DownloadThemeButtonComponent } from './download-theme-button/download-t
     AppRoutingModule,
     HeaderModule,
     InstancesModule,
-    SandboxModule
+    SandboxModule,
   ],
   providers: [StylesService],
   bootstrap: [AppComponent]

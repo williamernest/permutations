@@ -22,7 +22,14 @@ export class StylesService {
     {label: 'On Error', name: 'on-error', value: ''},
   ];
 
+  shapes: Array<any> = [
+    {label: 'Large', name: '$mdc-shape-large-surface-radius', value: '0', defaultValue: '0'},
+    {label: 'Medium', name: '$mdc-shape-medium-surface-radius', value: '8', defaultValue: '8'},
+    {label: 'Small', name: '$mdc-shape-small-surface-radius', value: '4', defaultValue: '4'},
+  ];
+
   colorSubject: Subject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  shapeSubject: Subject<Array<any>> = new BehaviorSubject<Array<any>>([]);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -39,7 +46,21 @@ export class StylesService {
     this.colorSubject.next(this.colors);
   }
 
-  compileGlobalStyles(scss: string, elementId: string): void {
+  getShape(): Array<any> {
+    return this.shapes;
+  }
+
+  getShapeSubject(): Observable<Array<any>> {
+    return this.shapeSubject.asObservable();
+  }
+
+  setShape(shapes: Array<any>): void {
+    this.shapes = shapes;
+    this.shapeSubject.next(this.shapes);
+  }
+
+  compileGlobalStyles(elementId: string): void {
+    const scss = this.compileScss();
     if (!this.mapSassToCss.has(scss)) {
       this.httpClient.post(this.API_URL, {data: {code: scss}}).subscribe((response) => {
         const previousScript = document.getElementById(elementId);
@@ -72,7 +93,7 @@ export class StylesService {
     }
   }
 
-  compileLocalStyles(scss: string): Observable<string> {
+  compileLocalStyles(scss): Observable<string> {
     return this.httpClient
       .post(this.API_URL, {data: {code: scss}})
       .pipe(map((res: Response) => {
@@ -83,5 +104,38 @@ export class StylesService {
           return '';
         }
       }));
+  }
+
+  private compileScss(): string {
+    let scss = '.compiled-styles {\n';
+
+    this.colors.forEach(el => {
+      if (el.value !== '') {
+        scss = `${scss}\n$mdc-theme-${el.name}: ${el.value};`;
+      }
+    });
+
+    this.shapes.forEach(el => {
+      if (el.value !== '' && el.value !== el.defaultValue) {
+        scss = ` ${scss}\n${el.name}: ${el.value}${el.value > 0 ? 'px' : ''};`;
+      }
+    });
+
+    scss = `${scss}
+      @import "@material/theme/mdc-theme";
+      @import "@material/textfield/mdc-text-field";
+      @import "@material/list/mdc-list.scss";
+      @import "@material/drawer/mdc-drawer";
+      @import "@material/top-app-bar/mdc-top-app-bar";
+      @import "@material/slider/mdc-slider";
+      @import "@material/checkbox/mdc-checkbox";
+      @import "@material/switch/mdc-switch";
+      @import "@material/radio/mdc-radio";
+      @import "@material/button/mdc-button";
+      @import "@material/fab/mdc-fab";
+      @import "@material/icon-button/mdc-icon-button";
+    }
+    `;
+    return scss;
   }
 }
