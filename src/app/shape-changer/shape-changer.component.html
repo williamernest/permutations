@@ -1,3 +1,31 @@
-<p>
-  shape-changer works!
-</p>
+<button class="filter-button mdc-menu-surface--anchor mdc-icon-button material-icons" (click)="toggle()">rounded_corner</button>
+<div class="mdc-menu-surface" style="overflow: visible">
+  <div class="color-picker-surface">
+    <div class="text-field-filter-control">
+      Shape Size
+      <div class="shape-tool">
+        <div *ngFor="let shape of shapes">
+          <span class="mdc-typography--body2">{{shape.label}} Components</span>
+          <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
+               aria-valuemin="0" aria-valuemax="24" [(attr.aria-valuenow)]="shape.value"
+               aria-label="Select Value"
+               [attr.data-slider-variable]="shape.name">
+            <div class="mdc-slider__track-container">
+              <div class="mdc-slider__track"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+              <div class="mdc-slider__pin">
+                <span class="mdc-slider__pin-value-marker"></span>
+              </div>
+              <svg class="mdc-slider__thumb" width="21" height="21">
+                <circle cx="10.5" cy="10.5" r="7.875"></circle>
+              </svg>
+              <div class="mdc-slider__focus-ring"></div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="mdc-button--raised mdc-button" (click)="updateShape()" (keypress.enter)="updateShape()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 @import "material-components-web/material-components-web";
 
+
 .mdc-components {
   box-sizing: border-box;
   display: flex;
@@ -281,9 +282,9 @@
 }
 
 .mdc-component__toolbar .mdc-fab {
-  position: absolute;
-  bottom: -25px;
-  right: 28px;
+  position: absolute !important;
+  bottom: -25px !important;
+  right: 28px!important;
 }
 
 .mdc-component__toolbar .content {
@@ -306,7 +307,7 @@
 }
 
 .mdc-component .mdc-top-app-bar {
-  position: unset;
+  position: unset !important;
 }
 
 .mdc-list {
@@ -316,12 +317,12 @@
 
 .mdc-component .mdc-drawer-scrim {
   //display: block;
-  position: absolute;
+  position: absolute !important;
 }
 
 .mdc-component .mdc-drawer {
-  position: absolute;
-  border-right-width: 0;
+  position: absolute !important;
+  border-right-width: 0 !important;
 }
 
 .mdc-component__toolbar .content {

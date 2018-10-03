@@ -7,6 +7,8 @@ import {HeaderComponent} from './header.component';
 import {ComponentDrawerComponent} from '../component-drawer/component-drawer.component';
 import {RouterModule} from '@angular/router';
 import {DownloadThemeButtonComponent} from '../download-theme-button/download-theme-button.component';
+import {ShapeChangerComponent} from '../shape-changer/shape-changer.component';
+import {TextFieldComponent} from '../web-components/text-field/text-field.component';
 
 @NgModule({
   imports: [
@@ -20,11 +22,15 @@ import {DownloadThemeButtonComponent} from '../download-theme-button/download-th
     HeaderComponent,
     ComponentDrawerComponent,
     DownloadThemeButtonComponent,
+    ShapeChangerComponent
   ],
   exports: [
     TopAppBarComponent,
     HeaderComponent,
     ComponentDrawerComponent,
+  ],
+  entryComponents: [
+    TextFieldComponent,
   ]
 })
 export class HeaderModule { }

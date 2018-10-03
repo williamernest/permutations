@@ -19,3 +19,18 @@
   flex-direction: column;
   margin: 0 5px;
 }
+
+.color-changer-color {
+  height: 75px;
+  background-color: var(--mdc-theme-primary);
+  display: flex;
+
+  > span {
+    display: block;
+    font-size: 36px;
+    color: var(--mdc-theme-on-primary);
+    cursor: pointer;
+    font-weight: bold;
+    margin: auto;
+  }
+}
