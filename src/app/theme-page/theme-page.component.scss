@@ -1,5 +1,5 @@
 @import "material-components-web/material-components-web";
-
+@import "@material/theme/mixins";
 
 .mdc-components {
   box-sizing: border-box;
@@ -13,7 +13,6 @@
 }
 .mdc-components__column {
   display: flex;
-  height: 664px;
   flex-direction: column;
   margin: 0 8px;
   width: 400px;
@@ -44,9 +43,11 @@
   overflow: hidden;
   width: 400px;
 }
+
 .mdc-component__section--size-narrow {
   height: 152px;
 }
+
 .mdc-component__section__content {
   display: flex;
   flex-direction: column;
@@ -69,7 +70,7 @@
 .mdc-component__containers {
   align-items: flex-start;
   display: flex;
-  height: 292px;
+  height: 350px;
   flex-direction: row;
 }
 .mdc-component__containers__primary__only p {
@@ -288,6 +289,9 @@
 }
 
 .mdc-component__toolbar .content {
+  @include mdc-theme-prop(background-color, surface);
+  @include mdc-theme-prop(color, on-surface);
+
   font-size: 13px;
   line-height: 20px;
   padding: 50px 35px;
@@ -316,8 +320,12 @@
 }
 
 .mdc-component .mdc-drawer-scrim {
-  //display: block;
+  //display: block !important;
   position: absolute !important;
+}
+
+.mdc-component .mdc-drawer--open + .mdc-drawer-scrim {
+  display: block !important;;
 }
 
 .mdc-component .mdc-drawer {
@@ -341,3 +349,33 @@
   width: 100%;
   z-index: 9999999;
 }
+
+.test-card {
+  margin: 15px 10px;
+}
+
+.test-card__content {
+  padding: 20px;
+}
+
+.test-card__media-content {
+  @include mdc-theme-prop(color, on-primary);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.text-field-container {
+  padding-top: 25px;
+}
+
+
+.mdc-component .mdc-top-app-bar .mdc-top-app-bar__title {
+  @include mdc-theme-prop(color, on-primary);
+}
+//
+//.mdc-component .mdc-card .mdc-icon-button {
+//  @include mdc-theme-prop(color, on-surface);
+//}

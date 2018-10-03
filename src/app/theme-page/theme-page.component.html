@@ -114,29 +114,41 @@
             <p>Cards</p>
             <div class="mdc-component__section">
               <div class="mdc-component__containers__primary">
-                <div class="mdc-card">
-                  <div class="mdc-card__primary-action">
-                    <div class="mdc-card__media">
-                      <div class="material-image" width="262" height="262"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve"><g><rect x="0.3" y="0.5" width="300" height="300" class="material-image__background"></rect><g><path class="material-image--shape-circle" d="M124.5,171l26.3-45.5c-7.7-4.6-16.7-7.2-26.3-7.2c-28.6,0-51.7,23.2-51.7,51.7c0,28.6,23.2,51.7,51.7,51.7 c28.3,0,51.2-22.6,51.7-50.8H124.5z"></path><path class="material-image--shape-triangle" d="M176.2,170.1c0,0.3,0,0.6,0,1H228l-51.7-89.6l-25.5,44.1C166,134.5,176.2,151.1,176.2,170.1z"></path><path class="material-image--shape-intersection" d="M176.2,171c0-0.3,0-0.6,0-1c0-19-10.2-35.6-25.5-44.6L124.5,171H176.2z"></path></g></g></svg></div>
-                      <div class="mdc-card__media-content">
-                        <div class="demo-card__primary">
-                          <h2 class="demo-card__title mdc-typography--headline6 mdc-theme--on-primary">Our Changing Planet</h2>
-                        </div>
+
+                <div class="mdc-card test-card">
+                  <a class="mdc-card__primary-action">
+                    <div class="mdc-card__media test-card__media">
+                      <div class="test-card__media-content">
+                        <b>Media</b>: 16:9<br>
+                        <b>Width</b>: unset<br>
+                        <b>Height</b>: unset
                       </div>
+                        <div class="material-image" width="262" height="262"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve"><g><rect x="0.3" y="0.5" width="300" height="300" class="material-image__background"></rect><g><path class="material-image--shape-circle" d="M124.5,171l26.3-45.5c-7.7-4.6-16.7-7.2-26.3-7.2c-28.6,0-51.7,23.2-51.7,51.7c0,28.6,23.2,51.7,51.7,51.7 c28.3,0,51.2-22.6,51.7-50.8H124.5z"></path><path class="material-image--shape-triangle" d="M176.2,170.1c0,0.3,0,0.6,0,1H228l-51.7-89.6l-25.5,44.1C166,134.5,176.2,151.1,176.2,170.1z"></path><path class="material-image--shape-intersection" d="M176.2,171c0-0.3,0-0.6,0-1c0-19-10.2-35.6-25.5-44.6L124.5,171H176.2z"></path></g></g></svg></div>
                     </div>
-                  </div>
+                  </a>
                   <div class="mdc-card__actions">
                     <div class="mdc-card__action-buttons">
-                      <button class="mdc-button mdc-card__action mdc-card__action--button">Action 1</button>
-                      <button class="mdc-button mdc-card__action mdc-card__action--button">Action 2</button>
+                      <button class="mdc-button mdc-card__action mdc-card__action--button">Yes</button>
+                      <button class="mdc-button mdc-card__action mdc-card__action--button">No</button>
                     </div>
                     <div class="mdc-card__action-icons">
-                      <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Share">share</button>
-                      <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="More options">more_vert</button>
+                      <button class="mdc-icon-button mdc-card__action mdc-card__action--icon"
+                              aria-pressed="false"
+                              style="--mdc-ripple-fg-size: 28.8px; --mdc-ripple-fg-scale: 1.66667; --mdc-ripple-left: 10px; --mdc-ripple-top: 10px;">
+                        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
+                        <i class="material-icons mdc-icon-button__icon">favorite_border</i>
+                      </button>
+                      <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon"
+                              data-mdc-ripple-is-unbounded
+                              title="Share"
+                              style="--mdc-ripple-fg-size: 28.8px; --mdc-ripple-fg-scale: 1.66667; --mdc-ripple-left: 10px; --mdc-ripple-top: 10px;">share</button>
+                      <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon"
+                              data-mdc-ripple-is-unbounded
+                              title="More options"
+                              style="--mdc-ripple-fg-size: 28.8px; --mdc-ripple-fg-scale: 1.66667; --mdc-ripple-left: 10px; --mdc-ripple-top: 10px;">more_vert</button>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -147,11 +159,11 @@
       <div class="mdc-components__column">
         <div>
           <div class="mdc-component mdc-component__menu">
-            <p>Menu</p>
+            <p>Drawer</p>
             <div class="mdc-component__section">
               <div class="mdc-component__section__content">
                 <div class="mdc-component__section__content__frame">
-                  <nav class="mdc-drawer mdc-drawer--modal mdc-drawer--open">
+                  <nav class="mdc-drawer mdc-drawer--modal mdc-drawer--open has-top-app-bar">
                     <div class="mdc-list-group">
                       <nav class="nav-header">
                         <div class="material-image" width="240" height="240"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve"><g><rect x="0.3" y="0.5" width="300" height="300" class="material-image__background"></rect><g><path class="material-image--shape-circle" d="M124.5,171l26.3-45.5c-7.7-4.6-16.7-7.2-26.3-7.2c-28.6,0-51.7,23.2-51.7,51.7c0,28.6,23.2,51.7,51.7,51.7 c28.3,0,51.2-22.6,51.7-50.8H124.5z"></path><path class="material-image--shape-triangle" d="M176.2,170.1c0,0.3,0,0.6,0,1H228l-51.7-89.6l-25.5,44.1C166,134.5,176.2,151.1,176.2,170.1z"></path><path class="material-image--shape-intersection" d="M176.2,171c0-0.3,0-0.6,0-1c0-19-10.2-35.6-25.5-44.6L124.5,171H176.2z"></path></g></g></svg></div>
@@ -161,7 +173,7 @@
                     </div>
                   </nav>
                   <div class="mdc-drawer-scrim"></div>
-                  <header class="mdc-top-app-bar" data-mdc-auto-init="MDCTopAppBar">
+                  <header class="mdc-top-app-bar has-drawer">
                     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"><a class="mdc-top-app-bar__navigation-icon material-icons">menu</a> <span class="mdc-top-app-bar__title">Title</span></section>
                   </header>
 
@@ -170,21 +182,49 @@
             </div>
           </div>
         </div>
-        <span class="flex"></span>
-        <div>
-          <div class="mdc-component mdc-component__textfield">
-            <p>Text Field</p>
-            <div class="mdc-component__section mdc-component__section--size-narrow">
-              <div dir-horizontal="" class="mdc-component__containers">
-                <div class="mdc-component__containers__primary mdc-textfield--theme-primary mdc-component__containers__primary__only">
-                  <p>Primary</p>
-                  <div class="mdc-text-field mdc-text-field--with-leading-icon">
-                    <i class="material-icons mdc-text-field__icon">phone</i>
-                    <input class="mdc-text-field__input" type="text" id="7V0e559pxK" placeholder="">
-                    <label class="mdc-floating-label" for="7V0e559pxK">Single-line Input Label</label>
-                    <div class="mdc-line-ripple"></div>
-                  </div>
+      </div>
+      <div>
+        <div class="mdc-components__column mdc-component mdc-component__textfield">
+          <p>Cards</p>
+          <div class="mdc-component__section">
+            <div dir-horizontal="" class="mdc-component__containers">
+              <div class="mdc-component__containers__primary mdc-component__containers__primary__only text-field-container">
+                <p>Primary</p>
+                <div class="mdc-text-field mdc-text-field--with-leading-icon">
+                  <i class="material-icons mdc-text-field__icon">phone</i>
+                  <input class="mdc-text-field__input" type="text" id="7V0e559pxK" placeholder="">
+                  <label class="mdc-floating-label" for="7V0e559pxK">Single-line Input Label</label>
+                  <div class="mdc-line-ripple"></div>
                 </div>
+
+                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                  <i class="material-icons mdc-text-field__icon">phone</i>
+                  <input class="mdc-text-field__input" type="text" id="St8-jFhz3">
+                  <label class="mdc-floating-label" for="St8-jFhz3">Phone Number</label>
+                  <div class="mdc-notched-outline"><svg>
+                    <path class="mdc-notched-outline__path"></path>
+                  </svg></div>
+                  <div class="mdc-notched-outline__idle"></div>
+                </div>
+
+                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                  <input class="mdc-text-field__input" type="text" id="x7F6EBK25" placeholder="">
+                  <label class="mdc-floating-label" for="x7F6EBK25">Station Name</label>
+                  <i class="material-icons mdc-text-field__icon">directions_transit</i>
+                  <div class="mdc-notched-outline"><svg>
+                    <path class="mdc-notched-outline__path"></path>
+                  </svg></div>
+                  <div class="mdc-notched-outline__idle"></div>
+                </div>
+
+                <div class="mdc-text-field mdc-text-field--focused mdc-text-field--invalid mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">
+                  <i class="material-icons mdc-text-field__icon">vpn_key</i>
+                  <input class="mdc-text-field__input" type="text" id="T9EyQIV6u" placeholder="" value=" ">
+                  <label class="mdc-floating-label mdc-floating-label--float-above" for="T9EyQIV6u">Floating Label</label>
+                  <i class="material-icons mdc-text-field__icon">error_outline</i>
+                  <div class="mdc-line-ripple"></div>
+                </div>
+
               </div>
             </div>
           </div>

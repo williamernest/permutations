@@ -7,6 +7,7 @@ import {MDCSwitch} from '@material/switch';
 import {MDCRadio} from '@material/radio';
 import {MDCCheckbox} from '@material/checkbox';
 import {MDCDrawer} from '@material/drawer';
+import {MDCIconButtonToggle} from '@material/icon-button';
 
 @Component({
   selector: 'app-theme-page',
@@ -23,11 +24,11 @@ export class ThemePageComponent implements OnInit, AfterViewInit, OnDestroy {
     '.mdc-icon-button',
     '.mdc-slider',
     '.mdc-switch',
-    '.mdc-top-app-bar',
+    '.mdc-top-app-bar:not(.has-drawer)',
     '.mdc-text-field',
     '.mdc-radio',
     '.mdc-checkbox',
-    '.mdc-drawer',
+    '.mdc-drawer:not(.has-top-app-bar)',
   ];
   constructor(private myElement: ElementRef) { }
 
@@ -52,13 +53,16 @@ export class ThemePageComponent implements OnInit, AfterViewInit, OnDestroy {
         } else if (ele.classList.contains('mdc-switch')) {
           return new MDCSwitch(ele);
         } else if (ele.classList.contains('mdc-icon-button')) {
-          const ripple = new MDCRipple(ele);
-          ripple.unbounded = true;
-          return ripple;
+          return new MDCIconButtonToggle(ele);
         } else {
           return new MDCRipple(ele);
         }
       });
+
+    const topAppBarWithDrawer = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar.has-drawer'));
+    const drawerWithTopAppBar = new MDCDrawer(document.querySelector('.mdc-drawer.has-top-app-bar'));
+    topAppBarWithDrawer.listen('MDCTopAppBar:nav', () => drawerWithTopAppBar.open = !drawerWithTopAppBar.open);
+    this.destroyableElements.push(topAppBarWithDrawer, drawerWithTopAppBar);
 
   }
 
