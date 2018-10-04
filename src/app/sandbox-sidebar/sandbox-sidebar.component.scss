@@ -5,6 +5,8 @@
 
 .sidebar-header {
   min-height: 48px;
+  font-size: 18px;
+  padding-left: 24px;
 }
 
 .mdc-list-item__text {
@@ -13,4 +15,9 @@
 
 .mdc-list {
   cursor: pointer;
+}
+
+.mdc-list-item {
+  border-radius: 4px;
+  margin: 0 24px 8px 12px;
 }

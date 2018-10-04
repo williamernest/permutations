@@ -11,6 +11,10 @@
 
 .mat-expansion-panel-body {
   margin-bottom: 48px;
+
+  .mdc-card--outlined {
+    border: none;
+  }
 }
 
 .mat-expansion-panel-header:hover, .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover, .mdc-ripple-surface::before, .mdc-ripple-surface::after  {
