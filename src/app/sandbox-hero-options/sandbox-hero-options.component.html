@@ -1,4 +1,4 @@
-<div class="sandbox-options-container">
+<div class="sandbox-options-container mdc-card mdc-card--outlined">
   <div *ngFor="let item of config[currentComponent]"  [ngSwitch]="item.type">
     <span *ngIf="item.type !== 'checkbox-input'"> {{ item.label }}</span>
     <ul class="mdc-list" *ngSwitchCase="'radio'">

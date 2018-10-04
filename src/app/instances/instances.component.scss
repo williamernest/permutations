@@ -1,0 +1,22 @@
+.mat-expansion-panel {
+  box-shadow: none !important;
+  border-bottom: 1px solid #dadce0;
+  //padding: 24px 0 24px !important;
+}
+
+.mat-expansion-panel-header {
+  height: auto;
+  padding: 24px !important;
+}
+
+.mat-expansion-panel-body {
+  margin-bottom: 48px;
+}
+
+.mat-expansion-panel-header:hover, .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover, .mdc-ripple-surface::before, .mdc-ripple-surface::after  {
+  background: none !important;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0px !important;
+}
