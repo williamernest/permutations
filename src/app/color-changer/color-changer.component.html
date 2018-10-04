@@ -6,7 +6,7 @@
       <div class="color-row">
        <div class="color-entry" *ngFor="let color of colors">
          <input class="color-entry" [(colorPicker)]="color.value" [(value)]="color.label" [style.background]="color.value"
-           [ngStyle]="{'color': colorObject[color.name.startsWith('on-') ? color.name.substring(3) : 'on-' + color.name]}"
+           [ngStyle]="{'color': colorObject[color.name.startsWith('on-surface') ? 'surface' : 'on-' + color.name]}"
          [cpOKButton]="true" (colorPickerSelect)="updateColors()" [cpPosition]="'left'" [cpOKButtonClass]="'mdc-button mdc-button--unelevated'"
          />
        </div>
