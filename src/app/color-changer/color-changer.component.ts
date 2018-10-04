@@ -15,7 +15,7 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
 
   colors: Array<any> = [];
 
-  colorObject: Array<any> = [];
+  colorObject = {};
 
   @Output() cssChange: EventEmitter<string> = new EventEmitter<string>();
   menuSurface: MDCMenuSurface;
@@ -35,10 +35,15 @@ export class ColorChangerComponent implements OnInit, AfterViewInit, OnDestroy{
         val.value = window.getComputedStyle(document.body).getPropertyValue(`--mdc-theme-${val.name}`);
         val.defaultValue = val.value;
       }
+
+      this.colorObject[val.name] = val.value;
     });
   }
 
   updateColors() {
+    this.colors.forEach(val => {
+      this.colorObject[val.name] = val.value;
+    })
     this.stylesService.setColors(this.colors);
     this.httpRequestDebouncer.next();
   }

@@ -23,12 +23,13 @@
 .color-row {
   .color-entry {
     height: 60px;
-    width: 92px;
+    width: 110px;
     display: flex;
     justify-content: space-evenly;
     border-radius: 4px;
     margin: 10px;
     cursor: pointer;
+    font-size: 16px;
 
     input {
       border: 1px solid rgba(0, 0, 0, 0.12);
