@@ -1,7 +1,9 @@
+@import "@material/card/mdc-card";
 
 :host {
   flex: 2 1 auto;
   min-width: 270px;
+  max-width: 450px;
 }
 
 .sandbox-options-container {

@@ -4,12 +4,15 @@
   align-items: center;
   justify-content: center;
   min-height: 360px;
-  min-width: 500px;
   padding: 24px;
   background-color: #eee;
 }
 
+.mat-tab-group {
+  max-width: 95vw;
+  flex: 1 1 auto;
+}
+
 :host {
-  flex: 4 2 100%;
-  max-width: 70%;
+  flex: 1 1 auto;
 }

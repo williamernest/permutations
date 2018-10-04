@@ -1,6 +1,6 @@
 <mat-expansion-panel (opened)="panelOpenState = true"
                      (closed)="panelOpenState = false" [ngClass]="{'mdc-ripple-surface': !panelOpenState}">
-  <mat-expansion-panel-header [ngClass]="{'mdc-ripple-surface': panelOpenState}">
+  <mat-expansion-panel-header [ngClass]="{'mdc-ripple-surface': panelOpenState}" [expandedHeight]="'48px'">
     <mat-panel-title>
       <h2 class="mdc-typography--headline5">Text fields</h2>
     </mat-panel-title>

@@ -1,11 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {MDCList} from '@material/list';
+import {MDCRipple} from '@material/ripple';
 
 @Component({
   selector: 'app-sandbox-hero-options',
   templateUrl: './sandbox-hero-options.component.html',
   styleUrls: ['./sandbox-hero-options.component.scss']
 })
-export class SandboxHeroOptionsComponent implements OnInit {
+export class SandboxHeroOptionsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   config: any = {
     textfield: [
@@ -96,13 +98,23 @@ export class SandboxHeroOptionsComponent implements OnInit {
     ]
 };
 
+  private destroyableComponents = [];
   currentComponent_ = 'textfield';
   @Output() configChange = new EventEmitter<Object>();
 
-  constructor() { }
+  constructor(private ele: ElementRef) { }
 
   ngOnInit() {
     this.setOptions();
+  }
+
+  ngAfterViewInit() {
+    this.destroyableComponents = Array.from(this.ele.nativeElement.querySelectorAll('.mdc-list')).map((list) => new MDCList(list));
+    Array.prototype.push.call(this.destroyableComponents, ...Array.from(this.ele.nativeElement.querySelectorAll('.mdc-list-item')).map((ripple) => new MDCRipple(ripple)));
+  }
+
+  ngOnDestroy() {
+    this.destroyableComponents.forEach((list) => list.destroy());
   }
 
   setOptions() {
