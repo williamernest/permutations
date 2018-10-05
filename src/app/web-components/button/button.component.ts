@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {AfterContentChecked, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {MDCRipple} from '@material/ripple';
 import {ButtonState, ButtonType} from '../../button-config';
 
@@ -8,7 +8,7 @@ import {ButtonState, ButtonType} from '../../button-config';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements AfterViewInit, OnDestroy, OnInit, AfterContentChecked, OnChanges {
+export class ButtonComponent implements OnDestroy, OnInit, AfterContentChecked, OnChanges {
 
   @Input() text: string;
   @Input() icon: string;
@@ -45,16 +45,16 @@ export class ButtonComponent implements AfterViewInit, OnDestroy, OnInit, AfterC
     if (this.resetComponent) {
       this.setCurrentClasses();
       this.isDisabled_ = this.state === ButtonState[ButtonState.Disabled];
+      if (this.ripple_) {
+        this.ripple_.destroy();
+      }
+      this.ripple_ = new MDCRipple(this.myElement.nativeElement.firstChild);
       this.resetComponent = false;
     }
   }
 
   ngOnInit() {
     this.setCurrentClasses();
-  }
-
-  ngAfterViewInit(): void {
-    this.ripple_ = new MDCRipple(this.myElement.nativeElement.firstChild);
   }
 
   ngOnDestroy(): void {
