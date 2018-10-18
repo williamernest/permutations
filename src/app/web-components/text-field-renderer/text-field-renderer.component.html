@@ -1,4 +1,4 @@
-<mat-expansion-panel (opened)="panelOpenState = true"
+<mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true"
                      (closed)="panelOpenState = false" [ngClass]="{'mdc-ripple-surface': !panelOpenState}">
   <mat-expansion-panel-header [ngClass]="{'mdc-ripple-surface': panelOpenState}" [expandedHeight]="'48px'">
     <mat-panel-title>
@@ -11,22 +11,22 @@
       <div class="text-field-filter-control-container">
         <div class="text-field-filter-control">
           Types
-          <app-filter-selector *ngFor="let type of [0,1,2,3,4], let i = index " [checked]="i === 0" [label]="Types[type]" (checkboxChange)="typeChanged(type, $event)"></app-filter-selector>
+          <app-filter-selector *ngFor="let type of [0,1,2,3,4], let i = index " [checked]="types.indexOf(Types[Types[type]]) !== -1" [label]="Types[type]" (checkboxChange)="typeChanged(type, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
           States
-          <app-filter-selector *ngFor="let state of [0,1,2,3,4]; let i = index" [checked]="i === 0" [label]="States[state]" (checkboxChange)="statesChanged(state, $event)"></app-filter-selector>
+          <app-filter-selector *ngFor="let stat of [0,1,2,3,4]; let i = index" [checked]="state.indexOf(States[States[stat]]) !== -1" [label]="States[stat]" (checkboxChange)="statesChanged(stat, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
           Parameters
-          <app-filter-selector *ngFor="let param of [0,1,2,3]; let i = index" [checked]="i === 0" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
+          <app-filter-selector *ngFor="let param of [0,1,2,3]; let i = index" [checked]="params.indexOf(Parameters[Parameters[param]]) !== -1" [label]="Parameters[param]" (checkboxChange)="paramsChanged(param, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">
           Helper Text Params
-          <app-filter-selector *ngFor="let helperParams of [0,1,2,3,4]; let i = index" [checked]="i === 0" [label]="HelperTextParams[helperParams]" (checkboxChange)="helperParamsChanged(helperParams, $event)"></app-filter-selector>
+          <app-filter-selector *ngFor="let helperParam of [0,1,2,3,4]; let i = index" [checked]="helperParams.indexOf(HelperTextParams[HelperTextParams[helperParam]]) !== -1" [label]="HelperTextParams[helperParam]" (checkboxChange)="helperParamsChanged(helperParam, $event)"></app-filter-selector>
         </div>
 
         <div class="text-field-filter-control">

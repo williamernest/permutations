@@ -25,11 +25,11 @@ export class TextFieldRendererComponent implements OnInit, AfterViewInit, OnDest
   ripple: MDCRipple;
 
   @Input() textFields = Array<TfConfig>();
-  types: Array<TextfieldType> = [this.Types.Default];
-  state: Array<TextfieldStates> = [this.States.Default];
+  types: Array<TextfieldType> = [this.Types.Default, this.Types.Outlined];
+  state: Array<TextfieldStates> = [this.States.Default, this.States.Focused, this.States.FocusedInvalid, this.States.Invalid, this.States.Disabled];
   helperParams: Array<TextfieldHelperTextStyles> = [this.HelperTextParams.None];
   dense = false;
-  params: Array<TextfieldParameters> = [this.Parameters.NoIcon];
+  params: Array<TextfieldParameters> = [this.Parameters.NoIcon, this.Parameters.LeadingIcon, this.Parameters.TrailingIcon];
   panelOpenState = false;
 
   constructor(private http: HttpClient, private myElement: ElementRef) { }
