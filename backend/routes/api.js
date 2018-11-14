@@ -1,9 +1,7 @@
 const express = require('express');
 const __nodeSass = require('node-sass');
 const __extend = require('lodash/extend');
-const fs = require('fs');
 const path = require('path');
-const __HtmlEntities = require('html-entities').AllHtmlEntities;
 
 const router = express.Router();
 
@@ -21,9 +19,6 @@ router.post('/compile/scss', function (req, res) {
     });
     return;
   }
-
-  // htmlentities
-  const htmlEntities = new __HtmlEntities();
 
   // options
   const options = __extend({

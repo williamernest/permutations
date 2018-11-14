@@ -8,7 +8,7 @@ import {map} from 'rxjs/operators';
 })
 export class StylesService {
 
-  API_URL = '/api/compile/scss';
+  API_URL = 'https://us-central1-material-components-web.cloudfunctions.net/compileScss';
   mapSassToCss = new Map<string, string>();
 
   colors: Array<any> = [
