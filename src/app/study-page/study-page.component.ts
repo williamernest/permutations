@@ -15,6 +15,7 @@ export class StudyPageComponent implements OnInit {
   };
 
   border_radius_value = 4;
+  panelOpen = false;
 
   constructor() {
   }
