@@ -1,6 +1,8 @@
-import {AfterContentChecked, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {AfterContentChecked, Component, ElementRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {MDCRipple} from '@material/ripple';
 import {ButtonState, ButtonType} from '../../button-config';
+import {NgStyle} from '@angular/common';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-button',
@@ -11,10 +13,20 @@ import {ButtonState, ButtonType} from '../../button-config';
 export class ButtonComponent implements OnDestroy, OnInit, AfterContentChecked, OnChanges {
 
   @Input() text: string;
-  @Input() icon: string;
+  @Input() icon = '';
   @Input() state: string;
   @Input() type: ButtonType = ButtonType.Default;
   @Input() dense = false;
+  @Input() styleOverride: NgStyle | string;
+
+  @HostBinding('attr.style')
+  public get primaryAsStyle(): any {
+    if (!this.styleOverride || !this.styleOverride['--mdc-theme-primary']) {
+      return '';
+    }
+
+    return this.sanitizer.bypassSecurityTrustStyle(`--mdc-theme-primary: ${this.styleOverride['--mdc-theme-primary']}`);
+  }
 
   private resetComponent = false;
 
@@ -24,7 +36,7 @@ export class ButtonComponent implements OnDestroy, OnInit, AfterContentChecked, 
   isDisabled_ = false;
   currentClasses_ = {};
 
-  constructor(private myElement: ElementRef) {
+  constructor(private myElement: ElementRef, private sanitizer: DomSanitizer) {
   }
 
   ngOnChanges(changes: SimpleChanges) {

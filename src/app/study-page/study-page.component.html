@@ -1,0 +1,73 @@
+<div class="study-content">
+  <div class="study-stage">
+    <div class="study-components">
+      <app-button [type]="type" [text]="'Button'" [styleOverride]="styleOverride"></app-button>
+      <app-button [type]="type" text="Button" icon="star" [styleOverride]="styleOverride"></app-button>
+    </div>
+  </div>
+
+  <div class="study-component-panel">
+    <div class="study-component-panel-variant" (click)="togglePanel($event)">
+      <div class="study-component-panel--header">
+        <span class="label-wrapper">Button type</span>
+        <span class="study-component-panel-variant__icon material-icons">{{ panelOpen ? 'minimize' : 'maximize'}}</span>
+      </div>
+      <div class="study-component-panel-variant--content">
+        <app-radio-selector (radioChange)="type = 'Raised'" [label]="'Contained'" [checked]="true" [radioName]="'contained-radio'"></app-radio-selector>
+        <app-radio-selector (radioChange)="type = 'Outlined'" [label]="'Outlined'" [radioName]="'contained-radio'"></app-radio-selector>
+        <app-radio-selector (radioChange)="type = ''" [label]="'Text'" [radioName]="'contained-radio'"></app-radio-selector>
+      </div>
+    </div>
+    <div class="study-component-panel-shape" (click)="togglePanel($event)">
+      <div class="study-component-panel--header">
+        <span class="label-wrapper">
+        <i class="material-icons">rounded_corner</i>
+        Shape
+          </span>
+        <span class="study-component-panel-shape__border-radius">{{ styleOverride['border-radius'] | pixelsToDp }}</span>
+      </div>
+      <div class="study-component-panel-shape--content">
+        <div class="study-component-panel-shape--content_label">
+          Corner Radius:
+        </div>
+        <div class="study-component-panel-shape--content__input-row">
+          <input class="demo-page-slider" type="range" min="0" max="18" [value]="border_radius_value" (input)="setBorderRadius($event.target.value)" />
+          <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="border_radius_value" (input)="setBorderRadius($event.target.value)" />
+        </div>
+      </div>
+    </div>
+    <div class="study-component-panel-color" (click)="togglePanel($event)">
+      <div class="study-component-panel--header">
+        <span class="label-wrapper">
+          <i class="material-icons">color_lens</i>
+          Color
+        </span>
+      </div>
+      <div class="study-component-panel-color--content">
+        <div class="color-row">
+          <div class="color-entry">
+            <input class="color-entry"
+                   title="Color Picker"
+                   [(colorPicker)]="styleOverride['--mdc-theme-primary']"
+                   value="Primary"
+                   [style.background]="styleOverride['--mdc-theme-primary']"
+                   [cpPosition]="'left'"
+                   readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="study-component-panel-typography" (click)="togglePanel($event)">
+      <div class="study-component-panel--header">
+        <span class="label-wrapper">
+          <i class="material-icons">text_format</i>
+          Typography
+        </span>
+      </div>
+      <div class="study-component-panel-typography--content">
+        <button class="typography-button">Cc</button>
+      </div>
+    </div>
+
+  </div>
+</div>

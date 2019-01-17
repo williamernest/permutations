@@ -12,6 +12,7 @@ import {ComponentsModule} from './components/components.module';
 import {SandboxModule} from './sandbox/sandbox.module';
 import {StylesService} from './styles.service';
 import { ThemePageComponent } from './theme-page/theme-page.component';
+import {StudyPageModule} from './study-page/study-page.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ThemePageComponent } from './theme-page/theme-page.component';
     HeaderModule,
     InstancesModule,
     SandboxModule,
+    StudyPageModule
   ],
   providers: [StylesService],
   bootstrap: [AppComponent]

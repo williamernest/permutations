@@ -15,7 +15,11 @@ export class ComponentDrawerComponent implements OnInit, OnDestroy, AfterViewIni
   openChange = new EventEmitter<boolean>();
 
   constructor(private myElement: ElementRef, private router: Router) {
-    router.events.subscribe(() => this.drawer.open = false);
+    router.events.subscribe(() => {
+      if (this.drawer) {
+        this.drawer.open = false;
+      }
+    });
   }
 
   ngOnInit() {}

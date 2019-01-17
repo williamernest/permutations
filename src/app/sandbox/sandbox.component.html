@@ -1,6 +1,11 @@
-<div class="content">
+<app-header>
+  <div class="mdc-top-app-bar--fixed-adjust main-content">
 
-  <app-sandbox-sidebar (currentComponent)="updateCurrentComponent($event)"></app-sandbox-sidebar>
-  <app-sandbox-hero [config]="config" [currentComponent]="currentComponent"></app-sandbox-hero>
-  <app-sandbox-hero-options (configChange)="config = $event" [currentComponent]="currentComponent"></app-sandbox-hero-options>
-</div>
+    <div class="content">
+
+      <app-sandbox-sidebar (currentComponent)="updateCurrentComponent($event)"></app-sandbox-sidebar>
+      <app-sandbox-hero [config]="config" [currentComponent]="currentComponent"></app-sandbox-hero>
+      <app-sandbox-hero-options (configChange)="config = $event" [currentComponent]="currentComponent"></app-sandbox-hero-options>
+    </div>
+  </div>
+</app-header>

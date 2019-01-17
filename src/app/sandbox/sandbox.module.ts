@@ -11,6 +11,7 @@ import {HighlightJsModule} from 'ngx-highlight-js';
 import {TextFieldComponent} from '../web-components/text-field/text-field.component';
 import {SasscodeComponent} from '../sasscode/sasscode.component';
 import {CssCodeComponent} from '../css-code/css-code.component';
+import {HeaderModule} from '../header/header.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {CssCodeComponent} from '../css-code/css-code.component';
     MatTabsModule,
     MatIconModule,
     HighlightJsModule,
+    HeaderModule,
   ],
   declarations: [
     SandboxComponent,
@@ -26,10 +28,13 @@ import {CssCodeComponent} from '../css-code/css-code.component';
     SandboxSidebarComponent,
     SandboxHeroOptionsComponent,
     SasscodeComponent,
-    CssCodeComponent
+    CssCodeComponent,
   ],
   entryComponents: [
     TextFieldComponent,
+  ],
+  exports: [
+    SandboxComponent,
   ]
 })
 export class SandboxModule { }

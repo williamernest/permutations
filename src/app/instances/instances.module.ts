@@ -7,12 +7,14 @@ import {TextFieldRendererComponent} from '../web-components/text-field-renderer/
 import {ListRendererComponent} from '../web-components/list-renderer/list-renderer.component';
 import {ChipSetRendererComponent} from '../web-components/chip-set-renderer/chip-set-renderer.component';
 import {ButtonRendererComponent} from '../web-components/button-renderer/button-renderer.component';
+import {HeaderModule} from '../header/header.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
     MatExpansionModule,
+    HeaderModule,
   ],
   declarations: [
     TextFieldRendererComponent,
