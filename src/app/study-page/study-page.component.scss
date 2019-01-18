@@ -1,8 +1,75 @@
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/list/mdc-list";
+@import "@material/menu/mdc-menu";
+@import "@material/select/mdc-select";
+
 .study-content {
   display: flex;
   background-color: white;
   min-height: 600px;
   min-width: 600px;
+
+  .code-links {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 46px;
+    height: 46px;
+    transition: width 125ms linear;
+    border-radius: 4px;
+    border: 1px solid #dadce0;
+    box-sizing: border-box;
+
+    .code-icon {
+      opacity: 1;
+      display: inline-block;
+      transition: opacity 60ms linear;
+      font-size: 28px;
+      margin: 8px;
+    }
+
+    .platform-icon-container {
+      position: absolute;
+      display: flex;
+      width: 130px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 125ms linear;
+      top: 0;
+      height: 100%;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .platform-icon {
+      width: 20px;
+      color: rgba(0, 0, 0, 0.54);
+      fill: currentColor;
+
+      path {
+        fill: currentColor;
+      }
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    &:hover {
+      width: 130px;
+
+      .code-icon {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .platform-icon-container {
+        visibility: visible;
+        opacity: 1;
+
+      }
+    }
+  }
 
   .study-stage {
     display: flex;
@@ -16,7 +83,7 @@
     margin: auto;
   }
 
-  $color_picker_background: #303030;
+  $color_picker_background: #212121;
 
   .study-component-panel {
     display: flex;
@@ -43,6 +110,7 @@
     &-shape,
     &-color,
     &-typography {
+      position: relative;
       border-bottom: 1px solid #565656;
       cursor: pointer;
 
@@ -92,9 +160,51 @@
     }
   }
 
-  .color-row {
-    margin-top: 16px;
+  .typography-picker-container {
+    width: 215px;
+    height: 125px;
+    background-color: #303030;
+    cursor: auto;
+    display: flex;
+    flex-direction: column;
+  }
 
+  .font-family-preview {
+    font-size: 46px;
+    color: #f1f3f4;
+    font-family: 'Roboto', sans-serif;
+
+  }
+
+  .typography-preview {
+    flex-grow: .5;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .select-container {
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: baseline;
+    display: flex;
+  }
+
+  .study-select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #80868b;
+    width: 180px;
+    font-size: 18px;
+    color: #f1f3f4;
+
+
+    option {
+      background-color: #303030;
+    }
+  }
+
+  .color-row {
     .color-entry {
       height: 60px;
       width: 89px;
@@ -107,6 +217,9 @@
       input {
         border: 1px solid rgba(0, 0, 0, 0.12);
         text-align: center;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
       }
     }
   }
@@ -137,6 +250,14 @@
     color: #e6e6e6;
     letter-spacing: .38px;
     margin-top: 20px;
+  }
+
+  .mdc-menu-surface {
+    background-color: transparent;
+  }
+
+  .font-rubik {
+    font-family: 'Rubik', sans-serif;
   }
 
   app-radio-selector {

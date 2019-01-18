@@ -6,7 +6,7 @@ import {SandboxModule} from '../sandbox/sandbox.module';
 import {ButtonComponent} from '../web-components/button/button.component';
 import {ComponentsModule} from '../components/components.module';
 import {RadioSelectorComponent} from '../radio-selector/radio-selector.component';
-import {PixelsToDpPipe} from '../pixels-to-dp.pipe';
+import {DropPxPipe} from '../drop-px.pipe';
 import {ColorPickerModule} from 'ngx-color-picker';
 
 @NgModule({
@@ -18,7 +18,7 @@ import {ColorPickerModule} from 'ngx-color-picker';
   ],
   declarations: [
     StudyPageComponent,
-    PixelsToDpPipe
+    DropPxPipe
   ],
   entryComponents: [
     SandboxComponent,
