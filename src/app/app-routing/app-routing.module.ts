@@ -4,6 +4,7 @@ import {InstancesComponent} from '../instances/instances.component';
 import {SandboxComponent} from '../sandbox/sandbox.component';
 import {ThemePageComponent} from '../theme-page/theme-page.component';
 import {StudyPageComponent} from '../study-page/study-page.component';
+import {StudyPageTfComponent} from '../study-page-tf/study-page-tf.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/instances', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'sandbox', component: SandboxComponent },
   { path: 'theme', component: ThemePageComponent },
   { path: 'study', component: StudyPageComponent },
+  { path: 'study-tf', component: StudyPageTfComponent },
 ];
 
 @NgModule({

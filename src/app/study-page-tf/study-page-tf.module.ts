@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SandboxComponent} from '../sandbox/sandbox.component';
-import {StudyPageComponent} from './study-page.component';
+import {StudyPageTfComponent} from './study-page-tf.component';
 import {SandboxModule} from '../sandbox/sandbox.module';
 import {ButtonComponent} from '../web-components/button/button.component';
 import {ComponentsModule} from '../components/components.module';
@@ -18,7 +18,7 @@ import {SharedModule} from '../shared/shared.module';
     SharedModule
   ],
   declarations: [
-    StudyPageComponent
+    StudyPageTfComponent
   ],
   entryComponents: [
     SandboxComponent,
@@ -26,4 +26,4 @@ import {SharedModule} from '../shared/shared.module';
     RadioSelectorComponent
   ]
 })
-export class StudyPageModule { }
+export class StudyPageTfModule { }

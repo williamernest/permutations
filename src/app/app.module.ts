@@ -13,11 +13,14 @@ import {SandboxModule} from './sandbox/sandbox.module';
 import {StylesService} from './styles.service';
 import { ThemePageComponent } from './theme-page/theme-page.component';
 import {StudyPageModule} from './study-page/study-page.module';
+import {SharedModule} from './shared/shared.module';
+import {DropPxPipe} from './drop-px.pipe';
+import {StudyPageTfModule} from './study-page-tf/study-page-tf.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThemePageComponent,
+    ThemePageComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +32,14 @@ import {StudyPageModule} from './study-page/study-page.module';
     HeaderModule,
     InstancesModule,
     SandboxModule,
-    StudyPageModule
+    StudyPageModule,
+    StudyPageTfModule,
+    SharedModule
   ],
-  providers: [StylesService],
+  providers: [
+    StylesService,
+    DropPxPipe
+  ],
   bootstrap: [AppComponent]
 })
 

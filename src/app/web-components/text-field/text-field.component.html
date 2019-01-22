@@ -12,15 +12,16 @@
             [attr.id]="componentId"
             [disabled]="state === States.Disabled"
             class="mdc-text-field__input">{{ value }}</textarea>
-  <label *ngIf="type !== Types.Fullwidth" [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
+  <label *ngIf="!hasOutline && type !== Types.Fullwidth" [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
   <i *ngIf="parameters === Parameters.TrailingIcon || parameters === Parameters.BothIcons" class="material-icons mdc-text-field__icon">{{ trailingIcon }}</i>
   <div *ngIf="hasLineRipple" class="mdc-line-ripple" [ngClass]="currentClassesLineRipple"></div>
   <div *ngIf="hasOutline" class="mdc-notched-outline" [ngClass]="currentClassesOutline">
-    <svg>
-      <path class="mdc-notched-outline__path"></path>
-    </svg>
+    <div class="mdc-notched-outline__leading"></div>
+    <div class="mdc-notched-outline__notch">
+      <label [attr.for]="componentId" class="mdc-floating-label" [ngClass]="currentClassesLabel">{{ label }}</label>
+    </div>
+    <div class="mdc-notched-outline__trailing"></div>
   </div>
-  <div *ngIf="hasOutline" class="mdc-notched-outline__idle"></div>
 </div>
 <p *ngIf="helperTextParams"
    class="mdc-text-field-helper-text"

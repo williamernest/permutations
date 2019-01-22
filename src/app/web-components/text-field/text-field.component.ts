@@ -1,7 +1,9 @@
-import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked, EventEmitter, Output} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewEncapsulation, Input, OnChanges, AfterViewChecked, SimpleChanges, ChangeDetectorRef, AfterContentChecked, EventEmitter, Output, HostBinding} from '@angular/core';
 import {MDCTextField} from '@material/textfield';
 import * as shortId from 'shortid';
 import {TextfieldHelperTextStyles, TextfieldParameters, TextfieldStates, TextfieldType} from '../../textfield.enum';
+import {NgStyle} from '@angular/common';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-text-field',
@@ -37,12 +39,37 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
   @Input() state = TextfieldStates.Default;
   @Input() parameters: TextfieldParameters = TextfieldParameters.NoIcon;
   @Input() helperTextParams: TextfieldHelperTextStyles;
+  @Input() styleOverride: NgStyle;
+
+  @HostBinding('attr.style')
+  public get textFieldStyles(): any {
+    if (!this.styleOverride || !this.styleOverride['border-radius'] || !this.styleOverride['--mdc-theme-primary']) {
+      return '';
+    }
+
+    let primary = '';
+    if (this.styleOverride['--mdc-theme-primary']) {
+      primary = `--mdc-theme-primary: ${this.styleOverride['--mdc-theme-primary']};`;
+    }
+
+    let borderRadius = '';
+    if (this.styleOverride['border-radius']) {
+      borderRadius = `--text-field-border-radius: ${this.styleOverride['border-radius']};`;
+    }
+
+    let typography = '';
+    if (this.styleOverride['font-family']) {
+      typography = `--text-field-font-family: ${this.styleOverride['font-family']};`;
+    }
+
+    return this.sanitizer.bypassSecurityTrustStyle(`${borderRadius} ${primary} ${typography}`);
+  }
 
   @Output() blur = new EventEmitter<Event>();
 
   private resetComponent = false;
 
-  constructor(private myElement: ElementRef) {
+  constructor(private myElement: ElementRef, private sanitizer: DomSanitizer) {
     this.componentId = shortId.generate();
   }
 
