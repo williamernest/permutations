@@ -17,11 +17,13 @@ export class StudyPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   border_radius_value = 4;
   panelOpen = false;
+  corners = [4, 4, 4, 4];
 
   menuComponent: MDCMenuSurface = null;
   typographyPreviewElement: HTMLElement = null;
   typographyButton: HTMLElement = null;
   typographyButtonText = 'Rr';
+  maintainSymmetry = true;
 
   constructor(private myElement: ElementRef) {
   }
@@ -50,8 +52,23 @@ export class StudyPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.styleOverride['border-radius'] = value + 'px';
   }
 
+  setCornerRadius(value: string, corner: number) {
+    this.corners[corner] = parseInt(value, 10);
+    this.styleOverride['border-radius'] = this.corners.join('px ') + 'px';
+  }
+
   togglePanel(event) {
     event.target.classList[event.target.classList.contains('opened') ? 'remove' : 'add']('opened');
+  }
+
+  toggleSymmetry(newValue) {
+    this.maintainSymmetry = newValue;
+    if (this.maintainSymmetry) {
+      this.setBorderRadius(this.border_radius_value + '');
+    } else {
+      this.corners = this.corners.map(() => this.border_radius_value);
+      this.setCornerRadius(this.corners[0] + '', 0);
+    }
   }
 
   toggleTypographyMenu() {

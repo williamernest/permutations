@@ -2,6 +2,7 @@
 @import "@material/list/mdc-list";
 @import "@material/menu/mdc-menu";
 @import "@material/select/mdc-select";
+@import "@material/checkbox/mdc-checkbox";
 
 .study-content {
   display: flex;
@@ -89,7 +90,7 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    width: 280px;
+    min-width: 240px;
     background-color: $color_picker_background;
     border-radius: 4px;
     user-select: none;
@@ -260,19 +261,28 @@
     font-family: 'Rubik', sans-serif;
   }
 
+  .mdc-form-field {
+    color: rgba(255, 255, 255, 0.7);
+    transform: translateX(-8px);
+  }
+
   app-radio-selector {
     display: block;
     --mdc-theme-on-surface: grey;
     --mdc-theme-secondary: white;
 
-    .mdc-form-field {
-      color: #f1f3f4;
-      transform: translateX(-8px);
-    }
-
     // Selective override since the color is not a css variable
     .mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
-      border-color: grey;
+      border-color: rgba(255, 255, 255, 0.38);
+    }
+  }
+
+  .maintain-symmetry-checkbox {
+    --mdc-theme-secondary: #9e54fc;
+    font-size: 11px;
+
+    .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
+      border-color: rgba(255, 255, 255, 0.38);
     }
   }
 

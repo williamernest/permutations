@@ -15,7 +15,7 @@ import {SharedModule} from '../shared/shared.module';
     SandboxModule,
     ComponentsModule,
     ColorPickerModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     StudyPageComponent

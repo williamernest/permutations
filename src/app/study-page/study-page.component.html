@@ -133,7 +133,7 @@
         <i class="material-icons">rounded_corner</i>
         Shape
           </span>
-        <span class="study-component-panel-shape__border-radius">{{ styleOverride['border-radius'] | dropPx }}
+        <span *ngIf="maintainSymmetry" class="study-component-panel-shape__border-radius">{{ styleOverride['border-radius'] | dropPx }}
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10px" height="10px" viewBox="0 0 10 10" version="1.1" style="margin-left: 3px;">
             <title>Shape Icon</title>
             <g id="Early-playing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -159,9 +159,34 @@
         <div class="study-component-panel-shape--content_label">
           Corner Radius:
         </div>
-        <div class="study-component-panel-shape--content__input-row">
+        <div *ngIf="maintainSymmetry" class="study-component-panel-shape--content__input-row">
           <input class="demo-page-slider" type="range" min="0" max="18" [value]="border_radius_value" (input)="setBorderRadius($event.target.value)" />
           <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="border_radius_value" (input)="setBorderRadius($event.target.value)" />
+        </div>
+        <div *ngIf="!maintainSymmetry" class="study-component-panel-shape--content__input-row">
+          <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="corners[0]" (input)="setCornerRadius($event.target.value, 0)" />
+          <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="corners[1]" (input)="setCornerRadius($event.target.value, 1)" />
+          <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="corners[2]" (input)="setCornerRadius($event.target.value, 2)" />
+          <input class="demo-page-shape-input" type="number" min="0" max="18" [value]="corners[3]" (input)="setCornerRadius($event.target.value, 3)" />
+        </div>
+        <div class="mdc-form-field maintain-symmetry-checkbox">
+          <div class="mdc-checkbox">
+            <input type="checkbox"
+                   class="mdc-checkbox__native-control"
+                   id="checkbox-1"
+                   [checked]="maintainSymmetry"
+                    (change)="toggleSymmetry(!maintainSymmetry)"/>
+            <div class="mdc-checkbox__background">
+              <svg class="mdc-checkbox__checkmark"
+                   viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              </svg>
+              <div class="mdc-checkbox__mixedmark"></div>
+            </div>
+          </div>
+          <label for="checkbox-1">Maintain Symmetry</label>
         </div>
       </div>
     </div>
