@@ -54,7 +54,12 @@ export class TextFieldComponent implements OnChanges, OnDestroy, AfterViewChecke
 
     let borderRadius = '';
     if (this.styleOverride['border-radius']) {
-      borderRadius = `--text-field-border-radius: ${this.styleOverride['border-radius']};`;
+      const radiusArr = this.styleOverride['border-radius'].split(' ');
+      if (radiusArr.length === 1) {
+        borderRadius = `--text-field-border-radius-tl: ${radiusArr[0]}; --text-field-border-radius-tr: ${radiusArr[0]}; --text-field-border-radius-br: 0; --text-field-border-radius-bl: 0;`;
+      } else {
+        borderRadius = `--text-field-border-radius-tl: ${radiusArr[0]}; --text-field-border-radius-tr: ${radiusArr[1]}; --text-field-border-radius-br: ${radiusArr[2]}; --text-field-border-radius-bl: ${radiusArr[3]};`;
+      }
     }
 
     let typography = '';

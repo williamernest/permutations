@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import { MDCMenuSurface } from '@material/menu-surface';
+import {MDCMenuSurface} from '@material/menu-surface';
 import {TextfieldType} from '../textfield.enum';
 
 @Component({

@@ -17,8 +17,7 @@
   }
 
   .mdc-text-field:not(.mdc-text-field--outlined) {
-    border-top-left-radius: var(--text-field-border-radius);
-    border-top-right-radius: var(--text-field-border-radius);
+    border-radius: var(--text-field-border-radius-tl) var(--text-field-border-radius-tr) var(--text-field-border-radius-br) var(--text-field-border-radius-bl);
   }
 
   .mdc-text-field {
@@ -32,13 +31,13 @@
 
     &.mdc-text-field--outlined .mdc-notched-outline {
       .mdc-notched-outline__leading {
-        border-radius: var(--text-field-border-radius) 0 0 var(--text-field-border-radius);
-        min-width: var(--text-field-border-radius);
+        border-radius: var(--text-field-border-radius-tl) 0 0 var(--text-field-border-radius-bl);
+        min-width: var(--text-field-border-radius-tl);
 
       }
 
       .mdc-notched-outline__trailing {
-        border-radius: 0 var(--text-field-border-radius) var(--text-field-border-radius) 0;
+        border-radius: 0 var(--text-field-border-radius-tr) var(--text-field-border-radius-br) 0;
       }
     }
 
@@ -126,7 +125,7 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    width: 280px;
+    min-width: 240px;
     background-color: $color_picker_background;
     border-radius: 4px;
     user-select: none;
