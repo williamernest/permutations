@@ -121,8 +121,8 @@
         <span class="study-component-panel-variant__icon material-icons">{{ panelOpen ? 'minimize' : 'maximize'}}</span>
       </div>
       <div class="study-component-panel-variant--content">
-        <app-radio-selector (radioChange)="type = TfTypes.Default" [label]="'Filled'" [checked]="true" [radioName]="'contained-radio'"></app-radio-selector>
-        <app-radio-selector (radioChange)="type = TfTypes.Outlined" [label]="'Outlined'" [radioName]="'contained-radio'"></app-radio-selector>
+        <app-radio-selector (radioChange)="toggleTfType(TfTypes.Default)" [label]="'Filled'" [checked]="true" [radioName]="'contained-radio'"></app-radio-selector>
+        <app-radio-selector (radioChange)="toggleTfType(TfTypes.Outlined)" [label]="'Outlined'" [radioName]="'contained-radio'"></app-radio-selector>
       </div>
     </div>
     <div class="study-component-panel-shape" (click)="togglePanel($event)">

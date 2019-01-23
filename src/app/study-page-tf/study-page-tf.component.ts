@@ -20,7 +20,7 @@ export class StudyPageTfComponent implements OnInit, AfterViewInit, OnDestroy {
 
   border_radius_value = 4;
   panelOpen = false;
-  corners = [4, 4, 0, 0];
+  corners = [4, 4, 4, 4];
 
   menuComponent: MDCMenuSurface = null;
   typographyPreviewElement: HTMLElement = null;
@@ -72,6 +72,16 @@ export class StudyPageTfComponent implements OnInit, AfterViewInit, OnDestroy {
       this.corners = this.corners.map(() => this.border_radius_value);
       this.setCornerRadius(this.corners[0] + '', 0);
     }
+  }
+
+  toggleTfType(newType: TextfieldType) {
+    this.type = newType;
+    if (newType === TextfieldType.Default) {
+      this.corners[2] = 0;
+      this.corners[3] = 0;
+    }
+
+    this.toggleSymmetry(this.maintainSymmetry);
   }
 
   toggleTypographyMenu() {
