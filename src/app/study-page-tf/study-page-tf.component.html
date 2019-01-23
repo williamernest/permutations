@@ -2,7 +2,7 @@
   <div class="code-links">
     <i class="material-icons code-icon">code</i>
     <div class="platform-icon-container">
-      <a class="platform-icon" href="https://github.com/material-components/material-components-web" target="_blank">
+      <a class="platform-icon" href="https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield" target="_blank">
         <!--Web icon-->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16" version="1.1">
           <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
@@ -28,7 +28,7 @@
           </g>
         </svg>
       </a>
-      <a class="platform-icon" href="https://github.com/material-components/material-components-android" target="_blank">
+      <a class="platform-icon" href="https://github.com/material-components/material-components-android/blob/master/docs/components/TextInputLayout.md" target="_blank">
         <!--Android icon-->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="18px" viewBox="0 0 16 18" version="1.1">
           <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
@@ -54,7 +54,7 @@
           </g>
         </svg>
       </a>
-      <a class="platform-icon" href="https://github.com/material-components/material-components-ios" target="_blank">
+      <a class="platform-icon" href="https://github.com/material-components/material-components-ios/tree/develop/components/TextFields" target="_blank">
         <!--Apple icon-->
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="18px" viewBox="0 0 16 18" version="1.1">
           <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
@@ -118,7 +118,6 @@
     <div class="study-component-panel-variant" (click)="togglePanel($event)">
       <div class="study-component-panel--header">
         <span class="label-wrapper">Text field type</span>
-        <span class="study-component-panel-variant__icon material-icons">{{ panelOpen ? 'minimize' : 'maximize'}}</span>
       </div>
       <div class="study-component-panel-variant--content">
         <app-radio-selector (radioChange)="toggleTfType(TfTypes.Default)" [label]="'Filled'" [checked]="true" [radioName]="'contained-radio'"></app-radio-selector>
