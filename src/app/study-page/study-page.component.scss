@@ -9,6 +9,11 @@
   background-color: white;
   min-height: 600px;
   min-width: 600px;
+  overflow: hidden;
+
+  .color-picker .arrow.arrow-left {
+    top: 100px;
+  }
 
   .code-links {
     position: absolute;

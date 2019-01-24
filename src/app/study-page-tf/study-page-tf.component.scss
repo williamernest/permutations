@@ -9,6 +9,11 @@
   background-color: white;
   min-height: 600px;
   min-width: 600px;
+  overflow: hidden;
+
+  .color-picker .arrow.arrow-left {
+    top: 100px;
+  }
 
   // Override text field label styles since the values are hard coded (extra specificity required)
   .mdc-text-field--focused.mdc-text-field--focused .mdc-floating-label {
@@ -42,8 +47,6 @@
     }
 
   }
-
-
 
   .code-links {
     position: absolute;
@@ -290,10 +293,6 @@
 
   .mdc-menu-surface {
     background-color: transparent;
-  }
-
-  .font-rubik {
-    font-family: 'Rubik', sans-serif;
   }
 
   .mdc-form-field {

@@ -15,8 +15,14 @@ export class StudyPageComponent implements OnInit, AfterViewInit, OnDestroy {
     '--mdc-theme-primary': '#6200ee',
   };
 
+  fontChoices = [
+    '\'Roboto\', sans-serif',
+    '\'Rubik\', sans-serif',
+    '\'Raleway\', sans-serif',
+    '\'Libre Franklin\', sans-serif',
+  ];
+
   border_radius_value = 4;
-  panelOpen = false;
   corners = [4, 4, 4, 4];
 
   menuComponent: MDCMenuSurface = null;
@@ -80,15 +86,10 @@ export class StudyPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   selectChange({target}) {
-    if (target.options[target.selectedIndex].value === 'Roboto') {
-      this.typographyPreviewElement.classList.remove('font-rubik');
-      this.typographyButton.classList.remove('font-rubik');
-      this.styleOverride['font-family'] = '\'Roboto\', sans-serif';
-    } else {
-      this.typographyPreviewElement.classList.add('font-rubik');
-      this.typographyButton.classList.add('font-rubik');
-      this.styleOverride['font-family'] = '\'Rubik\', sans-serif';
-    }
+    const font = this.fontChoices[target.selectedIndex];
+    this.typographyPreviewElement.style.fontFamily = font;
+    this.typographyButton.style.fontFamily = font;
+    this.styleOverride['font-family'] = font;
   }
 
 }

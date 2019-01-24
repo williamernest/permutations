@@ -205,6 +205,8 @@
                    value="Primary"
                    [style.background]="styleOverride['--mdc-theme-primary']"
                    [cpPosition]="'left'"
+                   [cpPositionOffset]="'-100%'"
+                   [cpPositionRelativeToArrow]="true"
                    readonly />
           </div>
         </div>
@@ -230,6 +232,8 @@
               <select class="study-select" title="Pick a font family" (change)="selectChange($event)">
                 <option selected>Roboto</option>
                 <option>Rubik</option>
+                <option>Raleway</option>
+                <option>Libre Franklin</option>
               </select>
             </div>
           </div>
