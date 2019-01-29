@@ -25,10 +25,16 @@
                   <div dir-horizontal="" class="mdc-component__containers">
                     <div class="mdc-component__containers__primary mdc-component__containers__primary__only">
                       <p style="position: absolute; left: 16px; padding-bottom: 40px;">Primary</p>
-                      <div class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
-                        <div class="mdc-snackbar__text">Single-line snackbar</div>
-                        <div class="mdc-snackbar__action-wrapper">
-                          <button type="button" class="mdc-snackbar__action-button">Action</button>
+                      <div class="mdc-snackbar mdc-snackbar--open	">
+                        <div class="mdc-snackbar__surface">
+                          <div class="mdc-snackbar__label"
+                               role="status"
+                               aria-live="polite">
+                            Can't send photo. Retry in 5 seconds.
+                          </div>
+                          <div class="mdc-snackbar__actions">
+                            <button type="button" class="mdc-button mdc-snackbar__action">Retry</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -200,21 +206,25 @@
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
                       <i class="material-icons mdc-text-field__icon">phone</i>
                       <input class="mdc-text-field__input" type="text" id="St8-jFhz3">
-                      <label class="mdc-floating-label" for="St8-jFhz3">Phone Number</label>
-                      <div class="mdc-notched-outline"><svg>
-                        <path class="mdc-notched-outline__path"></path>
-                      </svg></div>
-                      <div class="mdc-notched-outline__idle"></div>
+                      <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                          <label class="mdc-floating-label" for="x7F6EBK25">Station Name</label>
+                        </div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                      </div>
                     </div>
 
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                       <input class="mdc-text-field__input" type="text" id="x7F6EBK25" placeholder="">
-                      <label class="mdc-floating-label" for="x7F6EBK25">Station Name</label>
                       <i class="material-icons mdc-text-field__icon">directions_transit</i>
-                      <div class="mdc-notched-outline"><svg>
-                        <path class="mdc-notched-outline__path"></path>
-                      </svg></div>
-                      <div class="mdc-notched-outline__idle"></div>
+                      <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                          <label class="mdc-floating-label" for="x7F6EBK25">Station Name</label>
+                        </div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                      </div>
                     </div>
 
                     <div class="mdc-text-field mdc-text-field--focused mdc-text-field--invalid mdc-text-field--with-leading-icon mdc-text-field--with-trailing-icon">

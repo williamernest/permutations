@@ -23,9 +23,9 @@ export class StylesService {
   ];
 
   shapes: Array<any> = [
-    {label: 'Large', name: '$mdc-shape-large-surface-radius', value: '0', defaultValue: '0'},
-    {label: 'Medium', name: '$mdc-shape-medium-surface-radius', value: '8', defaultValue: '8'},
-    {label: 'Small', name: '$mdc-shape-small-surface-radius', value: '4', defaultValue: '4'},
+    {label: 'Large', name: '$mdc-shape-large-component-radius', value: '0', defaultValue: '0'},
+    {label: 'Medium', name: '$mdc-shape-medium-component-radius', value: '8', defaultValue: '8'},
+    {label: 'Small', name: '$mdc-shape-small-component-radius', value: '4', defaultValue: '4'},
   ];
 
   colorSubject: Subject<Array<any>> = new BehaviorSubject<Array<any>>([]);
