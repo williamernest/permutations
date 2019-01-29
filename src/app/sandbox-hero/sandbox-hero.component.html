@@ -10,8 +10,10 @@
       <textarea highlight-js [lang]="'html'">
         {{ renderedHTML }}
       </textarea>
-      <app-text-field *ngIf="currentComponent === 'textfield'" style="display:none" [parameters]="config_.params" [type]="config_.type" [label]="config_.label" [value]="config_.value" [trailingIcon]="config_.trailingIcon" [leadingIcon]="config_.leadingIcon" [state]="config_.state" [dense]="config_.dense"></app-text-field>
-      <app-button *ngIf="currentComponent === 'button'" style="display:none" [text]="config_.label" [icon]="config_.leadingIcon" [state]="config_.state" [type]="config_.type" [dense]="config_.dense"></app-button>
+      <div style="display: none;">
+        <app-text-field *ngIf="currentComponent === 'textfield'" [parameters]="config_.params" [type]="config_.type" [label]="config_.label" [value]="config_.value" [trailingIcon]="config_.trailingIcon" [leadingIcon]="config_.leadingIcon" [state]="config_.state" [dense]="config_.dense"></app-text-field>
+        <app-button *ngIf="currentComponent === 'button'" [text]="config_.label" [icon]="config_.leadingIcon" [state]="config_.state" [type]="config_.type" [dense]="config_.dense"></app-button>
+      </div>
     </div>
   </mat-tab>
   <mat-tab label="React">
