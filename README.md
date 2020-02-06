@@ -4,7 +4,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Two terminals are required since there is a backend and front end. 
+
+### Backend server
+
+Change directory into the backend/ folder (`cd backend`). Run `npm start`.
+
+### Frontend server
+
+Run `ng serve --proxy-config proxy.config.json` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+The proxy config forces the angular development server to proxy all requests to the /api route to the backend server (which should be running on port 3000). 
 
 ## Code scaffolding
 
